@@ -8,42 +8,36 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================================================
-   DESIGN TOKENS — inspirés du style GYBN
+   DESIGN TOKENS
    ========================================================================== */
 :root{
-  /* Palette principale */
-  --c-green:        #415716;   /* vert signature */
-  --c-green-dark:   #2F400F;
-  --c-green-soft:   #EBEDDA;   /* crème/vert clair */
-  --c-teal:         #8AE0E5;
-  --c-teal-soft:    #EAF9FA;
-  --c-orange:       #FD8549;   /* accent CTA */
-  --c-orange-dark:  #E06A2E;
-  --c-beige:        #E9DED6;
-  --c-beige-soft:   #F5EDE7;
-  --c-ink:          #2F3C4C;   /* texte foncé */
-  --c-muted:        #566476;
-  --c-line:         #DDDDDD;
+  --c-green:        #306431;
+  --c-green-dark:   #244B26;
+  --c-green-soft:   #EAF0E8;
+  --c-green-pale:   #F4F8F3;
+  --c-orange:       #E07A3F;
+  --c-orange-dark:  #C25F26;
+  --c-ink:          #2F3C4C;
+  --c-muted:        #5B6879;
+  --c-line:         #E1E6E3;
   --c-bg:           #FFFFFF;
-  --c-bg-soft:      #F4F4F4;
+  --c-bg-soft:      #F6F8F6;
 
-  /* Radius */
   --r-sm: 8px;
-  --r-md: 16px;
-  --r-lg: 24px;
-  --r-pill: 30px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-pill: 999px;
 
-  /* Shadows */
-  --sh-sm: 0 1px 2px rgba(47,60,76,.06), 0 4px 14px rgba(47,60,76,.06);
-  --sh-md: 0 10px 30px rgba(47,60,76,.10);
-  --sh-lg: 0 20px 55px rgba(47,60,76,.18);
+  --sh-sm: 0 1px 2px rgba(47,60,76,.05), 0 3px 10px rgba(47,60,76,.05);
+  --sh-md: 0 8px 24px rgba(47,60,76,.09);
 
-  --container: 1240px;
-  --gutter: clamp(1rem, 3vw, 2.5rem);
+  --container: 1200px;
+  --gutter: clamp(1rem, 3vw, 2rem);
+  --header-space: 80px;
 }
 
 /* ==========================================================================
@@ -51,7 +45,7 @@
    ========================================================================== */
 *,*::before,*::after{box-sizing:border-box;}
 html{
-  font-size:112.5%; /* 18px — comme GYBN */
+  font-size:100%;
   -webkit-text-size-adjust:100%;
   scroll-behavior:smooth;
 }
@@ -59,26 +53,27 @@ body{
   margin:0;
   font-family:'Nunito Sans', system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   font-weight:400;
-  font-size:1rem;
-  line-height:1.65;
+  font-size:.95rem;
+  line-height:1.6;
   color:var(--c-ink);
   background:var(--c-bg);
   overflow-x:hidden;
 }
 img{max-width:100%; display:block;}
-a{color:var(--c-green); text-underline-offset:3px;}
-h1,h2,h3,h4,h5,h6{
+a{color:var(--c-green); text-underline-offset:2px;}
+
+h1,h2,h3,h4{
   font-family:'Be Vietnam Pro', 'Nunito Sans', sans-serif;
   font-weight:600;
-  line-height:1.25;
+  line-height:1.3;
   color:var(--c-ink);
-  letter-spacing:-.015em;
+  letter-spacing:-.01em;
   margin:0 0 .5em;
 }
-h1{font-size:clamp(2.4rem, 4vw + 1rem, 4rem); line-height:1.15;}
-h2{font-size:clamp(1.9rem, 2.6vw + .8rem, 3rem);}
-h3{font-size:clamp(1.4rem, 1.4vw + .9rem, 2rem);}
-h4{font-size:1.333rem;}
+h1{font-size:clamp(1.65rem, 1.6vw + .9rem, 2.4rem); line-height:1.2;}
+h2{font-size:clamp(1.3rem, .9vw + .9rem, 1.75rem);}
+h3{font-size:clamp(1.05rem, .35vw + .9rem, 1.2rem);}
+h4{font-size:1rem;}
 p{margin:0 0 1em;}
 p:last-child{margin-bottom:0;}
 
@@ -94,119 +89,90 @@ p:last-child{margin-bottom:0;}
 }
 .skip-link{
   position:absolute; left:-9999px; top:0; z-index:200;
-  background:var(--c-green); color:#fff; padding:.85rem 1.4rem;
-  border-radius:0 0 var(--r-pill) 0; font-weight:700;
+  background:var(--c-green); color:#fff; padding:.7rem 1.1rem;
+  border-radius:0 0 var(--r-pill) 0; font-weight:700; font-size:.9rem;
 }
 .skip-link:focus{left:0;}
 
 :where(a,button,input,select,textarea,[tabindex]):focus-visible{
-  outline:3px solid var(--c-orange);
-  outline-offset:3px;
-  border-radius:8px;
+  outline:2.5px solid var(--c-orange);
+  outline-offset:2px;
+  border-radius:6px;
+}
+
+.header-space{
+  height: var(--header-space);
+  width:100%;
+  display:block;
 }
 
 /* ==========================================================================
-   BOUTONS — style GYBN (pilule, large, généreux)
+   BOUTONS
    ========================================================================== */
 .btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:.5rem;
-  padding:1.05rem 2.2rem;
+  gap:.45rem;
+  padding:.7rem 1.35rem;
   border-radius:var(--r-pill);
-  border:2px solid transparent;
-  font-family:'Nunito Sans', sans-serif;
+  border:1.5px solid transparent;
+  font-family:inherit;
   font-weight:700;
-  font-size:1rem;
+  font-size:.875rem;
   line-height:1;
   text-decoration:none;
   cursor:pointer;
-  transition:transform .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+  transition:transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
   white-space:nowrap;
 }
-.btn:hover{transform:translateY(-2px);}
-.btn--primary{
-  background:var(--c-green);
-  color:#fff;
-}
+.btn:hover{transform:translateY(-1px);}
+.btn--primary{background:var(--c-green); color:#fff;}
 .btn--primary:hover{background:var(--c-green-dark); color:#fff;}
-.btn--orange{
-  background:var(--c-orange);
-  color:#fff;
-}
-.btn--orange:hover{background:var(--c-orange-dark); color:#fff;}
-.btn--outline{
-  background:transparent;
-  color:var(--c-green);
-  border-color:var(--c-green);
-}
+.btn--outline{background:transparent; color:var(--c-green); border-color:var(--c-green);}
 .btn--outline:hover{background:var(--c-green); color:#fff;}
-.btn--arrow::after{
-  content:"→";
-  transition:transform .2s ease;
-  font-size:1.1em;
-  line-height:1;
-}
-.btn--arrow:hover::after{transform:translateX(5px);}
-
-@media (max-width:544px){
-  .btn{padding:.85rem 1.6rem; font-size:.888rem;}
-}
+.btn--arrow::after{content:"→"; transition:transform .2s ease; font-size:1em;}
+.btn--arrow:hover::after{transform:translateX(3px);}
 
 /* ==========================================================================
-   SECTIONS + COURBES SVG (style GYBN)
+   SECTIONS
    ========================================================================== */
-.section{position:relative; padding-block:clamp(3rem, 6vw, 6rem);}
+.section{padding-block:clamp(2rem, 3.5vw, 3.25rem);}
 .section--soft{background:var(--c-bg-soft);}
-.section--cream{background:var(--c-green-soft);}
-.section--beige{background:var(--c-beige-soft);}
-.section--teal{background:var(--c-teal-soft);}
+.section--cream{background:var(--c-green-pale);}
 
-/* Séparateur courbe entre sections */
-.curve{
-  display:block;
-  width:100%;
-  height:clamp(60px, 8vw, 130px);
-  position:relative;
-  z-index:1;
-  pointer-events:none;
-  margin-top:-1px;
-}
-.curve svg{display:block; width:100%; height:100%;}
-
-/* Tête de section */
 .section-head{
-  max-width:64ch;
-  margin:0 auto clamp(2rem, 4vw, 3.5rem);
+  max-width:60ch;
+  margin:0 auto clamp(1.25rem, 2.5vw, 2rem);
   text-align:center;
 }
 .section-head__title{
-  font-size:clamp(1.9rem, 2.6vw + .8rem, 3rem);
-  margin:0 0 .8rem;
-  line-height:1.2;
+  margin:0 0 .5rem;
+  font-size:clamp(1.3rem, .9vw + .9rem, 1.75rem);
 }
 .section-head__sub{
   color:var(--c-muted);
-  font-size:clamp(1rem, .4vw + .9rem, 1.15rem);
+  font-size:.9rem;
+  line-height:1.65;
   margin:0;
-  line-height:1.7;
 }
 
 /* ==========================================================================
-   HERO SLIDER
+   HERO SLIDER — PLEINE LARGEUR
    ========================================================================== */
-.hero{padding-top:clamp(1rem, 2vw, 2rem);}
+.hero{
+  padding:0;
+  width:100%;
+}
 
 .slider{
   position:relative;
-  border-radius:var(--r-lg);
+  width:100%;
   overflow:hidden;
   background:#0C1F1A;
-  box-shadow:var(--sh-md);
   isolation:isolate;
 }
-.slider__viewport{overflow:hidden;}
+.slider__viewport{overflow:hidden; width:100%;}
 .slider__track{
   display:flex;
   transition:transform .7s cubic-bezier(.4,0,.2,1);
@@ -218,7 +184,7 @@ p:last-child{margin-bottom:0;}
   position:relative;
   flex:0 0 100%;
   min-width:100%;
-  min-height:clamp(300px, 48vh, 480px);
+  min-height:clamp(320px, 58vh, 620px);
   display:flex;
   align-items:flex-end;
   background:linear-gradient(135deg,#123B32 0%, #0A5B4B 100%);
@@ -232,80 +198,72 @@ p:last-child{margin-bottom:0;}
 .slide__overlay{
   position:absolute; inset:0; z-index:1;
   background:
-    linear-gradient(180deg, rgba(6,22,18,.15) 0%, rgba(6,22,18,.35) 55%, rgba(6,22,18,.85) 100%),
-    linear-gradient(90deg, rgba(6,22,18,.55) 0%, rgba(6,22,18,0) 60%);
+    linear-gradient(180deg, rgba(6,22,18,.10) 0%, rgba(6,22,18,.30) 55%, rgba(6,22,18,.85) 100%),
+    linear-gradient(90deg, rgba(6,22,18,.55) 0%, rgba(6,22,18,0) 65%);
 }
+
+/* Le contenu du slide est centré dans le conteneur, mais le slider est pleine largeur */
 .slide__content{
   position:relative; z-index:2;
-  padding:clamp(1.5rem, 3.5vw, 3rem);
-  max-width:min(72ch, 92%);
+  width:min(100% - (var(--gutter) * 2), var(--container));
+  margin-inline:auto;
+  padding-block:clamp(1.5rem, 3vw, 2.75rem);
+  padding-inline:0;
   color:#fff;
-}
-.slide__tag{
-  display:inline-block;
-  margin-bottom:1rem;
-  font-family:'Nunito Sans', sans-serif;
-  font-size:.75rem;
-  font-weight:800;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:#fff;
-  background:var(--c-orange);
-  padding:.4rem .95rem;
-  border-radius:var(--r-pill);
 }
 .slide__text{
   margin:0;
+  max-width:min(68ch, 92%);
   font-family:'Be Vietnam Pro', sans-serif;
   font-weight:500;
-  font-size:clamp(1.05rem, .9vw + .85rem, 1.5rem);
-  line-height:1.45;
-  text-shadow:0 2px 14px rgba(0,0,0,.35);
+  font-size:clamp(1rem, .7vw + .85rem, 1.35rem);
+  line-height:1.5;
+  text-shadow:0 2px 12px rgba(0,0,0,.35);
   text-wrap:pretty;
 }
 
-/* Contrôles */
+/* Contrôles — positionnés par rapport à la pleine largeur */
 .slider__nav{
   position:absolute; top:50%; transform:translateY(-50%);
   z-index:3;
-  width:clamp(38px, 3.4vw, 52px);
-  height:clamp(38px, 3.4vw, 52px);
+  width:clamp(36px, 3vw, 48px);
+  height:clamp(36px, 3vw, 48px);
   display:grid; place-items:center;
-  border:2px solid rgba(255,255,255,.55);
+  border:1.5px solid rgba(255,255,255,.5);
   border-radius:50%;
   background:rgba(10,30,25,.35);
   color:#fff; cursor:pointer;
   backdrop-filter:blur(6px);
   transition:background-color .2s ease, transform .2s ease;
 }
-.slider__nav:hover{background:var(--c-orange); border-color:var(--c-orange);}
+.slider__nav:hover{background:var(--c-green); border-color:var(--c-green);}
 .slider__nav:active{transform:translateY(-50%) scale(.94);}
-.slider__nav svg{width:18px; height:18px;}
-.slider__nav--prev{left:clamp(.8rem, 1.6vw, 1.4rem);}
-.slider__nav--next{right:clamp(.8rem, 1.6vw, 1.4rem);}
+.slider__nav svg{width:16px; height:16px;}
+.slider__nav--prev{left:clamp(1rem, 2.5vw, 2.5rem);}
+.slider__nav--next{right:clamp(1rem, 2.5vw, 2.5rem);}
 
 .slider__dots{
   position:absolute; z-index:3;
-  left:50%; bottom:clamp(.8rem, 1.8vw, 1.4rem);
+  left:50%; bottom:clamp(.85rem, 1.8vw, 1.5rem);
   transform:translateX(-50%);
-  display:flex; gap:.55rem;
-  padding:.4rem .75rem;
+  display:flex; gap:.5rem;
+  padding:.35rem .7rem;
   border-radius:var(--r-pill);
   background:rgba(8,24,20,.35);
   backdrop-filter:blur(6px);
 }
 .slider__dot{
-  width:10px; height:10px; padding:0;
+  width:9px; height:9px; padding:0;
   border:none; border-radius:50%;
   background:rgba(255,255,255,.55);
   cursor:pointer;
   transition:width .25s ease, background-color .25s ease;
 }
-.slider__dot[aria-selected="true"]{width:28px; border-radius:var(--r-pill); background:#fff;}
+.slider__dot[aria-selected="true"]{width:26px; border-radius:var(--r-pill); background:#fff;}
 
 .slider__progress{
   position:absolute; left:0; bottom:0; z-index:3;
-  height:4px; width:0%;
+  height:3px; width:0%;
   background:var(--c-orange);
   transition:width .18s linear;
 }
@@ -315,35 +273,33 @@ p:last-child{margin-bottom:0;}
    ========================================================================== */
 .transition-banner{
   position:relative;
-  padding-block:clamp(2.5rem, 5vw, 4.5rem);
-  background-color:var(--c-green-soft);
+  padding-block:clamp(1.5rem, 3vw, 2.5rem);
+  background-color:var(--c-green-pale);
   overflow:hidden;
   text-align:center;
+  border-bottom:1px solid var(--c-line);
 }
 .transition-banner::before{
   content:"";
   position:absolute; inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23415716' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round' opacity='0.55'%3E%3Cpath d='M26 38c11-9 27-7 34 2-11 9-27 7-34-2z'/%3E%3Cpath d='M33 52c0-10 7-18 17-20'/%3E%3Ccircle cx='118' cy='36' r='11'/%3E%3Cpath d='M118 18v7M118 54v-7M100 36h7M136 36h-7'/%3E%3Cpath d='M80 104c-10 0-18-8-18-18 0-12 18-27 18-27s18 15 18 27c0 10-8 18-18 18z'/%3E%3Cpath d='M38 122c7-7 16-7 23 0-7 7-16 7-23 0z'/%3E%3Cpath d='M128 114v25M115 127h25'/%3E%3C/g%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23306431' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round' opacity='0.5'%3E%3Cpath d='M26 38c11-9 27-7 34 2-11 9-27 7-34-2z'/%3E%3Cpath d='M33 52c0-10 7-18 17-20'/%3E%3Ccircle cx='118' cy='36' r='11'/%3E%3Cpath d='M118 18v7M118 54v-7M100 36h7M136 36h-7'/%3E%3Cpath d='M80 104c-10 0-18-8-18-18 0-12 18-27 18-27s18 15 18 27c0 10-8 18-18 18z'/%3E%3Cpath d='M38 122c7-7 16-7 23 0-7 7-16 7-23 0z'/%3E%3Cpath d='M128 114v25M115 127h25'/%3E%3C/g%3E%3C/svg%3E");
   background-size:160px 160px;
-  opacity:.14;
+  opacity:.13;
   pointer-events:none;
 }
 .transition-banner__inner{position:relative; z-index:1;}
 .transition-banner__text{
   margin:0;
   font-family:'Be Vietnam Pro', sans-serif;
-  font-size:clamp(1.35rem, 2.2vw + .9rem, 2.4rem);
+  font-size:clamp(1rem, 1vw + .75rem, 1.35rem);
   font-weight:700;
-  line-height:1.3;
+  line-height:1.4;
   color:var(--c-green);
   text-wrap:balance;
-  max-width:52ch;
+  max-width:60ch;
   margin-inline:auto;
 }
-.transition-banner__text em{
-  font-style:normal;
-  color:var(--c-orange);
-}
+.transition-banner__text em{font-style:normal; color:var(--c-orange);}
 
 /* ==========================================================================
    ACTUALITÉS
@@ -351,30 +307,31 @@ p:last-child{margin-bottom:0;}
 .news-head{
   display:flex; flex-wrap:wrap;
   align-items:flex-end; justify-content:space-between;
-  gap:1.5rem;
-  margin-bottom:clamp(2rem, 4vw, 3rem);
+  gap:1rem;
+  margin-bottom:clamp(1.25rem, 2.5vw, 2rem);
 }
-.news-head .section-head{
-  margin:0;
-  text-align:left;
-  max-width:52ch;
-}
+.news-head .section-head{margin:0; text-align:left; max-width:52ch;}
 .news-head .section-head__sub{text-align:left;}
 
 .news-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-  gap:clamp(1.25rem, 2.2vw, 2rem);
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:clamp(1rem, 1.8vw, 1.5rem);
 }
 .news-card{
   background:#fff;
-  border-radius:var(--r-lg);
+  border:1px solid var(--c-line);
+  border-radius:var(--r-md);
   overflow:hidden;
   box-shadow:var(--sh-sm);
-  transition:transform .25s ease, box-shadow .25s ease;
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
   display:flex;
 }
-.news-card:hover{transform:translateY(-6px); box-shadow:var(--sh-md);}
+.news-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--sh-md);
+  border-color:#C7D9C5;
+}
 .news-card__link{
   display:flex; flex-direction:column; height:100%;
   text-decoration:none; color:inherit;
@@ -387,190 +344,87 @@ p:last-child{margin-bottom:0;}
 }
 .news-card__media img{
   width:100%; height:100%; object-fit:cover;
-  transition:transform .55s ease;
+  transition:transform .5s ease;
 }
-.news-card:hover .news-card__media img{transform:scale(1.06);}
+.news-card:hover .news-card__media img{transform:scale(1.05);}
 .news-card__body{
-  padding:1.5rem 1.6rem 1.75rem;
-  display:flex; flex-direction:column; gap:.65rem;
+  padding:1.1rem 1.15rem 1.3rem;
+  display:flex; flex-direction:column; gap:.5rem;
   flex:1;
 }
 .news-card__meta{
   margin:0;
-  font-family:'Nunito Sans', sans-serif;
-  font-size:.78rem; font-weight:700;
+  font-size:.72rem; font-weight:700;
   letter-spacing:.05em; text-transform:uppercase;
   color:var(--c-muted);
 }
 .news-card__meta span{color:var(--c-orange);}
 .news-card__title{
-  font-size:1.2rem;
-  margin:0; line-height:1.35;
+  font-size:1rem;
+  margin:0; line-height:1.4;
   font-weight:700;
 }
 .news-card__desc{
-  font-size:.95rem;
+  font-size:.85rem;
   color:var(--c-muted);
   margin:0;
   line-height:1.6;
 }
 .news-card__cta{
   margin-top:auto;
-  padding-top:.75rem;
-  font-size:.9rem;
+  padding-top:.5rem;
+  font-size:.8rem;
   font-weight:800;
   color:var(--c-green);
   display:inline-flex;
   align-items:center;
-  gap:.45rem;
-  letter-spacing:.02em;
+  gap:.4rem;
 }
 .news-card__cta::after{content:"→"; transition:transform .2s ease;}
-.news-card:hover .news-card__cta::after{transform:translateX(5px);}
+.news-card:hover .news-card__cta::after{transform:translateX(4px);}
 
 /* ==========================================================================
    PARTENAIRES
    ========================================================================== */
+.partners-section{padding-block:clamp(1.75rem, 3vw, 2.5rem);}
+.partners-title{
+  text-align:center;
+  font-size:1rem;
+  font-weight:600;
+  color:var(--c-muted);
+  letter-spacing:.02em;
+  margin:0 0 clamp(1rem, 2vw, 1.5rem);
+}
 .partners-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
-  gap:clamp(1rem, 1.8vw, 1.5rem);
+  grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+  gap:clamp(.6rem, 1.2vw, 1rem);
+  align-items:center;
   list-style:none; padding:0; margin:0;
 }
 .partner{
   display:grid; place-items:center;
-  padding:1.4rem 1.1rem;
-  min-height:130px;
+  padding:1rem .75rem;
+  min-height:90px;
   background:#fff;
   border:1px solid var(--c-line);
-  border-radius:var(--r-md);
-  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  border-radius:var(--r-sm);
+  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 .partner:hover{
-  transform:translateY(-4px);
+  transform:translateY(-2px);
+  border-color:#C7D9C5;
   box-shadow:var(--sh-sm);
-  border-color:var(--c-teal);
 }
 .partner img{
-  max-height:62px; width:auto; object-fit:contain;
+  max-height:46px;
+  width:auto;
+  object-fit:contain;
   filter:grayscale(100%);
-  opacity:.72;
+  opacity:.7;
   transition:filter .25s ease, opacity .25s ease;
 }
 .partner:hover img{filter:grayscale(0%); opacity:1;}
-.partner__name{
-  margin-top:.65rem;
-  font-size:.75rem; font-weight:700;
-  letter-spacing:.03em;
-  text-align:center;
-  color:var(--c-muted);
-  line-height:1.35;
-}
-
-/* ==========================================================================
-   ONE HEALTH
-   ========================================================================== */
-.oh-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-  gap:clamp(1.25rem, 2.2vw, 2rem);
-  align-items:start;
-}
-.oh-card{
-  width:100%;
-  display:flex; flex-direction:column; gap:.65rem;
-  text-align:left;
-  font:inherit; color:inherit;
-  padding:2rem 1.75rem;
-  background:#fff;
-  border:1.5px solid var(--c-line);
-  border-radius:var(--r-lg);
-  cursor:pointer;
-  box-shadow:var(--sh-sm);
-  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-}
-.oh-card:hover{transform:translateY(-4px); box-shadow:var(--sh-md);}
-.oh-card[aria-expanded="true"]{
-  border-color:var(--c-green);
-  box-shadow:var(--sh-md);
-}
-.oh-card:nth-child(1){border-top:6px solid var(--c-green);}
-.oh-card:nth-child(2){border-top:6px solid var(--c-orange);}
-.oh-card:nth-child(3){border-top:6px solid var(--c-teal);}
-
-.oh-card__icon{
-  display:grid; place-items:center;
-  width:56px; height:56px;
-  border-radius:14px;
-  background:var(--c-green-soft);
-  color:var(--c-green);
-  margin-bottom:.5rem;
-}
-.oh-card:nth-child(2) .oh-card__icon{background:#FDEBDD; color:var(--c-orange-dark);}
-.oh-card:nth-child(3) .oh-card__icon{background:var(--c-teal-soft); color:#1D6A72;}
-.oh-card__icon svg{width:28px; height:28px;}
-
-.oh-card__title{
-  font-family:'Be Vietnam Pro', sans-serif;
-  font-size:1.25rem;
-  font-weight:700;
-  margin:0;
-}
-.oh-card__lead{
-  font-size:.95rem;
-  color:var(--c-muted);
-  margin:0;
-  line-height:1.6;
-}
-.oh-card__more{
-  margin-top:.75rem;
-  font-family:'Nunito Sans', sans-serif;
-  font-size:.82rem;
-  font-weight:800;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--c-green);
-  display:inline-flex;
-  align-items:center;
-  gap:.5rem;
-}
-.oh-card__more::after{
-  content:"+";
-  font-size:1.2rem;
-  line-height:1;
-  transition:transform .25s ease;
-}
-.oh-card[aria-expanded="true"] .oh-card__more::after{transform:rotate(45deg);}
-
-.oh-card__details{
-  display:grid;
-  grid-template-rows:0fr;
-  transition:grid-template-rows .35s ease;
-}
-.oh-card[aria-expanded="true"] .oh-card__details{grid-template-rows:1fr;}
-.oh-card__details > span{
-  overflow:hidden;
-  font-size:.92rem;
-  line-height:1.65;
-  color:var(--c-ink);
-}
-.oh-card__details p{
-  margin-top:1rem;
-  padding-top:1rem;
-  border-top:1px dashed var(--c-line);
-}
-
-.oh-note{
-  margin-top:clamp(1.75rem, 3vw, 2.75rem);
-  padding:1.25rem 1.5rem;
-  border-left:5px solid var(--c-orange);
-  background:var(--c-beige-soft);
-  border-radius:0 var(--r-md) var(--r-md) 0;
-  font-size:.95rem;
-  color:var(--c-muted);
-  max-width:80ch;
-}
-.oh-note strong{color:var(--c-ink);}
 
 /* ==========================================================================
    ACTIVITÉS
@@ -578,14 +432,14 @@ p:last-child{margin-bottom:0;}
 .activity{
   display:grid;
   grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
-  gap:clamp(1.5rem, 4vw, 4rem);
+  gap:clamp(1.25rem, 3vw, 2.75rem);
   align-items:center;
-  padding-block:clamp(2.5rem, 5vw, 4rem);
+  padding-block:clamp(1.5rem, 3vw, 2.5rem);
   border-bottom:1px solid var(--c-line);
 }
 .activity:last-of-type{border-bottom:none;}
 .activity__media{
-  border-radius:var(--r-lg);
+  border-radius:var(--r-md);
   overflow:hidden;
   box-shadow:var(--sh-md);
   aspect-ratio:16/11;
@@ -596,11 +450,10 @@ p:last-child{margin-bottom:0;}
 
 .activity__kicker{
   display:inline-block;
-  margin-bottom:.85rem;
-  padding:.4rem .95rem;
-  font-family:'Nunito Sans', sans-serif;
-  font-size:.74rem; font-weight:800;
-  letter-spacing:.14em; text-transform:uppercase;
+  margin-bottom:.55rem;
+  padding:.28rem .75rem;
+  font-size:.68rem; font-weight:800;
+  letter-spacing:.12em; text-transform:uppercase;
   color:#fff;
   background:var(--c-green);
   border-radius:var(--r-pill);
@@ -608,63 +461,64 @@ p:last-child{margin-bottom:0;}
 .activity:nth-child(even) .activity__kicker{background:var(--c-orange);}
 
 .activity__title{
-  font-size:clamp(1.5rem, 1.4vw + 1rem, 2.1rem);
-  margin-bottom:.75rem;
+  font-size:clamp(1.1rem, .55vw + .95rem, 1.35rem);
+  margin-bottom:.5rem;
 }
 .activity__text{
   color:var(--c-muted);
-  font-size:1rem;
-  line-height:1.7;
+  font-size:.9rem;
+  line-height:1.65;
 }
 .activity__list{
-  list-style:none; margin:1rem 0 1.5rem; padding:0;
-  display:grid; gap:.6rem;
+  list-style:none; margin:.75rem 0 1.1rem; padding:0;
+  display:grid; gap:.4rem;
 }
 .activity__list li{
   position:relative;
-  padding-left:1.75rem;
-  font-size:.95rem;
+  padding-left:1.4rem;
+  font-size:.85rem;
   color:var(--c-ink);
+  line-height:1.55;
 }
 .activity__list li::before{
   content:"";
   position:absolute; left:0; top:.55em;
-  width:10px; height:10px;
+  width:8px; height:8px;
   border-radius:50%;
   background:var(--c-green-soft);
-  border:3px solid var(--c-green);
+  border:2px solid var(--c-green);
 }
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
-  gap:.9rem;
-  margin:1.25rem 0 1.75rem;
+  grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+  gap:.6rem;
+  margin:.9rem 0 1.25rem;
 }
 .stat{
   background:var(--c-green-soft);
-  border-radius:var(--r-md);
-  padding:1.1rem 1rem;
+  border-radius:var(--r-sm);
+  padding:.8rem .75rem;
   text-align:center;
 }
 .stat__num{
   display:block;
   font-family:'Be Vietnam Pro', sans-serif;
-  font-size:1.75rem;
-  font-weight:800;
+  font-size:1.15rem;
+  font-weight:700;
   color:var(--c-green);
-  line-height:1.05;
-  margin-bottom:.25rem;
+  line-height:1.1;
+  margin-bottom:.15rem;
 }
 .stat__label{
-  font-size:.78rem;
+  font-size:.7rem;
   color:var(--c-muted);
-  line-height:1.4;
+  line-height:1.35;
   display:block;
 }
 
 .activities-footer{
-  margin-top:clamp(2rem, 4vw, 3.5rem);
+  margin-top:clamp(1.25rem, 2.5vw, 2rem);
   display:flex;
   justify-content:center;
 }
@@ -682,21 +536,21 @@ p:last-child{margin-bottom:0;}
 }
 .modal__panel{
   position:relative; z-index:1;
-  width:min(100% - 1.75rem, 720px);
-  max-height:min(90vh, 840px);
+  width:min(100% - 1.5rem, 660px);
+  max-height:min(90vh, 800px);
   overflow-y:auto;
   background:#fff;
   border-radius:var(--r-lg);
-  box-shadow:var(--sh-lg);
-  padding:clamp(1.75rem, 3.5vw, 2.75rem);
+  box-shadow:var(--sh-md);
+  padding:clamp(1.25rem, 3vw, 2rem);
   animation:popIn .3s cubic-bezier(.2,.8,.3,1);
 }
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes popIn{from{opacity:0; transform:translateY(16px) scale(.98)}to{opacity:1; transform:none}}
+@keyframes popIn{from{opacity:0; transform:translateY(14px) scale(.98)}to{opacity:1; transform:none}}
 
 .modal__close{
-  position:absolute; top:1rem; right:1rem;
-  width:42px; height:42px;
+  position:absolute; top:.75rem; right:.75rem;
+  width:36px; height:36px;
   display:grid; place-items:center;
   border:1px solid var(--c-line);
   border-radius:50%;
@@ -708,113 +562,109 @@ p:last-child{margin-bottom:0;}
 .modal__close:hover{background:var(--c-green); color:#fff; border-color:var(--c-green);}
 
 .modal__eyebrow{
-  font-family:'Nunito Sans', sans-serif;
-  font-size:.75rem; font-weight:800;
-  letter-spacing:.16em; text-transform:uppercase;
+  font-size:.7rem; font-weight:800;
+  letter-spacing:.14em; text-transform:uppercase;
   color:var(--c-orange);
-  margin:0 0 .5rem;
+  margin:0 0 .35rem;
 }
 .modal__title{
-  font-size:clamp(1.5rem, 1.4vw + 1rem, 2rem);
-  margin-bottom:.5rem;
+  font-size:clamp(1.2rem, 1vw + .95rem, 1.5rem);
+  margin-bottom:.35rem;
 }
 .modal__sub{
   color:var(--c-muted);
-  font-size:.95rem;
-  margin-bottom:1.75rem;
-  line-height:1.65;
+  font-size:.88rem;
+  margin-bottom:1.25rem;
+  line-height:1.6;
 }
 
-.form-grid{display:grid; grid-template-columns:1fr 1fr; gap:1.1rem;}
-.field{display:flex; flex-direction:column; gap:.4rem;}
+.form-grid{display:grid; grid-template-columns:1fr 1fr; gap:.85rem;}
+.field{display:flex; flex-direction:column; gap:.3rem;}
 .field--full{grid-column:1 / -1;}
 .field label{
-  font-family:'Nunito Sans', sans-serif;
-  font-size:.85rem; font-weight:700;
+  font-size:.8rem; font-weight:700;
   color:var(--c-ink);
 }
 .field label .req{color:#C0392B;}
 .field input, .field select, .field textarea{
-  font:inherit; font-size:.95rem;
+  font:inherit; font-size:.88rem;
   color:var(--c-ink);
-  padding:.8rem .95rem;
-  border:2px solid var(--c-line);
+  padding:.6rem .75rem;
+  border:1.5px solid var(--c-line);
   border-radius:var(--r-sm);
   background:#fff;
   transition:border-color .18s ease, box-shadow .18s ease;
   width:100%;
   font-family:'Nunito Sans', sans-serif;
 }
-.field textarea{resize:vertical; min-height:120px;}
+.field textarea{resize:vertical; min-height:100px;}
 .field input:focus, .field select:focus, .field textarea:focus{
   outline:none;
   border-color:var(--c-green);
-  box-shadow:0 0 0 4px rgba(65,87,22,.12);
+  box-shadow:0 0 0 3px rgba(48,100,49,.13);
 }
 .field input[aria-invalid="true"],
 .field textarea[aria-invalid="true"],
 .field select[aria-invalid="true"]{border-color:#C0392B;}
-.field__error{font-size:.78rem; color:#C0392B; min-height:1em;}
+.field__error{font-size:.72rem; color:#C0392B; min-height:1em;}
 
-.field--check{flex-direction:row; align-items:flex-start; gap:.75rem;}
-.field--check input{width:auto; margin-top:.3rem; flex:0 0 auto; accent-color:var(--c-green);}
-.field--check label{font-weight:400; font-size:.85rem; color:var(--c-muted); line-height:1.55;}
+.field--check{flex-direction:row; align-items:flex-start; gap:.55rem;}
+.field--check input{width:auto; margin-top:.25rem; flex:0 0 auto; accent-color:var(--c-green);}
+.field--check label{font-weight:400; font-size:.8rem; color:var(--c-muted); line-height:1.5;}
 
 .hp{position:absolute!important; left:-9999px!important; opacity:0;}
 
 .form-actions{
   grid-column:1 / -1;
-  display:flex; flex-wrap:wrap; align-items:center; gap:1rem;
-  margin-top:.75rem;
+  display:flex; flex-wrap:wrap; align-items:center; gap:.75rem;
+  margin-top:.5rem;
 }
-.form-status{font-size:.9rem; font-weight:700; color:var(--c-green);}
+.form-status{font-size:.82rem; font-weight:700; color:var(--c-green);}
 
 .modal__contact{
-  margin-top:2rem;
-  padding-top:1.75rem;
+  margin-top:1.5rem;
+  padding-top:1.25rem;
   border-top:1px solid var(--c-line);
-  display:grid; gap:.9rem;
-  font-size:.9rem;
+  display:grid; gap:.75rem;
+  font-size:.85rem;
 }
-.modal__contact-item{display:flex; gap:.8rem; align-items:flex-start; color:var(--c-muted);}
+.modal__contact-item{display:flex; gap:.65rem; align-items:flex-start; color:var(--c-muted);}
 .modal__contact-item strong{
   display:block;
   color:var(--c-ink);
-  font-size:.82rem;
-  font-family:'Nunito Sans', sans-serif;
+  font-size:.75rem;
   font-weight:800;
   letter-spacing:.04em;
   text-transform:uppercase;
-  margin-bottom:.15rem;
+  margin-bottom:.1rem;
 }
 .modal__contact-item svg{
-  width:20px; height:20px; flex:0 0 auto;
+  width:17px; height:17px; flex:0 0 auto;
   color:var(--c-green); margin-top:.1rem;
 }
 .modal__contact-item a{color:var(--c-green); font-weight:600;}
 
-/* Bouton flottant */
 .contact-fab{
   position:fixed;
-  right:clamp(1rem, 2vw, 1.75rem);
-  bottom:clamp(1rem, 2vw, 1.75rem);
+  right:clamp(.85rem, 1.6vw, 1.35rem);
+  bottom:clamp(.85rem, 1.6vw, 1.35rem);
   z-index:110;
-  display:inline-flex; align-items:center; gap:.65rem;
-  padding:1rem 1.5rem;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1.15rem;
   border:none;
   border-radius:var(--r-pill);
-  background:var(--c-orange);
+  background:var(--c-green);
   color:#fff;
   font-family:'Nunito Sans', sans-serif;
-  font-weight:800;
-  font-size:.9rem;
+  font-weight:700;
+  font-size:.82rem;
   letter-spacing:.02em;
-  box-shadow:0 12px 30px rgba(253,133,73,.45);
+  box-shadow:0 10px 24px rgba(48,100,49,.32);
   cursor:pointer;
   transition:transform .2s ease, background-color .2s ease;
 }
-.contact-fab:hover{transform:translateY(-3px); background:var(--c-orange-dark);}
-.contact-fab svg{width:18px; height:18px;}
+.contact-fab:hover{transform:translateY(-2px); background:var(--c-green-dark);}
+.contact-fab svg{width:16px; height:16px;}
 
 /* ==========================================================================
    RESPONSIVE
@@ -826,17 +676,15 @@ p:last-child{margin-bottom:0;}
 }
 
 @media (max-width:720px){
-  html{font-size:100%;}
   .form-grid{grid-template-columns:1fr;}
-  .slide__content{max-width:100%;}
-  .slide{min-height:clamp(260px, 42vh, 360px);}
+  .slide{min-height:clamp(260px, 42vh, 380px);}
+  .slide__text{max-width:100%;}
   .slider__nav{display:none;}
-  .slider__dots{bottom:.65rem;}
-  .slider__dot{width:8px;height:8px;}
+  .slider__dots{bottom:.55rem;}
+  .slider__dot{width:7px;height:7px;}
   .news-head{flex-direction:column; align-items:flex-start;}
   .news-head .section-head{text-align:left;}
   .section-head{text-align:left;}
-  .section-head__title{text-align:left;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -854,111 +702,108 @@ p:last-child{margin-bottom:0;}
 <body>
 <a class="skip-link" href="#main">Aller au contenu principal</a>
 
-<!-- HEADER -->
+<!-- HEADER INJECTÉ -->
 <div data-include="/components/header.html"></div>
+
+<!-- Espace réservé pour le header (~1 cm) -->
+<div class="header-space" aria-hidden="true"></div>
 
 <main id="main">
 
   <!-- ============================================================
-       HERO SLIDER
+       HERO SLIDER — PLEINE LARGEUR (full-width horizontal)
        ============================================================ -->
   <section class="hero" aria-label="Nos domaines d'action">
-    <div class="container">
-      <div class="slider" id="heroSlider"
-           role="region"
-           aria-roledescription="carrousel"
-           aria-label="Domaines d'action de l'APEBH">
+    <div class="slider" id="heroSlider"
+         role="region"
+         aria-roledescription="carrousel"
+         aria-label="Domaines d'action de l'APEBH">
 
-        <div class="slider__viewport">
-          <div class="slider__track" id="sliderTrack">
+      <div class="slider__viewport">
+        <div class="slider__track" id="sliderTrack">
 
-            <article class="slide" role="group" aria-roledescription="diapositive"
-                     aria-label="1 sur 4 : Recyclage et art">
-              <img class="slide__img" src="/images/objets-arts.jpg"
-                   alt="Objets d'art fabriqués à partir de déchets plastiques du Lac Tanganyika"
-                   fetchpriority="high">
-              <div class="slide__overlay"></div>
-              <div class="slide__content">
-                <span class="slide__tag">Recyclage &amp; art</span>
-                <p class="slide__text">
-                  En luttant contre la pollution grâce au recyclage des déchets plastiques du
-                  Lac Tanganyika transformés en objets d'art, et autres.
-                </p>
-              </div>
-            </article>
+          <article class="slide" role="group" aria-roledescription="diapositive"
+                   aria-label="1 sur 4 : Recyclage et art">
+            <img class="slide__img" src="/images/objets-arts.jpg"
+                 alt="Objets d'art fabriqués à partir de déchets plastiques du Lac Tanganyika"
+                 fetchpriority="high">
+            <div class="slide__overlay"></div>
+            <div class="slide__content">
+              <p class="slide__text">
+                En luttant contre la pollution grâce au recyclage des déchets plastiques du
+                Lac Tanganyika transformés en objets d'art, et autres.
+              </p>
+            </div>
+          </article>
 
-            <article class="slide" role="group" aria-roledescription="diapositive"
-                     aria-label="2 sur 4 : Zones humides">
-              <img class="slide__img" src="/images/wetlands.jpg"
-                   alt="Zone humide et écosystème aquatique protégé" loading="lazy">
-              <div class="slide__overlay"></div>
-              <div class="slide__content">
-                <span class="slide__tag">Zones humides</span>
-                <p class="slide__text">
-                  En menant des activités sur la protection des zones humides et des écosystèmes,
-                  notamment à travers le programme transfrontalier
-                  « Wetlands for Peace and People's Health Program ».
-                </p>
-              </div>
-            </article>
+          <article class="slide" role="group" aria-roledescription="diapositive"
+                   aria-label="2 sur 4 : Zones humides">
+            <img class="slide__img" src="/images/wetlands.jpg"
+                 alt="Zone humide et écosystème aquatique protégé" loading="lazy">
+            <div class="slide__overlay"></div>
+            <div class="slide__content">
+              <p class="slide__text">
+                En menant des activités sur la protection des zones humides et des écosystèmes,
+                notamment à travers le programme transfrontalier
+                « Wetlands for Peace and People's Health Program ».
+              </p>
+            </div>
+          </article>
 
-            <article class="slide" role="group" aria-roledescription="diapositive"
-                     aria-label="3 sur 4 : Jeunesse et femmes">
-              <img class="slide__img" src="/images/presentation-imagebox.jpg"
-                   alt="Jeunes et femmes engagés dans une activité de sensibilisation climatique"
-                   loading="lazy">
-              <div class="slide__overlay"></div>
-              <div class="slide__content">
-                <span class="slide__tag">Jeunesse &amp; genre</span>
-                <p class="slide__text">
-                  Avec des initiatives pour impliquer les jeunes et les femmes dans les politiques
-                  climatiques, comme le projet « Ngir'Ijambo ku biriko biraba » réalisé en partenariat
-                  avec l'Abarundikazi Period Movement (APM).
-                </p>
-              </div>
-            </article>
+          <article class="slide" role="group" aria-roledescription="diapositive"
+                   aria-label="3 sur 4 : Jeunesse et femmes">
+            <img class="slide__img" src="/images/presentation-imagebox.jpg"
+                 alt="Jeunes et femmes engagés dans une activité de sensibilisation climatique"
+                 loading="lazy">
+            <div class="slide__overlay"></div>
+            <div class="slide__content">
+              <p class="slide__text">
+                Avec des initiatives pour impliquer les jeunes et les femmes dans les politiques
+                climatiques, comme le projet « Ngir'Ijambo ku biriko biraba » réalisé en partenariat
+                avec l'Abarundikazi Period Movement (APM).
+              </p>
+            </div>
+          </article>
 
-            <article class="slide" role="group" aria-roledescription="diapositive"
-                     aria-label="4 sur 4 : Qualité de l'air et transition énergétique">
-              <img class="slide__img" src="/images/presentation-imagebox.jpg"
-                   alt="Table ronde sur la qualité de l'air et la transition énergétique" loading="lazy">
-              <div class="slide__overlay"></div>
-              <div class="slide__content">
-                <span class="slide__tag">Air, climat &amp; énergie</span>
-                <p class="slide__text">
-                  L'organisation participe à des tables rondes et des actions de sensibilisation
-                  sur la qualité de l'air (pollution intérieure et extérieure) et la transition
-                  énergétique, en lien avec des mouvements comme le Laudato Si' Movement Burundi.
-                </p>
-              </div>
-            </article>
+          <article class="slide" role="group" aria-roledescription="diapositive"
+                   aria-label="4 sur 4 : Qualité de l'air et transition énergétique">
+            <img class="slide__img" src="/images/presentation-imagebox.jpg"
+                 alt="Table ronde sur la qualité de l'air et la transition énergétique" loading="lazy">
+            <div class="slide__overlay"></div>
+            <div class="slide__content">
+              <p class="slide__text">
+                L'organisation participe à des tables rondes et des actions de sensibilisation
+                sur la qualité de l'air (pollution intérieure et extérieure) et la transition
+                énergétique, en lien avec des mouvements comme le Laudato Si' Movement Burundi.
+              </p>
+            </div>
+          </article>
 
-          </div>
         </div>
-
-        <button class="slider__nav slider__nav--prev" type="button" aria-label="Diapositive précédente">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg>
-        </button>
-        <button class="slider__nav slider__nav--next" type="button" aria-label="Diapositive suivante">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M9 6l6 6-6 6"/>
-          </svg>
-        </button>
-
-        <div class="slider__dots" id="sliderDots" role="tablist" aria-label="Choisir une diapositive"></div>
-        <div class="slider__progress" id="sliderProgress" aria-hidden="true"></div>
-
-        <p class="visually-hidden" id="sliderStatus" aria-live="polite"></p>
       </div>
+
+      <button class="slider__nav slider__nav--prev" type="button" aria-label="Diapositive précédente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="slider__nav slider__nav--next" type="button" aria-label="Diapositive suivante">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 6l6 6-6 6"/>
+        </svg>
+      </button>
+
+      <div class="slider__dots" id="sliderDots" role="tablist" aria-label="Choisir une diapositive"></div>
+      <div class="slider__progress" id="sliderProgress" aria-hidden="true"></div>
+
+      <p class="visually-hidden" id="sliderStatus" aria-live="polite"></p>
     </div>
   </section>
 
   <!-- ============================================================
-       BANNIÈRE DE TRANSITION (sans le petit badge "Une Seule Santé")
+       BANNIÈRE DE TRANSITION
        ============================================================ -->
   <section class="transition-banner" aria-label="Notre approche">
     <div class="container transition-banner__inner">
@@ -968,15 +813,8 @@ p:last-child{margin-bottom:0;}
     </div>
   </section>
 
-  <!-- Courbe de séparation -->
-  <div class="curve" aria-hidden="true">
-    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
-      <path d="M0,60 C240,10 480,10 720,40 C960,70 1200,90 1440,50 L1440,150 L0,150 Z" fill="#FFFFFF"/>
-    </svg>
-  </div>
-
   <!-- ============================================================
-       ACTUALITÉS (sans le petit label "Actualités")
+       ACTUALITÉS
        ============================================================ -->
   <section class="section" aria-labelledby="news-title">
     <div class="container">
@@ -1077,176 +915,38 @@ p:last-child{margin-bottom:0;}
     </div>
   </section>
 
-  <!-- Courbe de séparation vers Partenaires -->
-  <div class="curve" aria-hidden="true">
-    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
-      <path d="M0,20 C180,50 360,80 540,70 C720,60 900,30 1080,50 C1260,70 1350,100 1440,115 L1440,150 L0,150 Z" fill="#F4F4F4"/>
-    </svg>
-  </div>
-
   <!-- ============================================================
        PARTENAIRES
        ============================================================ -->
-  <section class="section section--soft" aria-labelledby="partners-title">
+  <section class="section section--soft partners-section" aria-labelledby="partners-title">
     <div class="container">
-      <header class="section-head">
-        <h2 class="section-head__title" id="partners-title">Nos partenaires stratégiques</h2>
-        <p class="section-head__sub">
-          Nous agissons aux côtés d'institutions nationales et internationales,
-          de réseaux de jeunesse et d'organisations de la société civile.
-        </p>
-      </header>
+      <h2 class="partners-title" id="partners-title">Nos partenaires</h2>
 
       <ul class="partners-grid">
         <li class="partner">
           <img src="/images/gef-sgp.png" alt="GEF Small Grants Programme" loading="lazy">
-          <span class="partner__name">GEF SGP</span>
         </li>
         <li class="partner">
           <img src="/images/undp.png" alt="Programme des Nations Unies pour le développement" loading="lazy">
-          <span class="partner__name">PNUD / UNDP</span>
         </li>
         <li class="partner">
           <img src="/images/unep.png" alt="Programme des Nations Unies pour l'environnement" loading="lazy">
-          <span class="partner__name">PNUE / UNEP</span>
         </li>
         <li class="partner">
           <img src="/images/apm.png" alt="Abarundikazi Period Movement" loading="lazy">
-          <span class="partner__name">APM</span>
         </li>
         <li class="partner">
           <img src="/images/wff.png" alt="World Food Forum" loading="lazy">
-          <span class="partner__name">World Food Forum</span>
         </li>
         <li class="partner">
           <img src="/images/mineagrie.png" alt="Ministère de l'Environnement" loading="lazy">
-          <span class="partner__name">Ministère de l'Environnement</span>
         </li>
         <li class="partner">
           <img src="/images/gybn.png" alt="Global Youth Biodiversity Network" loading="lazy">
-          <span class="partner__name">GYBN</span>
         </li>
       </ul>
     </div>
   </section>
-
-  <!-- Courbe de séparation vers One Health -->
-  <div class="curve" aria-hidden="true">
-    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
-      <path d="M0,60 C360,50 480,75 720,70 C960,65 1080,45 1440,55 L1440,150 L0,150 Z" fill="#FFFFFF"/>
-    </svg>
-  </div>
-
-  <!-- ============================================================
-       ONE HEALTH
-       ============================================================ -->
-  <section class="section" id="one-health" aria-labelledby="oh-title">
-    <div class="container">
-      <header class="section-head">
-        <h2 class="section-head__title" id="oh-title">Une Seule Santé « One Health »</h2>
-        <p class="section-head__sub">
-          La santé humaine, la santé animale et la santé des écosystèmes sont indissociables.
-          L'APEBH fédère ces trois piliers pour prévenir les risques sanitaires, protéger la
-          biodiversité et renforcer la résilience climatique des communautés.
-        </p>
-      </header>
-
-      <div class="oh-grid">
-
-        <button class="oh-card" type="button" aria-expanded="false" aria-controls="oh-humaine">
-          <span class="oh-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 20.5s-7-4.2-7-9.2A4.4 4.4 0 0 1 12 8.2a4.4 4.4 0 0 1 7 3.1c0 5-7 9.2-7 9.2z"/>
-              <path d="M8.6 12h2l1-2 1.6 3.2.9-1.2h1.9"/>
-            </svg>
-          </span>
-          <span class="oh-card__title">Santé Humaine</span>
-          <span class="oh-card__lead">
-            Prévenir les zoonoses et les risques sanitaires liés à l'environnement.
-          </span>
-          <span class="oh-card__more">En savoir plus</span>
-          <span class="oh-card__details" id="oh-humaine">
-            <span>
-              <p>
-                Prévention des zoonoses et des risques sanitaires liés à l'environnement,
-                promotion de l'accès à l'eau potable et à un air sain (pollution intérieure
-                et extérieure), et renforcement de la résilience des communautés face aux
-                maladies émergentes — notamment en lien avec le <strong>Pandemic Fund</strong>
-                et nos partenariats stratégiques.
-              </p>
-            </span>
-          </span>
-        </button>
-
-        <button class="oh-card" type="button" aria-expanded="false" aria-controls="oh-animale">
-          <span class="oh-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="6.8" cy="9.2" r="1.9"/>
-              <circle cx="12" cy="7.2" r="1.9"/>
-              <circle cx="17.2" cy="9.2" r="1.9"/>
-              <path d="M12 20.2c-3 0-5.2-2-5.2-4.5S9 12 12 12s5.2 1.2 5.2 3.7-2.2 4.5-5.2 4.5z"/>
-            </svg>
-          </span>
-          <span class="oh-card__title">Santé Animale</span>
-          <span class="oh-card__lead">
-            Surveiller les maladies émergentes et protéger la faune sauvage.
-          </span>
-          <span class="oh-card__more">En savoir plus</span>
-          <span class="oh-card__details" id="oh-animale">
-            <span>
-              <p>
-                Surveillance des maladies à potentiel épidémique, protection de la faune
-                sauvage et des espèces locales, promotion de pratiques d'élevage durables
-                et réduction des interfaces homme–animal qui favorisent l'émergence de
-                nouvelles menaces sanitaires.
-              </p>
-            </span>
-          </span>
-        </button>
-
-        <button class="oh-card" type="button" aria-expanded="false" aria-controls="oh-ecosystemes">
-          <span class="oh-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14z"/>
-              <path d="M5 19c3-5.2 7-8.2 11-9.4"/>
-            </svg>
-          </span>
-          <span class="oh-card__title">Santé des Écosystèmes</span>
-          <span class="oh-card__lead">
-            Des écosystèmes sains sont la première barrière sanitaire.
-          </span>
-          <span class="oh-card__more">En savoir plus</span>
-          <span class="oh-card__details" id="oh-ecosystemes">
-            <span>
-              <p>
-                Préservation du Lac Tanganyika, des zones humides et des sols, restauration
-                de la biodiversité et lutte contre la pollution plastique. La dégradation
-                des écosystèmes amplifie directement les risques sanitaires et la
-                vulnérabilité climatique.
-              </p>
-            </span>
-          </span>
-        </button>
-
-      </div>
-
-      <p class="oh-note">
-        <strong>Synergies :</strong> biodiversité, risques sanitaires, pollution et résilience
-        climatique sont traités de manière intégrée — du suivi des indicateurs
-        environnementaux jusqu'à l'élaboration de politiques publiques transversales.
-      </p>
-    </div>
-  </section>
-
-  <!-- Courbe de séparation vers Activités -->
-  <div class="curve" aria-hidden="true">
-    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
-      <path d="M0,25 C180,50 360,80 540,70 C720,60 900,30 1080,50 C1260,70 1350,100 1440,115 L1440,150 L0,150 Z" fill="#EBEDDA"/>
-    </svg>
-  </div>
 
   <!-- ============================================================
        ACTIVITÉS
@@ -1470,7 +1170,7 @@ p:last-child{margin-bottom:0;}
 
         <div class="field field--full">
           <label for="cf-message">Message <span class="req">*</span></label>
-          <textarea id="cf-message" name="message" rows="5" required
+          <textarea id="cf-message" name="message" rows="4" required
                     placeholder="Décrivez votre demande en quelques lignes…"></textarea>
           <span class="field__error" data-error-for="cf-message"></span>
         </div>
@@ -1649,22 +1349,7 @@ p:last-child{margin-bottom:0;}
 })();
 
 /* ==========================================================================
-   C. ACCORDÉON ONE HEALTH
-   ========================================================================== */
-(function initOneHealth(){
-  const cards = document.querySelectorAll('.oh-card');
-  if(!cards.length) return;
-  cards.forEach((card) => {
-    card.addEventListener('click', () => {
-      const isOpen = card.getAttribute('aria-expanded') === 'true';
-      cards.forEach((c) => c.setAttribute('aria-expanded','false'));
-      card.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-    });
-  });
-})();
-
-/* ==========================================================================
-   D. MODALE CONTACT
+   C. MODALE CONTACT
    ========================================================================== */
 (function initContactModal(){
   const modal  = document.getElementById('contactModal');
@@ -1677,7 +1362,7 @@ p:last-child{margin-bottom:0;}
     'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
     'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-  let lastFocused = null, autoOpenTimer = null;
+  let lastFocused = null;
 
   function openModal(){
     lastFocused = document.activeElement;
@@ -1687,8 +1372,6 @@ p:last-child{margin-bottom:0;}
     document.dispatchEvent(new CustomEvent('apebh:modal-open'));
     const first = modal.querySelector('#cf-nom');
     if(first) setTimeout(() => first.focus(), 60);
-    try { sessionStorage.setItem('apebh_contact_seen','1'); } catch(e){}
-    clearTimeout(autoOpenTimer);
   }
   function closeModal(){
     modal.classList.remove('is-open');
@@ -1713,10 +1396,6 @@ p:last-child{margin-bottom:0;}
       else if(!e.shiftKey && document.activeElement === lastEl){ e.preventDefault(); firstEl.focus(); }
     }
   });
-
-  let seen = false;
-  try { seen = sessionStorage.getItem('apebh_contact_seen') === '1'; } catch(e){}
-  if(!seen) autoOpenTimer = setTimeout(openModal, 15000);
 
   const rules = {
     'cf-nom':      { required:true, message:'Veuillez indiquer votre nom complet.' },
