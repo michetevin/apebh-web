@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEBH - Accueil | Protection de l'Environnement et Santé</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'nature-green': {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669', // Primary
+                            700: '#047857',
+                            900: '#064e3b',
+                        },
+                        'water-blue': {
+                            50: '#f0f9ff',
+                            500: '#0ea5e9',
+                            600: '#0284c7', // Secondary
+                            700: '#0369a1',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles */
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        /* Swiper custom pagination colors */
+        .swiper-pagination-bullet-active { background-color: #059669 !important; }
+        .swiper-button-next, .swiper-button-prev { color: #059669 !important; transform: scale(0.7); background: white; padding: 30px; border-radius: 50%; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .swiper-button-next:after, .swiper-button-prev:after { font-size: 24px !important; font-weight: bold; }
+        
+        /* Watermark Background for Transition Banner */
+        .bg-watermark {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.83-54.627 54.627-.83-.83L54.627 0zM29.627 0l.83.83-29.627 29.627-.83-.83L29.627 0zM0 29.627l.83.83L0 30.457v-.83zm60-29.627v.83l-.83-.83h.83zM60 29.627l-.83.83-29.627-29.627.83-.83L60 29.627zM29.627 60l-.83-.83 29.627-29.627.83.83L29.627 60z' fill='%2310b981' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* Modal transitions */
+        .modal-enter { opacity: 0; transform: scale(0.95); }
+        .modal-enter-active { opacity: 1; transform: scale(1); transition: all 0.3s ease-out; }
+        .modal-leave { opacity: 1; transform: scale(1); }
+        .modal-leave-active { opacity: 0; transform: scale(0.95); transition: all 0.2s ease-in; }
+
+        /* One health interactive pillar transition */
+        .pillar-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .pillar-card:hover { transform: translateY(-10px); z-index: 10; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); border-color: #059669; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- INCLUSION DU HEADER -->
+    <!-- [INCLUDE: /components/header.html] -->
+    <header class="bg-white shadow-sm py-4 px-6 w-full text-center border-b border-gray-100 hidden">
+        <!-- Contenu simulé pour prévisualisation, normalement remplacé par le composant -->
+        <div class="max-w-7xl mx-auto flex justify-between items-center text-nature-green-600 font-bold text-xl">
+            <span>APEBH <span class="text-sm text-gray-500 font-normal">Header Placeholder</span></span>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECTION HERO & SLIDER (Contenu, max-w-5xl pour écrans zoomés) -->
+        <section class="pt-8 pb-4 px-4 bg-slate-50">
+            <div class="max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-soft relative bg-white border border-gray-100">
+                <!-- Swiper -->
+                <div class="swiper heroSwiper h-[400px] md:h-[450px] w-full relative">
+                    <div class="swiper-wrapper">
+                        
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide relative">
+                            <img src="/images/objets-arts.jpg" onerror="this.onerror=null;this.src='https://placehold.co/1000x500/059669/ffffff?text=Recyclage+Lac+Tanganyika';" alt="Recyclage déchets plastiques" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent flex flex-col justify-end p-8 md:p-12">
+                                <span class="bg-nature-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full w-max mb-4">Économie Circulaire</span>
+                                <p class="text-white text-lg md:text-xl font-medium leading-relaxed max-w-3xl drop-shadow-md">
+                                    En luttant contre la pollution grâce au recyclage des déchets plastiques du Lac Tanganyika transformés en objets d'art, et autres.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide relative">
+                            <img src="/images/wetlands.jpg" onerror="this.onerror=null;this.src='https://placehold.co/1000x500/0284c7/ffffff?text=Zones+Humides';" alt="Protection des zones humides" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent flex flex-col justify-end p-8 md:p-12">
+                                <span class="bg-water-blue-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full w-max mb-4">Conservation</span>
+                                <p class="text-white text-lg md:text-xl font-medium leading-relaxed max-w-3xl drop-shadow-md">
+                                    En menant des activités sur la protection des zones humides et des écosystèmes, notamment à travers le programme transfrontalier « Wetlands for Peace and People's Health Program ».
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide relative">
+                            <img src="/images/presentation-imagebox.jpg" onerror="this.onerror=null;this.src='https://placehold.co/1000x500/047857/ffffff?text=Implication+des+Jeunes+et+Femmes';" alt="Implication des jeunes et des femmes" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent flex flex-col justify-end p-8 md:p-12">
+                                <span class="bg-nature-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full w-max mb-4">Inclusion & Genre</span>
+                                <p class="text-white text-lg md:text-xl font-medium leading-relaxed max-w-3xl drop-shadow-md">
+                                    Avec des initiatives pour impliquer les jeunes et les femmes dans les politiques climatiques, comme le projet « Ngir'Ijambo ku biriko biraba » réalisé en partenariat avec l'Abarundikazi Period Movement (APM).
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide relative">
+                            <img src="/images/presentation-imagebox.jpg" onerror="this.onerror=null;this.src='https://placehold.co/1000x500/0369a1/ffffff?text=Qualit%C3%A9+de+l%27Air+%26+Transition';" alt="Qualité de l'air" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent flex flex-col justify-end p-8 md:p-12">
+                                <span class="bg-water-blue-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full w-max mb-4">Climat & Énergie</span>
+                                <p class="text-white text-lg md:text-xl font-medium leading-relaxed max-w-3xl drop-shadow-md">
+                                    L'organisation participe à des tables rondes et des actions de sensibilisation sur la qualité de l'air (pollution intérieure et extérieure) et la transition énergétique, en lien avec le Laudato Si' Movement Burundi.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Navigation & Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next hidden md:flex"></div>
+                    <div class="swiper-button-prev hidden md:flex"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BANNIÈRE DE TRANSITION -->
+        <section class="bg-watermark py-10 px-4 shadow-sm border-y border-gray-200">
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <div class="flex items-center justify-center space-x-4 mb-4 text-nature-green-600 opacity-80">
+                    <i class="fa-solid fa-leaf text-2xl"></i>
+                    <i class="fa-solid fa-droplet text-2xl"></i>
+                    <i class="fa-solid fa-paw text-2xl"></i>
+                </div>
+                <h2 class="text-2xl md:text-4xl font-bold text-gray-800 tracking-tight">
+                    Nous agissons pour l’approche <br class="hidden md:block">
+                    <span class="text-nature-green-600">Une Seule Santé "One Health"</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-water-blue-500 to-nature-green-500 mx-auto mt-6 rounded-full"></div>
+            </div>
+        </section>
+
+        <!-- APPROCHE ONE HEALTH (Interactif) -->
+        <section class="py-16 px-4 bg-white relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-sm font-bold tracking-wider text-water-blue-600 uppercase mb-2">Axe Transversal</h3>
+                    <h2 class="text-3xl font-bold text-gray-900">Le Concept One Health</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Fédérer la santé humaine, animale et environnementale. Une synergie face aux risques sanitaires, à la pollution et pour la résilience climatique.</p>
+                </div>
+
+                <div class="relative max-w-5xl mx-auto">
+                    <!-- Connecting line background (Desktop) -->
+                    <div class="hidden md:block absolute top-1/2 left-10 right-10 h-1 bg-gray-100 -translate-y-1/2 z-0"></div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                        <!-- Pillar 1: Ecosystem -->
+                        <div class="pillar-card bg-white rounded-2xl p-8 border-2 border-transparent shadow-sm text-center flex flex-col items-center group">
+                            <div class="w-20 h-20 rounded-full bg-nature-green-50 text-nature-green-600 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-tree"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Santé des Écosystèmes</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                                Restauration de la biodiversité, préservation des zones humides et réduction de la pollution.
+                            </p>
+                        </div>
+
+                        <!-- Pillar 2: Human -->
+                        <div class="pillar-card bg-white rounded-2xl p-8 border-2 border-transparent shadow-sm text-center flex flex-col items-center group">
+                            <div class="w-20 h-20 rounded-full bg-water-blue-50 text-water-blue-600 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-person-dots-from-line"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Santé Humaine</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                                Lutte contre la pollution de l'air, accès à une eau saine, et implication communautaire pour le bien-être.
+                            </p>
+                        </div>
+
+                        <!-- Pillar 3: Animal -->
+                        <div class="pillar-card bg-white rounded-2xl p-8 border-2 border-transparent shadow-sm text-center flex flex-col items-center group">
+                            <div class="w-20 h-20 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-paw"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Santé Animale</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                                Préservation des habitats naturels et prévention des zoonoses via une coexistence durable.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTUALITÉS -->
+        <section class="py-16 px-4 bg-slate-50">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-10">
+                    <div>
+                        <h3 class="text-sm font-bold tracking-wider text-nature-green-600 uppercase mb-2">Sur le terrain</h3>
+                        <h2 class="text-3xl font-bold text-gray-900">Dernières Actualités</h2>
+                    </div>
+                    <a href="/blog/" class="mt-4 md:mt-0 text-nature-green-600 hover:text-nature-green-700 font-semibold flex items-center gap-2 group">
+                        Plus d'actualités 
+                        <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- News Card 1 -->
+                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-soft transition-shadow border border-gray-100 flex flex-col">
+                        <a href="https://irisnews.org/umuhivu-une-foire-de-la-connaissance-pour-celebrer-la-jeunesse-ses-idees-et-ses-victoires/" target="_blank" class="block relative h-48 overflow-hidden group">
+                            <img src="/news/images/iris-news.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0f172a/ffffff?text=UMUHIVU+Foire';" alt="UMUHIVU Foire" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold px-3 py-1 rounded-full">Sur Iris news</span>
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="text-sm text-water-blue-600 font-medium mb-2"><i class="fa-regular fa-calendar mr-2"></i>13 juillet 2025</div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight"><a href="https://irisnews.org/umuhivu-une-foire-de-la-connaissance-pour-celebrer-la-jeunesse-ses-idees-et-ses-victoires/" target="_blank" class="hover:text-nature-green-600 transition-colors">UMUHIVU : une foire de la connaissance pour célébrer la jeunesse, ses idées et ses victoires</a></h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">Renforcer la conscience des jeunes femmes sur leur rôle dans la protection de l’environnement.</p>
+                            <a href="https://irisnews.org/umuhivu-une-foire-de-la-connaissance-pour-celebrer-la-jeunesse-ses-idees-et-ses-victoires/" target="_blank" class="mt-auto text-sm font-semibold text-nature-green-600 hover:text-nature-green-700 flex items-center gap-1">Lire l'article <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- News Card 2 -->
+                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-soft transition-shadow border border-gray-100 flex flex-col">
+                        <a href="/blog/news/renforcer-la-conservation-transfrontalieres-biodiversite/" class="block relative h-48 overflow-hidden group">
+                            <img src="/news/renforcer-la-conservation-transfrontalieres-biodiversite/img.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0284c7/ffffff?text=Wetlands+for+Peace';" alt="Wetlands for Peace" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="text-sm text-water-blue-600 font-medium mb-2"><i class="fa-regular fa-calendar mr-2"></i>5 décembre 2023</div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight"><a href="/blog/news/renforcer-la-conservation-transfrontalieres-biodiversite/" class="hover:text-nature-green-600 transition-colors">Le programme « Wetlands for Peace and People’s Health Program »</a></h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">En collaboration avec MKAAJI MPYA asbl, nous visons à renforcer la conservation transfrontalière de la biodiversité dans la région des Grands Lacs africains, tout en s’attaquant au changement climatique et en améliorant la santé des communautés locales et des peuples autochtones.</p>
+                            <a href="/blog/news/renforcer-la-conservation-transfrontalieres-biodiversite/" class="mt-auto text-sm font-semibold text-nature-green-600 hover:text-nature-green-700 flex items-center gap-1">Lire l'article <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- News Card 3 -->
+                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-soft transition-shadow border border-gray-100 flex flex-col">
+                        <a href="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/" class="block relative h-48 overflow-hidden group">
+                            <img src="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/img.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/047857/ffffff?text=COP+16+Colombia';" alt="COP 16 Colombia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="text-sm text-water-blue-600 font-medium mb-2"><i class="fa-regular fa-calendar mr-2"></i>27 octobre 2024</div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight"><a href="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/" class="hover:text-nature-green-600 transition-colors">Plaidoyer Jeunesse et Biodiversité à la COP 16 en Colombie</a></h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">À Cali, en Colombie, avant la COP 16 sur la biodiversité des Nations Unies, notre coordinateur de programme a partagé les avancées de "Wetlands For Peace" lors d'un événement parallèle organisé par Post-2020 Biodiversity Framework – EU Support et AWF.</p>
+                            <a href="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/" class="mt-auto text-sm font-semibold text-nature-green-600 hover:text-nature-green-700 flex items-center gap-1">Lire l'article <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTENAIRES STRATÉGIQUES -->
+        <section class="py-12 bg-white border-t border-gray-100">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <h3 class="text-sm font-bold tracking-wider text-gray-400 uppercase mb-8">Nos Partenaires Stratégiques</h3>
+                
+                <div class="swiper partnerSwiper h-20">
+                    <div class="swiper-wrapper items-center">
+                        <!-- Logo placeholders based on names -->
+                        <div class="swiper-slide w-auto px-6 opacity-60 hover:opacity-100 transition-opacity"><img src="/images/gef-sgp.png" onerror="this.src='https://placehold.co/150x60/ffffff/9ca3af?text=GEF-SGP'" class="h-12 w-auto object-contain" alt="GEF SGP"></div>
+                        <div class="swiper-slide w-auto px-6 opacity-60 hover:opacity-100 transition-opacity"><img src="/images/undp.png" onerror="this.src='https://placehold.co/150x60/ffffff/9ca3af?text=UNDP'" class="h-12 w-auto object-contain" alt="UNDP"></div>
+                        <div class="swiper-slide w-auto px-6 opacity-60 hover:opacity-100 transition-opacity"><img src="/images/unep.png" onerror="this.src='https://placehold.co/150x60/ffffff/9ca3af?text=UNEP'" class="h-12 w-auto object-contain" alt="UNEP"></div>
+                        <div class="swiper-slide w-auto px-6 opacity-60 hover:opacity-100 transition-opacity"><img src="/images/apm.png" onerror="this.src='https://placehold.co/150x60/ffffff/9ca3af?text=APM'" class="h-12 w-auto object-contain" alt="APM"></div>
+                        <div class="swiper-slide w-auto px-6 opacity-60 hover:opacity-100 transition-opacity"><img src="/images/wff.png" onerror="this.src='https://placehold.co/150x60/ffffff/9ca3af?text=WFF'" class="h-12 w-auto object-contain" alt="World Food Forum"></div>
+                        <div class="swiper-slide w-auto px-6 opacity-60 hover:opacity-100 transition-opacity"><img src="/images/mineagrie.png" onerror="this.src='https://placehold.co/150x60/ffffff/9ca3af?text=MINEAGRIE'" class="h-12 w-auto object-contain" alt="Ministère de l'Environnement"></div>
+                        <div class="swiper-slide w-auto px-6 opacity-60 hover:opacity-100 transition-opacity"><img src="/images/gybn.png" onerror="this.src='https://placehold.co/150x60/ffffff/9ca3af?text=GYBN'" class="h-12 w-auto object-contain" alt="GYBN"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOS ACTIVITÉS -->
+        <section class="py-16 px-4 bg-slate-50">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Nos Principaux Domaines d'Intervention</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">De la sécurité alimentaire à la qualité de l'air, découvrez nos actions ciblées pour un impact durable au Burundi et dans la région des Grands Lacs.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Activité 1 -->
+                    <div class="relative group rounded-2xl overflow-hidden h-72 md:h-80 shadow-sm cursor-pointer border border-gray-200" onclick="window.location.href='/activites/wff-burundi/'">
+                        <img src="/images/wff-burundi.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x600/eab308/ffffff?text=S%C3%A9curit%C3%A9+Alimentaire';" alt="Sécurité Alimentaire & WFF" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent p-6 flex flex-col justify-end">
+                            <h3 class="text-xl font-bold text-white mb-2">Sécurité Alimentaire & WFF</h3>
+                            <p class="text-gray-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">
+                                Transformation des systèmes agroalimentaires et coordination du réseau national de la jeunesse avec la FAO.
+                            </p>
+                            <span class="text-nature-green-400 font-semibold text-sm flex items-center gap-2">Découvrir <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Activité 2 -->
+                    <div class="relative group rounded-2xl overflow-hidden h-72 md:h-80 shadow-sm cursor-pointer border border-gray-200" onclick="window.location.href='/activites/wetlands-ramsar/'">
+                        <img src="/images/ramsar-wetlands.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x600/0ea5e9/ffffff?text=Zones+Humides';" alt="Zones Humides & Ramsar" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent p-6 flex flex-col justify-end">
+                            <h3 class="text-xl font-bold text-white mb-2">Zones Humides & Convention Ramsar</h3>
+                            <p class="text-gray-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">
+                                Protection des écosystèmes aquatiques, Lac Tanganyika et marais transfrontaliers.
+                            </p>
+                            <span class="text-nature-green-400 font-semibold text-sm flex items-center gap-2">Découvrir <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Activité 3 -->
+                    <div class="relative group rounded-2xl overflow-hidden h-72 md:h-80 shadow-sm cursor-pointer border border-gray-200" onclick="window.location.href='/activites/biodiversite-cdb/'">
+                        <img src="/images/biodiversite-cdb.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x600/22c55e/ffffff?text=Biodiversit%C3%A9';" alt="Biodiversité CDB" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent p-6 flex flex-col justify-end">
+                            <h3 class="text-xl font-bold text-white mb-2">Biodiversité (CDB & SPANB)</h3>
+                            <p class="text-gray-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">
+                                Alignement avec le Cadre mondial de Kunming-Montréal et conservation des espèces locales.
+                            </p>
+                            <span class="text-nature-green-400 font-semibold text-sm flex items-center gap-2">Découvrir <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Activité 4 -->
+                    <div class="relative group rounded-2xl overflow-hidden h-72 md:h-80 shadow-sm cursor-pointer border border-gray-200" onclick="window.location.href='/activites/air-et-climat/'">
+                        <img src="/activites/air-et-climat/qualite-air-climat.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x600/64748b/ffffff?text=Qualit%C3%A9+de+l%27Air+%26+Climat';" alt="Qualité Air et Climat" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent p-6 flex flex-col justify-end">
+                            <h3 class="text-xl font-bold text-white mb-2">Qualité de l'Air, Climat & Énergie</h3>
+                            <p class="text-gray-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">
+                                Plaidoyer pour la qualité de l'air, cuisson propre et protection de la couche d'ozone.
+                            </p>
+                            <span class="text-nature-green-400 font-semibold text-sm flex items-center gap-2">Découvrir <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-12 text-center">
+                    <a href="/activities/" class="inline-flex items-center justify-center bg-nature-green-600 hover:bg-nature-green-700 text-white font-semibold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all">
+                        Voir toutes nos activités <i class="fa-solid fa-grid-2 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- INCLUSION DU FOOTER -->
+    <!-- [INCLUDE: /components/footer.html] -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm hidden">
+        <p>Footer Placeholder - APEBH &copy; 2026</p>
+    </footer>
+
+    <!-- BOUTON CONTACT FLOTTANT (FAB) -->
+    <button id="contactFab" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-40 bg-nature-green-600 hover:bg-nature-green-700 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-2xl transition-transform hover:scale-110 focus:outline-none">
+        <i class="fa-regular fa-comment-dots"></i>
+    </button>
+
+    <!-- MODAL CONTACT -->
+    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" id="modalBackdrop"></div>
+        
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl relative z-10 overflow-hidden flex flex-col md:flex-row modal-enter" id="modalContent">
+            
+            <!-- Close Button -->
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 bg-white/80 rounded-full w-8 h-8 flex items-center justify-center z-20">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Infos Sidebar -->
+            <div class="bg-slate-50 md:w-2/5 p-8 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Contactez-nous</h3>
+                <p class="text-gray-600 text-sm mb-8">Nous sommes à votre écoute pour toute collaboration, information ou soutien de nos projets.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-water-blue-100 text-water-blue-600 flex items-center justify-center shrink-0 mt-1">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-sm font-semibold text-gray-900">Email</h4>
+                            <p class="text-sm text-gray-600 mt-1">info@apebh.org</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-nature-green-100 text-nature-green-600 flex items-center justify-center shrink-0 mt-1">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-sm font-semibold text-gray-900">Bureau</h4>
+                            <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                                06 Avenue de la Mission,<br>
+                                Immeuble Ndongozi Bureau B9,<br>
+                                Mukaza-Bujumbura
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="p-8 md:w-3/5 bg-white">
+                <form id="contactForm" class="space-y-4" onsubmit="event.preventDefault(); alert('Message envoyé ! (Simulation)');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Nom complet</label>
+                            <input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-nature-green-500 focus:border-nature-green-500 outline-none transition-shadow text-sm" placeholder="Votre nom">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-nature-green-500 focus:border-nature-green-500 outline-none transition-shadow text-sm" placeholder="votre@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Organisation</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-nature-green-500 focus:border-nature-green-500 outline-none transition-shadow text-sm" placeholder="Nom de votre structure">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Objectif du message</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-nature-green-500 focus:border-nature-green-500 outline-none transition-shadow text-sm bg-white">
+                                <option value="">Sélectionnez...</option>
+                                <option value="partenariat">Proposition de partenariat</option>
+                                <option value="information">Demande d'information</option>
+                                <option value="presse">Contact presse</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Message</label>
+                        <textarea required rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-nature-green-500 focus:border-nature-green-500 outline-none transition-shadow text-sm resize-none" placeholder="Comment pouvons-nous vous aider ?"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-nature-green-600 hover:bg-nature-green-700 text-white font-medium py-3 px-4 rounded-lg shadow transition-colors mt-2">
+                        Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialisation du Slider Hero
+            const heroSwiper = new Swiper('.heroSwiper', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                effect: 'fade', // Plus doux et moderne pour un slider de texte/image
+                fadeEffect: {
+                    crossFade: true
+                }
+            });
+
+            // Initialisation du Carousel Partenaires
+            const partnerSwiper = new Swiper('.partnerSwiper', {
+                slidesPerView: 'auto',
+                spaceBetween: 30,
+                loop: true,
+                speed: 3000,
+                autoplay: {
+                    delay: 0,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    320: { slidesPerView: 2, spaceBetween: 20 },
+                    640: { slidesPerView: 3, spaceBetween: 30 },
+                    768: { slidesPerView: 4, spaceBetween: 40 },
+                    1024: { slidesPerView: 5, spaceBetween: 50 },
+                }
+            });
+
+            // Logique Modal Contact
+            const modal = document.getElementById('contactModal');
+            const fab = document.getElementById('contactFab');
+            const closeBtn = document.getElementById('closeModal');
+            const backdrop = document.getElementById('modalBackdrop');
+            const content = document.getElementById('modalContent');
+
+            function openModal() {
+                modal.classList.remove('hidden');
+                // Force un reflow pour jouer l'animation CSS
+                void modal.offsetWidth;
+                content.classList.add('modal-enter-active');
+                content.classList.remove('modal-enter');
+                document.body.style.overflow = 'hidden'; // Empêche le scroll derrière
+            }
+
+            function closeModal() {
+                content.classList.remove('modal-enter-active');
+                content.classList.add('modal-leave-active');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    content.classList.remove('modal-leave-active');
+                    content.classList.add('modal-enter');
+                    document.body.style.overflow = '';
+                }, 200); // Temps de l'animation
+            }
+
+            fab.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+            
+            // Fermer avec Echap
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
