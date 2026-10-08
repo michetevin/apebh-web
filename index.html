@@ -158,23 +158,29 @@ p:last-child{margin-bottom:0;}
 }
 
 /* ==========================================================================
-   HERO SLIDER — PLEINE LARGEUR
+   HERO SLIDER — PLEIN ÉCRAN (full screen)
    ========================================================================== */
 .hero{
   padding:0;
   width:100%;
+  margin:0;
 }
 
 .slider{
   position:relative;
   width:100%;
+  height: calc(100vh - var(--header-space));
+  height: calc(100svh - var(--header-space));
+  height: calc(100dvh - var(--header-space));
+  min-height: 520px;
   overflow:hidden;
   background:#0C1F1A;
   isolation:isolate;
 }
-.slider__viewport{overflow:hidden; width:100%;}
+.slider__viewport{overflow:hidden; width:100%; height:100%;}
 .slider__track{
   display:flex;
+  height:100%;
   transition:transform .7s cubic-bezier(.4,0,.2,1);
   will-change:transform;
 }
@@ -184,9 +190,10 @@ p:last-child{margin-bottom:0;}
   position:relative;
   flex:0 0 100%;
   min-width:100%;
-  min-height:clamp(320px, 58vh, 620px);
+  height:100%;
   display:flex;
-  align-items:flex-end;
+  align-items:center;
+  justify-content:center;
   background:linear-gradient(135deg,#123B32 0%, #0A5B4B 100%);
 }
 .slide__img{
@@ -198,36 +205,40 @@ p:last-child{margin-bottom:0;}
 .slide__overlay{
   position:absolute; inset:0; z-index:1;
   background:
-    linear-gradient(180deg, rgba(6,22,18,.10) 0%, rgba(6,22,18,.30) 55%, rgba(6,22,18,.85) 100%),
-    linear-gradient(90deg, rgba(6,22,18,.55) 0%, rgba(6,22,18,0) 65%);
+    linear-gradient(180deg, rgba(6,22,18,.35) 0%, rgba(6,22,18,.18) 40%, rgba(6,22,18,.55) 100%),
+    linear-gradient(90deg, rgba(6,22,18,.60) 0%, rgba(6,22,18,.15) 65%, rgba(6,22,18,.05) 100%);
 }
 
-/* Le contenu du slide est centré dans le conteneur, mais le slider est pleine largeur */
+/* Contenu centré dans le conteneur, slider pleine largeur */
 .slide__content{
   position:relative; z-index:2;
   width:min(100% - (var(--gutter) * 2), var(--container));
   margin-inline:auto;
-  padding-block:clamp(1.5rem, 3vw, 2.75rem);
+  padding-block:clamp(2rem, 5vw, 4rem);
+  padding-bottom:calc(clamp(2rem, 5vw, 4rem) + 40px);
   padding-inline:0;
   color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 .slide__text{
   margin:0;
-  max-width:min(68ch, 92%);
+  max-width:min(60ch, 92%);
   font-family:'Be Vietnam Pro', sans-serif;
   font-weight:500;
-  font-size:clamp(1rem, .7vw + .85rem, 1.35rem);
-  line-height:1.5;
-  text-shadow:0 2px 12px rgba(0,0,0,.35);
+  font-size:clamp(1.1rem, 1.4vw + .9rem, 1.9rem);
+  line-height:1.45;
+  text-shadow:0 2px 16px rgba(0,0,0,.45);
   text-wrap:pretty;
 }
 
-/* Contrôles — positionnés par rapport à la pleine largeur */
+/* Contrôles */
 .slider__nav{
   position:absolute; top:50%; transform:translateY(-50%);
   z-index:3;
-  width:clamp(36px, 3vw, 48px);
-  height:clamp(36px, 3vw, 48px);
+  width:clamp(40px, 3.2vw, 54px);
+  height:clamp(40px, 3.2vw, 54px);
   display:grid; place-items:center;
   border:1.5px solid rgba(255,255,255,.5);
   border-radius:50%;
@@ -238,18 +249,18 @@ p:last-child{margin-bottom:0;}
 }
 .slider__nav:hover{background:var(--c-green); border-color:var(--c-green);}
 .slider__nav:active{transform:translateY(-50%) scale(.94);}
-.slider__nav svg{width:16px; height:16px;}
+.slider__nav svg{width:18px; height:18px;}
 .slider__nav--prev{left:clamp(1rem, 2.5vw, 2.5rem);}
 .slider__nav--next{right:clamp(1rem, 2.5vw, 2.5rem);}
 
 .slider__dots{
   position:absolute; z-index:3;
-  left:50%; bottom:clamp(.85rem, 1.8vw, 1.5rem);
+  left:50%; bottom:clamp(1.25rem, 2.5vw, 2.25rem);
   transform:translateX(-50%);
   display:flex; gap:.5rem;
   padding:.35rem .7rem;
   border-radius:var(--r-pill);
-  background:rgba(8,24,20,.35);
+  background:rgba(8,24,20,.4);
   backdrop-filter:blur(6px);
 }
 .slider__dot{
@@ -676,11 +687,13 @@ p:last-child{margin-bottom:0;}
 }
 
 @media (max-width:720px){
+  :root{ --header-space: 70px; }
   .form-grid{grid-template-columns:1fr;}
-  .slide{min-height:clamp(260px, 42vh, 380px);}
-  .slide__text{max-width:100%;}
+  .slider{ min-height: 480px; }
+  .slide__content{ padding-bottom: calc(2rem + 50px); }
+  .slide__text{ max-width:100%; font-size:clamp(1rem, 3.5vw, 1.25rem); }
   .slider__nav{display:none;}
-  .slider__dots{bottom:.55rem;}
+  .slider__dots{bottom:.85rem;}
   .slider__dot{width:7px;height:7px;}
   .news-head{flex-direction:column; align-items:flex-start;}
   .news-head .section-head{text-align:left;}
@@ -711,7 +724,7 @@ p:last-child{margin-bottom:0;}
 <main id="main">
 
   <!-- ============================================================
-       HERO SLIDER — PLEINE LARGEUR (full-width horizontal)
+       HERO SLIDER — PLEIN ÉCRAN (full screen)
        ============================================================ -->
   <section class="hero" aria-label="Nos domaines d'action">
     <div class="slider" id="heroSlider"
@@ -738,7 +751,7 @@ p:last-child{margin-bottom:0;}
 
           <article class="slide" role="group" aria-roledescription="diapositive"
                    aria-label="2 sur 4 : Zones humides">
-            <img class="slide__img" src="/images/imageswetlands.jpg"
+            <img class="slide__img" src="/images/wetlands.jpg"
                  alt="Zone humide et écosystème aquatique protégé" loading="lazy">
             <div class="slide__overlay"></div>
             <div class="slide__content">
@@ -767,7 +780,7 @@ p:last-child{margin-bottom:0;}
 
           <article class="slide" role="group" aria-roledescription="diapositive"
                    aria-label="4 sur 4 : Qualité de l'air et transition énergétique">
-            <img class="slide__img" src="/images/table-ronde.jpg"
+            <img class="slide__img" src="/images/presentation-imagebox.jpg"
                  alt="Table ronde sur la qualité de l'air et la transition énergétique" loading="lazy">
             <div class="slide__overlay"></div>
             <div class="slide__content">
