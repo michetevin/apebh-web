@@ -37,7 +37,6 @@
 
   --container: 1200px;
   --gutter: clamp(1rem, 3vw, 2rem);
-  --header-space: 80px;
 }
 
 /* ==========================================================================
@@ -98,12 +97,6 @@ p:last-child{margin-bottom:0;}
   outline:2.5px solid var(--c-orange);
   outline-offset:2px;
   border-radius:6px;
-}
-
-.header-space{
-  height: var(--header-space);
-  width:100%;
-  display:block;
 }
 
 /* ==========================================================================
@@ -184,7 +177,7 @@ p:last-child{margin-bottom:0;}
   position:relative;
   flex:0 0 100%;
   min-width:100%;
-  min-height:clamp(320px, 58vh, 620px);
+  min-height:clamp(342px, 62vh, 663px);
   display:flex;
   align-items:flex-end;
   background:linear-gradient(135deg,#123B32 0%, #0A5B4B 100%);
@@ -202,7 +195,6 @@ p:last-child{margin-bottom:0;}
     linear-gradient(90deg, rgba(6,22,18,.55) 0%, rgba(6,22,18,0) 65%);
 }
 
-/* Le contenu du slide est centré dans le conteneur, mais le slider est pleine largeur */
 .slide__content{
   position:relative; z-index:2;
   width:min(100% - (var(--gutter) * 2), var(--container));
@@ -222,7 +214,6 @@ p:last-child{margin-bottom:0;}
   text-wrap:pretty;
 }
 
-/* Contrôles — positionnés par rapport à la pleine largeur */
 .slider__nav{
   position:absolute; top:50%; transform:translateY(-50%);
   z-index:3;
@@ -398,33 +389,20 @@ p:last-child{margin-bottom:0;}
 .partners-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
-  gap:clamp(.6rem, 1.2vw, 1rem);
+  gap:clamp(1rem, 2vw, 1.75rem);
   align-items:center;
   list-style:none; padding:0; margin:0;
 }
 .partner{
   display:grid; place-items:center;
-  padding:1rem .75rem;
-  min-height:90px;
-  background:#fff;
-  border:1px solid var(--c-line);
-  border-radius:var(--r-sm);
-  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-}
-.partner:hover{
-  transform:translateY(-2px);
-  border-color:#C7D9C5;
-  box-shadow:var(--sh-sm);
+  padding:.5rem;
+  min-height:70px;
 }
 .partner img{
-  max-height:46px;
+  max-height:52px;
   width:auto;
   object-fit:contain;
-  filter:grayscale(100%);
-  opacity:.7;
-  transition:filter .25s ease, opacity .25s ease;
 }
-.partner:hover img{filter:grayscale(0%); opacity:1;}
 
 /* ==========================================================================
    ACTIVITÉS
@@ -447,18 +425,6 @@ p:last-child{margin-bottom:0;}
 }
 .activity__media img{width:100%; height:100%; object-fit:cover;}
 .activity:nth-child(even) .activity__media{order:2;}
-
-.activity__kicker{
-  display:inline-block;
-  margin-bottom:.55rem;
-  padding:.28rem .75rem;
-  font-size:.68rem; font-weight:800;
-  letter-spacing:.12em; text-transform:uppercase;
-  color:#fff;
-  background:var(--c-green);
-  border-radius:var(--r-pill);
-}
-.activity:nth-child(even) .activity__kicker{background:var(--c-orange);}
 
 .activity__title{
   font-size:clamp(1.1rem, .55vw + .95rem, 1.35rem);
@@ -677,7 +643,7 @@ p:last-child{margin-bottom:0;}
 
 @media (max-width:720px){
   .form-grid{grid-template-columns:1fr;}
-  .slide{min-height:clamp(260px, 42vh, 380px);}
+  .slide{min-height:clamp(278px, 45vh, 406px);}
   .slide__text{max-width:100%;}
   .slider__nav{display:none;}
   .slider__dots{bottom:.55rem;}
@@ -704,9 +670,6 @@ p:last-child{margin-bottom:0;}
 
 <!-- HEADER INJECTÉ -->
 <div data-include="/components/header.html"></div>
-
-<!-- Espace réservé pour le header (~1 cm) -->
-<div class="header-space" aria-hidden="true"></div>
 
 <main id="main">
 
@@ -821,10 +784,6 @@ p:last-child{margin-bottom:0;}
       <div class="news-head">
         <header class="section-head">
           <h2 class="section-head__title" id="news-title">Nos dernières actualités</h2>
-          <p class="section-head__sub">
-            Terrain, plaidoyer et partenariats : suivez nos actions pour l'environnement,
-            la biodiversité et la santé des communautés.
-          </p>
         </header>
         <a class="btn btn--outline btn--arrow" href="/blog/">Toutes les actualités</a>
       </div>
@@ -958,53 +917,10 @@ p:last-child{margin-bottom:0;}
           Des programmes concrets, portés avec les communautés
         </h2>
         <p class="section-head__sub">
-          Quatre axes structurent notre action : sécurité alimentaire, zones humides,
-          biodiversité, et qualité de l'air &amp; transition énergétique.
+          Trois axes structurent notre action : zones humides, biodiversité,
+          et qualité de l'air &amp; transition énergétique.
         </p>
       </header>
-
-      <article class="activity">
-        <div class="activity__media">
-          <img src="/images/wff-burundi.jpg" loading="lazy"
-               alt="Jeunes agriculteurs participant à un atelier du World Food Forum Burundi">
-        </div>
-        <div class="activity__body">
-          <span class="activity__kicker">Sécurité alimentaire</span>
-          <h3 class="activity__title">
-            Chapitre national du World Food Forum (WFF) Burundi
-          </h3>
-          <p class="activity__text">
-            L'APEBH coordonne le réseau national de la jeunesse engagée dans la transformation
-            des systèmes agroalimentaires, en collaboration avec la FAO, autour de
-            l'agroécologie et de l'autonomisation des jeunes et des femmes agricultrices.
-          </p>
-
-          <ul class="activity__list">
-            <li>Coordination du chapitre national WFF Burundi</li>
-            <li>Promotion de l'agroécologie et des chaînes de valeur durables</li>
-            <li>Autonomisation des jeunes et des femmes agriculteurs</li>
-          </ul>
-
-          <div class="stats">
-            <div class="stat">
-              <span class="stat__num">15</span>
-              <span class="stat__label">Organisations du noyau fondateur</span>
-            </div>
-            <div class="stat">
-              <span class="stat__num">National</span>
-              <span class="stat__label">Couverture du chapitre WFF</span>
-            </div>
-            <div class="stat">
-              <span class="stat__num">Jeunes</span>
-              <span class="stat__label">Public prioritaire</span>
-            </div>
-          </div>
-
-          <a class="btn btn--primary btn--arrow" href="/activites/wff-burundi/">
-            Rejoindre le réseau des jeunes
-          </a>
-        </div>
-      </article>
 
       <article class="activity">
         <div class="activity__media">
@@ -1012,7 +928,6 @@ p:last-child{margin-bottom:0;}
                alt="Zones humides et marais du Lac Tanganyika">
         </div>
         <div class="activity__body">
-          <span class="activity__kicker">Zones humides &amp; Ramsar</span>
           <h3 class="activity__title">
             Protection des zones humides et de la Convention de Ramsar
           </h3>
@@ -1041,7 +956,6 @@ p:last-child{margin-bottom:0;}
                alt="Biodiversité locale et espèces protégées">
         </div>
         <div class="activity__body">
-          <span class="activity__kicker">Biodiversité</span>
           <h3 class="activity__title">
             Convention sur la diversité biologique (CDB) &amp; SPANB
           </h3>
@@ -1070,7 +984,6 @@ p:last-child{margin-bottom:0;}
                alt="Sensibilisation sur la qualité de l'air et la cuisson propre">
         </div>
         <div class="activity__body">
-          <span class="activity__kicker">Air, climat &amp; énergie</span>
           <h3 class="activity__title">
             Qualité de l'air, climat et transition énergétique
           </h3>
