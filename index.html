@@ -177,7 +177,8 @@ p:last-child{margin-bottom:0;}
   position:relative;
   flex:0 0 100%;
   min-width:100%;
-  min-height:clamp(342px, 62vh, 663px);
+  /* 10% plus haut que la version précédente (342→376, 62→68.2, 663→729) */
+  min-height:clamp(376px, 68.2vh, 729px);
   display:flex;
   align-items:flex-end;
   background:linear-gradient(135deg,#123B32 0%, #0A5B4B 100%);
@@ -643,7 +644,8 @@ p:last-child{margin-bottom:0;}
 
 @media (max-width:720px){
   .form-grid{grid-template-columns:1fr;}
-  .slide{min-height:clamp(278px, 45vh, 406px);}
+  /* 10% plus haut que précédemment (278→306, 45→49.5, 406→447) */
+  .slide{min-height:clamp(306px, 49.5vh, 447px);}
   .slide__text{max-width:100%;}
   .slider__nav{display:none;}
   .slider__dots{bottom:.55rem;}
@@ -916,10 +918,7 @@ p:last-child{margin-bottom:0;}
         <h2 class="section-head__title" id="activities-title">
           Des programmes concrets, portés avec les communautés
         </h2>
-        <p class="section-head__sub">
-          Trois axes structurent notre action : zones humides, biodiversité,
-          et qualité de l'air &amp; transition énergétique.
-        </p>
+        <!-- Texte supprimé : « Trois axes structurent notre action : zones humides, biodiversité, et qualité de l'air & transition énergétique. » -->
       </header>
 
       <article class="activity">
