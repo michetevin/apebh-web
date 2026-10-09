@@ -1,126 +1,1536 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>APEBH — Agir pour l'environnement, la biodiversité et la santé</title><meta name="description" content="APEBH : recyclage des déchets plastiques du Lac Tanganyika, protection des zones humides, biodiversité, qualité de l'air et approche Une Seule Santé (One Health) au Burundi.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@500;600;700&display=swap" rel="stylesheet">
-<style>/* ==========================================================================   DESIGN TOKENS   ========================================================================== */:root{  --c-green:        #306431;  --c-green-dark:   #244B26;  --c-green-soft:   #EAF0E8;  --c-green-pale:   #FFFFFF; /* Corrigé : Forcé en blanc pur */  --c-orange:       #E07A3F;  --c-orange-dark:  #C25F26;  --c-ink:          #2F3C4C;  --c-muted:        #5B6879;  --c-line:         #E1E6E3;  --c-bg:           #FFFFFF;  --c-bg-soft:      #FFFFFF; /* Corrigé : Forcé en blanc pur */
-  --r-sm: 8px;  --r-md: 14px;  --r-lg: 20px;  --r-pill: 999px;
-  --sh-sm: 0 1px 2px rgba(47,60,76,.05), 0 3px 10px rgba(47,60,76,.05);  --sh-md: 0 8px 24px rgba(47,60,76,.09);
-  --container: 1200px;  --gutter: clamp(1rem, 3vw, 2rem);}
-/* ==========================================================================   BASE   ========================================================================== */*,*::before,*::after{box-sizing:border-box;}html{  font-size:100%;  -webkit-text-size-adjust:100%;  scroll-behavior:smooth;}body{  margin:0;  font-family:'Nunito Sans', system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;  font-weight:400;  font-size:.95rem;  line-height:1.6;  color:var(--c-ink);  background:var(--c-bg);  overflow-x:hidden;}img{max-width:100%; display:block;}a{color:var(--c-green); text-underline-offset:2px;}
-h1,h2,h3,h4{  font-family:'Be Vietnam Pro', 'Nunito Sans', sans-serif;  font-weight:600;  line-height:1.3;  color:var(--c-ink);  letter-spacing:-.01em;  margin:0 0 .5em;}h1{font-size:clamp(1.65rem, 1.6vw + .9rem, 2.4rem); line-height:1.2;}h2{font-size:clamp(1.3rem, .9vw + .9rem, 1.75rem);}h3{font-size:clamp(1.05rem, .35vw + .9rem, 1.2rem);}h4{font-size:1rem;}p{margin:0 0 1em;}p:last-child{margin-bottom:0;}
-.container{  width:min(100% - (var(--gutter) * 2), var(--container));  margin-inline:auto;  position:relative;}
-.visually-hidden{  position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;}.skip-link{  position:absolute; left:-9999px; top:0; z-index:200;  background:var(--c-green); color:#fff; padding:.7rem 1.1rem;  border-radius:0 0 var(--r-pill) 0; font-weight:700; font-size:.9rem;}.skip-link:focus{left:0;}
-:where(a,button,input,select,textarea,[tabindex]):focus-visible{  outline:2.5px solid var(--c-orange);  outline-offset:2px;  border-radius:6px;}
-/* ==========================================================================   BOUTONS   ========================================================================== */.btn{  display:inline-flex;  align-items:center;  justify-content:center;  gap:.45rem;  padding:.7rem 1.35rem;  border-radius:var(--r-pill);  border:1.5px solid transparent;  font-family:inherit;  font-weight:700;  font-size:.875rem;  line-height:1;  text-decoration:none;  cursor:pointer;  transition:transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;  white-space:nowrap;}.btn:hover{transform:translateY(-1px);}.btn--primary{background:var(--c-green); color:#fff;}.btn--primary:hover{background:var(--c-green-dark); color:#fff;}.btn--outline{background:transparent; color:var(--c-green); border-color:var(--c-green);}.btn--outline:hover{background:var(--c-green); color:#fff;}.btn--arrow::after{content:"→"; transition:transform .2s ease; font-size:1em;}.btn--arrow:hover::after{transform:translateX(3px);}
-/* ==========================================================================   SECTIONS   ========================================================================== */.section{padding-block:clamp(2rem, 3.5vw, 3.25rem);}.section--soft{background:var(--c-bg-soft);}.section--cream{background:var(--c-green-pale);}
-.section-head{  max-width:60ch;  margin:0 auto clamp(1.25rem, 2.5vw, 2rem);  text-align:center;}.section-head__title{  margin:0 0 .5rem;  font-size:clamp(1.3rem, .9vw + .9rem, 1.75rem);}.section-head__sub{  color:var(--c-muted);  font-size:.9rem;  line-height:1.65;  margin:0;}
-/* ==========================================================================   HERO SLIDER — PLEINE LARGEUR   ========================================================================== */.hero{  padding:0;  width:100%;}
-.slider{  position:relative;  width:100%;  overflow:hidden;  background:#FFFFFF; /* Corrigé en blanc */  isolation:isolate;}.slider__viewport{overflow:hidden; width:100%;}.slider__track{  display:flex;  transition:transform .7s cubic-bezier(.4,0,.2,1);  will-change:transform;}.slider__track.is-instant{transition:none;}
-.slide{  position:relative;  flex:0 0 100%;  min-width:100%;  /* Corrigé : Augmentation significative de la hauteur pour ne plus couper l'image */  min-height:clamp(450px, 85vh, 1080px);  display:flex;  align-items:flex-end;  background:linear-gradient(135deg,#123B32 0%, #0A5B4B 100%);}.slide__img{  position:absolute; inset:0;  width:100%; height:100%;  object-fit:cover;  z-index:0;}.slide__overlay{  position:absolute; inset:0; z-index:1;  background:    linear-gradient(180deg, rgba(6,22,18,.10) 0%, rgba(6,22,18,.30) 55%, rgba(6,22,18,.85) 100%),    linear-gradient(90deg, rgba(6,22,18,.55) 0%, rgba(6,22,18,0) 65%);}
-.slide__content{  position:relative; z-index:2;  width:min(100% - (var(--gutter) * 2), var(--container));  margin-inline:auto;  padding-block:clamp(1.5rem, 3vw, 2.75rem);  padding-inline:0;  color:#fff;}.slide__text{  margin:0;  max-width:min(68ch, 92%);  font-family:'Be Vietnam Pro', sans-serif;  font-weight:500;  font-size:clamp(1rem, .7vw + .85rem, 1.35rem);  line-height:1.5;  text-shadow:0 2px 12px rgba(0,0,0,.35);  text-wrap:pretty;}
-.slider__nav{  position:absolute; top:50%; transform:translateY(-50%);  z-index:3;  width:clamp(36px, 3vw, 48px);  height:clamp(36px, 3vw, 48px);  display:grid; place-items:center;  border:1.5px solid rgba(255,255,255,.5);  border-radius:50%;  background:rgba(10,30,25,.35);  color:#fff; cursor:pointer;  backdrop-filter:blur(6px);  transition:background-color .2s ease, transform .2s ease;}.slider__nav:hover{background:var(--c-green); border-color:var(--c-green);}.slider__nav:active{transform:translateY(-50%) scale(.94);}.slider__nav svg{width:16px; height:16px;}.slider__nav--prev{left:clamp(1rem, 2.5vw, 2.5rem);}.slider__nav--next{right:clamp(1rem, 2.5vw, 2.5rem);}
-.slider__dots{  position:absolute; z-index:3;  left:50%; bottom:clamp(.85rem, 1.8vw, 1.5rem);  transform:translateX(-50%);  display:flex; gap:.5rem;  padding:.35rem .7rem;  border-radius:var(--r-pill);  background:rgba(8,24,20,.35);  backdrop-filter:blur(6px);}.slider__dot{  width:9px; height:9px; padding:0;  border:none; border-radius:50%;  background:rgba(255,255,255,.55);  cursor:pointer;  transition:width .25s ease, background-color .25s ease;}.slider__dot[aria-selected="true"]{width:26px; border-radius:var(--r-pill); background:#fff;}
-.slider__progress{  position:absolute; left:0; bottom:0; z-index:3;  height:3px; width:0%;  background:var(--c-orange);  transition:width .18s linear;}
-/* ==========================================================================   BANNIÈRE DE TRANSITION   ========================================================================== */.transition-banner{  position:relative;  padding-block:clamp(1.5rem, 3vw, 2.5rem);  background-color:var(--c-green-pale);  overflow:hidden;  text-align:center;  border-bottom:1px solid var(--c-line);}.transition-banner::before{  content:"";  position:absolute; inset:0;  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23306431' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round' opacity='0.5'%3E%3Cpath d='M26 38c11-9 27-7 34 2-11 9-27 7-34-2z'/%3E%3Cpath d='M33 52c0-10 7-18 17-20'/%3E%3Ccircle cx='118' cy='36' r='11'/%3E%3Cpath d='M118 18v7M118 54v-7M100 36h7M136 36h-7'/%3E%3Cpath d='M80 104c-10 0-18-8-18-18 0-12 18-27 18-27s18 15 18 27c0 10-8 18-18 18z'/%3E%3Cpath d='M38 122c7-7 16-7 23 0-7 7-16 7-23 0z'/%3E%3Cpath d='M128 114v25M115 127h25'/%3E%3C/g%3E%3C/svg%3E");  background-size:160px 160px;  opacity:.13;  pointer-events:none;}.transition-banner__inner{position:relative; z-index:1;}.transition-banner__text{  margin:0;  font-family:'Be Vietnam Pro', sans-serif;  font-size:clamp(1rem, 1vw + .75rem, 1.35rem);  font-weight:700;  line-height:1.4;  color:var(--c-green);  text-wrap:balance;  max-width:60ch;  margin-inline:auto;}.transition-banner__text em{font-style:normal; color:var(--c-orange);}
-/* ==========================================================================   ACTUALITÉS   ========================================================================== */.news-head{  display:flex; flex-wrap:wrap;  align-items:flex-end; justify-content:space-between;  gap:1rem;  margin-bottom:clamp(1.25rem, 2.5vw, 2rem);}.news-head .section-head{margin:0; text-align:left; max-width:52ch;}.news-head .section-head__sub{text-align:left;}
-.news-grid{  display:grid;  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));  gap:clamp(1rem, 1.8vw, 1.5rem);}.news-card{  background:#fff;  border:1px solid var(--c-line);  border-radius:var(--r-md);  overflow:hidden;  box-shadow:var(--sh-sm);  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;  display:flex;}.news-card:hover{  transform:translateY(-3px);  box-shadow:var(--sh-md);  border-color:#C7D9C5;}.news-card__link{  display:flex; flex-direction:column; height:100%;  text-decoration:none; color:inherit;  width:100%;}.news-card__media{  aspect-ratio:16/10;  background:linear-gradient(135deg,#DDEBE6,#C7DED6);  overflow:hidden;}.news-card__media img{  width:100%; height:100%; object-fit:cover;  transition:transform .5s ease;}.news-card:hover .news-card__media img{transform:scale(1.05);}.news-card__body{  padding:1.1rem 1.15rem 1.3rem;  display:flex; flex-direction:column; gap:.5rem;  flex:1;}.news-card__meta{  margin:0;  font-size:.72rem; font-weight:700;  letter-spacing:.05em; text-transform:uppercase;  color:var(--c-muted);}.news-card__meta span{color:var(--c-orange);}.news-card__title{  font-size:1rem;  margin:0; line-height:1.4;  font-weight:700;}.news-card__desc{  font-size:.85rem;  color:var(--c-muted);  margin:0;  line-height:1.6;}.news-card__cta{  margin-top:auto;  padding-top:.5rem;  font-size:.8rem;  font-weight:800;  color:var(--c-green);  display:inline-flex;  align-items:center;  gap:.4rem;}.news-card__cta::after{content:"→"; transition:transform .2s ease;}.news-card:hover .news-card__cta::after{transform:translateX(4px);}
-/* ==========================================================================   PARTENAIRES   ========================================================================== */.partners-section{padding-block:clamp(1.75rem, 3vw, 2.5rem);}.partners-title{  text-align:center;  font-size:1rem;  font-weight:600;  color:var(--c-muted);  letter-spacing:.02em;  margin:0 0 clamp(1rem, 2vw, 1.5rem);}.partners-grid{  display:grid;  grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));  gap:clamp(1rem, 2vw, 1.75rem);  align-items:center;  list-style:none; padding:0; margin:0;}.partner{  display:grid; place-items:center;  padding:.5rem;  min-height:70px;}.partner img{  max-height:52px;  width:auto;  object-fit:contain;}
-/* ==========================================================================   ACTIVITÉS   ========================================================================== */.activity{  display:grid;  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);  gap:clamp(1.25rem, 3vw, 2.75rem);  align-items:center;  padding-block:clamp(1.5rem, 3vw, 2.5rem);  border-bottom:1px solid var(--c-line);}.activity:last-of-type{border-bottom:none;}.activity__media{  border-radius:var(--r-md);  overflow:hidden;  box-shadow:var(--sh-md);  aspect-ratio:16/11;  background:linear-gradient(135deg,#DDEBE6,#BFD9D0);}.activity__media img{width:100%; height:100%; object-fit:cover;}.activity:nth-child(even) .activity__media{order:2;}
-.activity__title{  font-size:clamp(1.1rem, .55vw + .95rem, 1.35rem);  margin-bottom:.5rem;}.activity__text{  color:var(--c-muted);  font-size:.9rem;  line-height:1.65;}.activity__list{  list-style:none; margin:.75rem 0 1.1rem; padding:0;  display:grid; gap:.4rem;}.activity__list li{  position:relative;  padding-left:1.4rem;  font-size:.85rem;  color:var(--c-ink);  line-height:1.55;}.activity__list li::before{  content:"";  position:absolute; left:0; top:.55em;  width:8px; height:8px;  border-radius:50%;  background:var(--c-green-soft);  border:2px solid var(--c-green);}
-.stats{  display:grid;  grid-template-columns:repeat(auto-fit, minmax(120px,1fr));  gap:.6rem;  margin:.9rem 0 1.25rem;}.stat{  background:var(--c-green-soft);  border-radius:var(--r-sm);  padding:.8rem .75rem;  text-align:center;}.stat__num{  display:block;  font-family:'Be Vietnam Pro', sans-serif;  font-size:1.15rem;  font-weight:700;  color:var(--c-green);  line-height:1.1;  margin-bottom:.15rem;}.stat__label{  font-size:.7rem;  color:var(--c-muted);  line-height:1.35;  display:block;}
-.activities-footer{  margin-top:clamp(1.25rem, 2.5vw, 2rem);  display:flex;  justify-content:center;}
-/* ==========================================================================   MODALE CONTACT   ========================================================================== */.modal{position:fixed; inset:0; z-index:120; display:none;}.modal.is-open{display:grid; place-items:center;}.modal__backdrop{  position:absolute; inset:0;  background:rgba(8,22,18,.62);  backdrop-filter:blur(4px);  animation:fadeIn .25s ease;}.modal__panel{  position:relative; z-index:1;  width:min(100% - 1.5rem, 660px);  max-height:min(90vh, 800px);  overflow-y:auto;  background:#fff;  border-radius:var(--r-lg);  box-shadow:var(--sh-md);  padding:clamp(1.25rem, 3vw, 2rem);  animation:popIn .3s cubic-bezier(.2,.8,.3,1);}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes popIn{from{opacity:0; transform:translateY(14px) scale(.98)}to{opacity:1; transform:none}}
-.modal__close{  position:absolute; top:.75rem; right:.75rem;  width:36px; height:36px;  display:grid; place-items:center;  border:1px solid var(--c-line);  border-radius:50%;  background:#fff;  color:var(--c-muted);  cursor:pointer;  transition:background-color .2s ease, color .2s ease;}.modal__close:hover{background:var(--c-green); color:#fff; border-color:var(--c-green);}
-.modal__eyebrow{  font-size:.7rem; font-weight:800;  letter-spacing:.14em; text-transform:uppercase;  color:var(--c-orange);  margin:0 0 .35rem;}.modal__title{  font-size:clamp(1.2rem, 1vw + .95rem, 1.5rem);  margin-bottom:.35rem;}.modal__sub{  color:var(--c-muted);  font-size:.88rem;  margin-bottom:1.25rem;  line-height:1.6;}
-.form-grid{display:grid; grid-template-columns:1fr 1fr; gap:.85rem;}.field{display:flex; flex-direction:column; gap:.3rem;}.field--full{grid-column:1 / -1;}.field label{  font-size:.8rem; font-weight:700;  color:var(--c-ink);}.field label .req{color:#C0392B;}.field input, .field select, .field textarea{  font:inherit; font-size:.88rem;  color:var(--c-ink);  padding:.6rem .75rem;  border:1.5px solid var(--c-line);  border-radius:var(--r-sm);  background:#fff;  transition:border-color .18s ease, box-shadow .18s ease;  width:100%;  font-family:'Nunito Sans', sans-serif;}.field textarea{resize:vertical; min-height:100px;}.field input:focus, .field select:focus, .field textarea:focus{  outline:none;  border-color:var(--c-green);  box-shadow:0 0 0 3px rgba(48,100,49,.13);}.field input[aria-invalid="true"],.field textarea[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:#C0392B;}.field__error{font-size:.72rem; color:#C0392B; min-height:1em;}
-.field--check{flex-direction:row; align-items:flex-start; gap:.55rem;}.field--check input{width:auto; margin-top:.25rem; flex:0 0 auto; accent-color:var(--c-green);}.field--check label{font-weight:400; font-size:.8rem; color:var(--c-muted); line-height:1.5;}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APEBH — Agir pour l'environnement, la biodiversité et la santé</title>
+<meta name="description" content="APEBH : recyclage des déchets plastiques du Lac Tanganyika, protection des zones humides, biodiversité, qualité de l'air et approche Une Seule Santé (One Health) au Burundi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   DESIGN TOKENS
+   ========================================================================== */
+:root{
+  --c-green:        #306431;
+  --c-green-dark:   #244B26;
+  --c-green-soft:   #EAF0E8;
+  --c-green-pale:   #FFFFFF;
+  --c-orange:       #E07A3F;
+  --c-orange-dark:  #C25F26;
+  --c-ink:          #2F3C4C;
+  --c-muted:        #5B6879;
+  --c-line:         #E1E6E3;
+  --c-bg:           #FFFFFF;
+  --c-bg-soft:      #FFFFFF;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-pill: 999px;
+
+  --sh-sm: 0 1px 2px rgba(47,60,76,.05), 0 3px 10px rgba(47,60,76,.05);
+  --sh-md: 0 8px 24px rgba(47,60,76,.09);
+
+  --container: 1200px;
+  --gutter: clamp(1rem, 3vw, 2rem);
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+*,*::before,*::after{box-sizing:border-box;}
+
+html{
+  font-size:100%;
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  /* Espace libre de ~1 cm en haut pour le header injecté */
+  padding-top:1cm;
+  font-family:'Nunito Sans', system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-weight:400;
+  font-size:.95rem;
+  line-height:1.6;
+  color:var(--c-ink);
+  background:var(--c-bg);
+  overflow-x:hidden;
+}
+
+img{max-width:100%; display:block;}
+a{color:var(--c-green); text-underline-offset:2px;}
+
+h1,h2,h3,h4{
+  font-family:'Be Vietnam Pro', 'Nunito Sans', sans-serif;
+  font-weight:600;
+  line-height:1.3;
+  color:var(--c-ink);
+  letter-spacing:-.01em;
+  margin:0 0 .5em;
+}
+h1{font-size:clamp(1.65rem, 1.6vw + .9rem, 2.4rem); line-height:1.2;}
+h2{font-size:clamp(1.3rem, .9vw + .9rem, 1.75rem);}
+h3{font-size:clamp(1.05rem, .35vw + .9rem, 1.2rem);}
+h4{font-size:1rem;}
+p{margin:0 0 1em;}
+p:last-child{margin-bottom:0;}
+
+.container{
+  width:min(100% - (var(--gutter) * 2), var(--container));
+  margin-inline:auto;
+  position:relative;
+}
+
+.visually-hidden{
+  position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+.skip-link{
+  position:absolute; left:-9999px; top:0; z-index:200;
+  background:var(--c-green); color:#fff; padding:.7rem 1.1rem;
+  border-radius:0 0 var(--r-pill) 0; font-weight:700; font-size:.9rem;
+}
+.skip-link:focus{left:0;}
+
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{
+  outline:2.5px solid var(--c-orange);
+  outline-offset:2px;
+  border-radius:6px;
+}
+
+/* ==========================================================================
+   BOUTONS
+   ========================================================================== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  padding:.7rem 1.35rem;
+  border-radius:var(--r-pill);
+  border:1.5px solid transparent;
+  font-family:inherit;
+  font-weight:700;
+  font-size:.875rem;
+  line-height:1;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn--primary{background:var(--c-green); color:#fff;}
+.btn--primary:hover{background:var(--c-green-dark); color:#fff;}
+.btn--outline{background:transparent; color:var(--c-green); border-color:var(--c-green);}
+.btn--outline:hover{background:var(--c-green); color:#fff;}
+.btn--arrow::after{content:"→"; transition:transform .2s ease; font-size:1em;}
+.btn--arrow:hover::after{transform:translateX(3px);}
+
+/* ==========================================================================
+   SECTIONS
+   ========================================================================== */
+.section{padding-block:clamp(2rem, 3.5vw, 3.25rem);}
+.section--soft{background:var(--c-bg-soft);}
+.section--cream{background:var(--c-green-pale);}
+
+.section-head{
+  max-width:60ch;
+  margin:0 auto clamp(1.25rem, 2.5vw, 2rem);
+  text-align:center;
+}
+.section-head__title{
+  margin:0 0 .5rem;
+  font-size:clamp(1.3rem, .9vw + .9rem, 1.75rem);
+}
+.section-head__sub{
+  color:var(--c-muted);
+  font-size:.9rem;
+  line-height:1.65;
+  margin:0;
+}
+
+/* ==========================================================================
+   HERO SLIDER — IMAGE À GAUCHE / TEXTE DYNAMIQUE À DROITE
+   ========================================================================== */
+.hero{padding:0; width:100%;}
+
+.slider{
+  width:min(100% - (var(--gutter) * 2), var(--container));
+  margin-inline:auto;
+  padding-block:clamp(1.5rem, 3vw, 2.5rem);
+  display:grid;
+  grid-template-columns:minmax(0, 1.4fr) minmax(0, 1fr);
+  gap:clamp(1.5rem, 3vw, 3rem);
+  align-items:center;
+}
+
+/* --- Colonne image (nettoyée : aucun dégradé de superposition) --- */
+.slider__media{
+  position:relative;
+  min-width:0;
+}
+
+.slider__viewport{
+  overflow:hidden;
+  width:100%;
+  aspect-ratio:7 / 4;          /* ≈ 1400 × 800 */
+  border-radius:var(--r-lg);
+  background:#F2F5F1;
+  box-shadow:var(--sh-md);
+}
+
+.slider__track{
+  display:flex;
+  height:100%;
+  transition:transform .7s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+.slider__track.is-instant{transition:none;}
+
+.slide{
+  position:relative;
+  flex:0 0 100%;
+  min-width:100%;
+  height:100%;
+}
+
+.slide__img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* --- Flèches de navigation --- */
+.slider__nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  z-index:3;
+  width:clamp(36px, 3vw, 46px);
+  height:clamp(36px, 3vw, 46px);
+  display:grid; place-items:center;
+  border:1.5px solid rgba(255,255,255,.75);
+  border-radius:50%;
+  background:rgba(47,60,76,.38);
+  color:#fff; cursor:pointer;
+  backdrop-filter:blur(6px);
+  transition:background-color .2s ease, transform .2s ease, border-color .2s ease;
+}
+.slider__nav:hover{background:var(--c-green); border-color:var(--c-green);}
+.slider__nav:active{transform:translateY(-50%) scale(.94);}
+.slider__nav svg{width:16px; height:16px;}
+.slider__nav--prev{left:clamp(.7rem, 1.5vw, 1.1rem);}
+.slider__nav--next{right:clamp(.7rem, 1.5vw, 1.1rem);}
+
+/* --- Barre de progression --- */
+.slider__progress{
+  position:absolute; left:0; bottom:0; z-index:3;
+  height:4px; width:0%;
+  background:var(--c-orange);
+  border-radius:0 var(--r-pill) var(--r-pill) 0;
+  transition:width .18s linear;
+}
+
+/* --- Colonne texte dynamique --- */
+.slider__panel{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(1.1rem, 2vw, 1.6rem);
+  min-width:0;
+}
+
+.slider__texts{
+  display:grid;
+}
+
+.slider__text{
+  grid-area:1 / 1;
+  margin:0;
+  font-family:'Be Vietnam Pro', 'Nunito Sans', sans-serif;
+  font-weight:500;
+  font-size:clamp(1.02rem, .8vw + .85rem, 1.32rem);
+  line-height:1.55;
+  color:var(--c-ink);
+  text-wrap:pretty;
+  opacity:0;
+  transform:translateY(8px);
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .5s ease, transform .5s ease, visibility .5s;
+}
+.slider__text.is-active{
+  opacity:1;
+  transform:none;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+/* --- Accroche One Health, intégrée sous le bloc de texte --- */
+.slider__tagline{
+  margin:0;
+  padding-left:.9rem;
+  border-left:3px solid var(--c-orange);
+  font-family:'Be Vietnam Pro', sans-serif;
+  font-size:clamp(.92rem, .5vw + .8rem, 1.1rem);
+  font-weight:700;
+  line-height:1.45;
+  color:var(--c-green);
+  text-wrap:balance;
+}
+.slider__tagline em{font-style:normal; color:var(--c-orange);}
+
+/* --- Pastilles --- */
+.slider__controls{display:flex; align-items:center;}
+.slider__dots{
+  display:flex; gap:.5rem;
+  padding:.35rem .7rem;
+  border-radius:var(--r-pill);
+  background:var(--c-green-soft);
+}
+.slider__dot{
+  width:9px; height:9px; padding:0;
+  border:none; border-radius:50%;
+  background:#B9C9B6;
+  cursor:pointer;
+  transition:width .25s ease, background-color .25s ease;
+}
+.slider__dot[aria-current="true"]{
+  width:26px; border-radius:var(--r-pill); background:var(--c-green);
+}
+
+/* ==========================================================================
+   ACTUALITÉS
+   ========================================================================== */
+.news-head{
+  display:flex; flex-wrap:wrap;
+  align-items:flex-end; justify-content:space-between;
+  gap:1rem;
+  margin-bottom:clamp(1.25rem, 2.5vw, 2rem);
+}
+.news-head .section-head{margin:0; text-align:left; max-width:52ch;}
+.news-head .section-head__sub{text-align:left;}
+
+.news-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:clamp(1rem, 1.8vw, 1.5rem);
+}
+.news-card{
+  background:#fff;
+  border:1px solid var(--c-line);
+  border-radius:var(--r-md);
+  overflow:hidden;
+  box-shadow:var(--sh-sm);
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  display:flex;
+}
+.news-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--sh-md);
+  border-color:#C7D9C5;
+}
+.news-card__link{
+  display:flex; flex-direction:column; height:100%;
+  text-decoration:none; color:inherit;
+  width:100%;
+}
+.news-card__media{
+  aspect-ratio:16/10;
+  background:linear-gradient(135deg,#DDEBE6,#C7DED6);
+  overflow:hidden;
+}
+.news-card__media img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .5s ease;
+}
+.news-card:hover .news-card__media img{transform:scale(1.05);}
+.news-card__body{
+  padding:1.1rem 1.15rem 1.3rem;
+  display:flex; flex-direction:column; gap:.5rem;
+  flex:1;
+}
+.news-card__meta{
+  margin:0;
+  font-size:.72rem; font-weight:700;
+  letter-spacing:.05em; text-transform:uppercase;
+  color:var(--c-muted);
+}
+.news-card__meta span{color:var(--c-orange);}
+.news-card__title{
+  font-size:1rem;
+  margin:0; line-height:1.4;
+  font-weight:700;
+}
+.news-card__desc{
+  font-size:.85rem;
+  color:var(--c-muted);
+  margin:0;
+  line-height:1.6;
+}
+.news-card__cta{
+  margin-top:auto;
+  padding-top:.5rem;
+  font-size:.8rem;
+  font-weight:800;
+  color:var(--c-green);
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+}
+.news-card__cta::after{content:"→"; transition:transform .2s ease;}
+.news-card:hover .news-card__cta::after{transform:translateX(4px);}
+
+/* ==========================================================================
+   PARTENAIRES — BANDEAU DÉFILANT VERS LA GAUCHE
+   ========================================================================== */
+.partners-section{padding-block:clamp(1.75rem, 3vw, 2.5rem);}
+
+.partners-title{
+  text-align:center;
+  font-size:1rem;
+  font-weight:600;
+  color:var(--c-muted);
+  letter-spacing:.02em;
+  margin:0 0 clamp(1rem, 2vw, 1.5rem);
+}
+
+.partners-marquee{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask-image:linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+
+.partners-track{
+  display:flex;
+  width:max-content;
+  animation:partnersScroll 38s linear infinite;
+}
+
+.partners-marquee:hover .partners-track,
+.partners-marquee:focus-within .partners-track{
+  animation-play-state:paused;
+}
+
+.partners-grid{
+  --pgap:clamp(2rem, 4vw, 3.5rem);
+  display:flex;
+  align-items:center;
+  gap:var(--pgap);
+  padding:0 var(--pgap) 0 0;
+  margin:0;
+  list-style:none;
+  flex:0 0 auto;
+}
+
+.partner{
+  display:grid; place-items:center;
+  padding:.5rem;
+  min-height:70px;
+  min-width:120px;
+  flex:0 0 auto;
+}
+.partner img{
+  max-height:52px;
+  width:auto;
+  object-fit:contain;
+}
+
+@keyframes partnersScroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* ==========================================================================
+   ACTIVITÉS
+   ========================================================================== */
+.activity{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+  gap:clamp(1.25rem, 3vw, 2.75rem);
+  align-items:center;
+  padding-block:clamp(1.5rem, 3vw, 2.5rem);
+  border-bottom:1px solid var(--c-line);
+}
+.activity:last-of-type{border-bottom:none;}
+
+.activity__media{
+  border-radius:var(--r-md);
+  overflow:hidden;
+  box-shadow:var(--sh-md);
+  aspect-ratio:16/11;
+  background:linear-gradient(135deg,#DDEBE6,#BFD9D0);
+}
+.activity__media img{width:100%; height:100%; object-fit:cover;}
+
+/* Alternance : l'image reste à gauche sur la 1re activité */
+.activity:nth-child(odd) .activity__media{order:2;}
+
+.activity__title{
+  font-size:clamp(1.1rem, .55vw + .95rem, 1.35rem);
+  margin-bottom:.5rem;
+}
+.activity__text{
+  color:var(--c-muted);
+  font-size:.9rem;
+  line-height:1.65;
+}
+.activity__list{
+  list-style:none; margin:.75rem 0 1.1rem; padding:0;
+  display:grid; gap:.4rem;
+}
+.activity__list li{
+  position:relative;
+  padding-left:1.4rem;
+  font-size:.85rem;
+  color:var(--c-ink);
+  line-height:1.55;
+}
+.activity__list li::before{
+  content:"";
+  position:absolute; left:0; top:.55em;
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--c-green-soft);
+  border:2px solid var(--c-green);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+  gap:.6rem;
+  margin:.9rem 0 1.25rem;
+}
+.stat{
+  background:var(--c-green-soft);
+  border-radius:var(--r-sm);
+  padding:.8rem .75rem;
+  text-align:center;
+}
+.stat__num{
+  display:block;
+  font-family:'Be Vietnam Pro', sans-serif;
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--c-green);
+  line-height:1.1;
+  margin-bottom:.15rem;
+}
+.stat__label{
+  font-size:.7rem;
+  color:var(--c-muted);
+  line-height:1.35;
+  display:block;
+}
+
+.activities-footer{
+  margin-top:clamp(1.25rem, 2.5vw, 2rem);
+  display:flex;
+  justify-content:center;
+}
+
+/* ==========================================================================
+   MODALE CONTACT
+   ========================================================================== */
+.modal{position:fixed; inset:0; z-index:120; display:none;}
+.modal.is-open{display:grid; place-items:center;}
+.modal__backdrop{
+  position:absolute; inset:0;
+  background:rgba(8,22,18,.62);
+  backdrop-filter:blur(4px);
+  animation:fadeIn .25s ease;
+}
+.modal__panel{
+  position:relative; z-index:1;
+  width:min(100% - 1.5rem, 660px);
+  max-height:min(90vh, 800px);
+  overflow-y:auto;
+  background:#fff;
+  border-radius:var(--r-lg);
+  box-shadow:var(--sh-md);
+  padding:clamp(1.25rem, 3vw, 2rem);
+  animation:popIn .3s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0; transform:translateY(14px) scale(.98)}to{opacity:1; transform:none}}
+
+.modal__close{
+  position:absolute; top:.75rem; right:.75rem;
+  width:36px; height:36px;
+  display:grid; place-items:center;
+  border:1px solid var(--c-line);
+  border-radius:50%;
+  background:#fff;
+  color:var(--c-muted);
+  cursor:pointer;
+  transition:background-color .2s ease, color .2s ease;
+}
+.modal__close:hover{background:var(--c-green); color:#fff; border-color:var(--c-green);}
+
+.modal__eyebrow{
+  font-size:.7rem; font-weight:800;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--c-orange);
+  margin:0 0 .35rem;
+}
+.modal__title{
+  font-size:clamp(1.2rem, 1vw + .95rem, 1.5rem);
+  margin-bottom:.35rem;
+}
+.modal__sub{
+  color:var(--c-muted);
+  font-size:.88rem;
+  margin-bottom:1.25rem;
+  line-height:1.6;
+}
+
+.form-grid{display:grid; grid-template-columns:1fr 1fr; gap:.85rem;}
+.field{display:flex; flex-direction:column; gap:.3rem;}
+.field--full{grid-column:1 / -1;}
+.field label{
+  font-size:.8rem; font-weight:700;
+  color:var(--c-ink);
+}
+.field label .req{color:#C0392B;}
+.field input, .field select, .field textarea{
+  font:inherit; font-size:.88rem;
+  color:var(--c-ink);
+  padding:.6rem .75rem;
+  border:1.5px solid var(--c-line);
+  border-radius:var(--r-sm);
+  background:#fff;
+  transition:border-color .18s ease, box-shadow .18s ease;
+  width:100%;
+  font-family:'Nunito Sans', sans-serif;
+}
+.field textarea{resize:vertical; min-height:100px;}
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline:none;
+  border-color:var(--c-green);
+  box-shadow:0 0 0 3px rgba(48,100,49,.13);
+}
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"],
+.field select[aria-invalid="true"]{border-color:#C0392B;}
+.field__error{font-size:.72rem; color:#C0392B; min-height:1em;}
+
+.field--check{flex-direction:row; align-items:flex-start; gap:.55rem;}
+.field--check input{width:auto; margin-top:.25rem; flex:0 0 auto; accent-color:var(--c-green);}
+.field--check label{font-weight:400; font-size:.8rem; color:var(--c-muted); line-height:1.5;}
+
 .hp{position:absolute!important; left:-9999px!important; opacity:0;}
-.form-actions{  grid-column:1 / -1;  display:flex; flex-wrap:wrap; align-items:center; gap:.75rem;  margin-top:.5rem;}.form-status{font-size:.82rem; font-weight:700; color:var(--c-green);}
-.modal__contact{  margin-top:1.5rem;  padding-top:1.25rem;  border-top:1px solid var(--c-line);  display:grid; gap:.75rem;  font-size:.85rem;}.modal__contact-item{display:flex; gap:.65rem; align-items:flex-start; color:var(--c-muted);}.modal__contact-item strong{  display:block;  color:var(--c-ink);  font-size:.75rem;  font-weight:800;  letter-spacing:.04em;  text-transform:uppercase;  margin-bottom:.1rem;}.modal__contact-item svg{  width:17px; height:17px; flex:0 0 auto;  color:var(--c-green); margin-top:.1rem;}.modal__contact-item a{color:var(--c-green); font-weight:600;}
-.contact-fab{  position:fixed;  right:clamp(.85rem, 1.6vw, 1.35rem);  bottom:clamp(.85rem, 1.6vw, 1.35rem);  z-index:110;  display:inline-flex; align-items:center; gap:.5rem;  padding:.75rem 1.15rem;  border:none;  border-radius:var(--r-pill);  background:var(--c-green);  color:#fff;  font-family:'Nunito Sans', sans-serif;  font-weight:700;  font-size:.82rem;  letter-spacing:.02em;  box-shadow:0 10px 24px rgba(48,100,49,.32);  cursor:pointer;  transition:transform .2s ease, background-color .2s ease;}.contact-fab:hover{transform:translateY(-2px); background:var(--c-green-dark);}.contact-fab svg{width:16px; height:16px;}
-/* ==========================================================================   RESPONSIVE   ========================================================================== */@media (max-width:900px){  .activity{grid-template-columns:1fr;}  .activity:nth-child(even) .activity__media{order:0;}  .activity__media{aspect-ratio:16/9;}}
-@media (max-width:720px){  .form-grid{grid-template-columns:1fr;}  /* Corrigé : Augmentation pour mobile aussi */  .slide{min-height:clamp(350px, 75vh, 800px);}  .slide__text{max-width:100%;}  .slider__nav{display:none;}  .slider__dots{bottom:.55rem;}  .slider__dot{width:7px;height:7px;}  .news-head{flex-direction:column; align-items:flex-start;}  .news-head .section-head{text-align:left;}  .section-head{text-align:left;}}
-@media (prefers-reduced-motion: reduce){  html{scroll-behavior:auto;}  *,*::before,*::after{    animation-duration:.001ms!important;    animation-iteration-count:1!important;    transition-duration:.001ms!important;  }  .slider__track{transition:none;}}</style></head>
-<body><a class="skip-link" href="#main">Aller au contenu principal</a>
-<!-- HEADER INJECTÉ --><div data-include="/components/header.html"></div>
+
+.form-actions{
+  grid-column:1 / -1;
+  display:flex; flex-wrap:wrap; align-items:center; gap:.75rem;
+  margin-top:.5rem;
+}
+.form-status{font-size:.82rem; font-weight:700; color:var(--c-green);}
+
+.modal__contact{
+  margin-top:1.5rem;
+  padding-top:1.25rem;
+  border-top:1px solid var(--c-line);
+  display:grid; gap:.75rem;
+  font-size:.85rem;
+}
+.modal__contact-item{display:flex; gap:.65rem; align-items:flex-start; color:var(--c-muted);}
+.modal__contact-item strong{
+  display:block;
+  color:var(--c-ink);
+  font-size:.75rem;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin-bottom:.1rem;
+}
+.modal__contact-item svg{
+  width:17px; height:17px; flex:0 0 auto;
+  color:var(--c-green); margin-top:.1rem;
+}
+.modal__contact-item a{color:var(--c-green); font-weight:600;}
+
+.contact-fab{
+  position:fixed;
+  right:clamp(.85rem, 1.6vw, 1.35rem);
+  bottom:clamp(.85rem, 1.6vw, 1.35rem);
+  z-index:110;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1.15rem;
+  border:none;
+  border-radius:var(--r-pill);
+  background:var(--c-green);
+  color:#fff;
+  font-family:'Nunito Sans', sans-serif;
+  font-weight:700;
+  font-size:.82rem;
+  letter-spacing:.02em;
+  box-shadow:0 10px 24px rgba(48,100,49,.32);
+  cursor:pointer;
+  transition:transform .2s ease, background-color .2s ease;
+}
+.contact-fab:hover{transform:translateY(-2px); background:var(--c-green-dark);}
+.contact-fab svg{width:16px; height:16px;}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width:900px){
+  .slider{
+    grid-template-columns:1fr;
+    gap:clamp(1.1rem, 3vw, 1.6rem);
+  }
+  .slider__viewport{aspect-ratio:16/10;}
+  .slider__text{font-size:1rem;}
+
+  .activity{grid-template-columns:1fr;}
+  .activity:nth-child(odd) .activity__media{order:0;}
+  .activity__media{aspect-ratio:16/9;}
+}
+
+@media (max-width:720px){
+  .form-grid{grid-template-columns:1fr;}
+
+  .slider{padding-block:1.25rem;}
+  .slider__viewport{aspect-ratio:16/11; border-radius:var(--r-md);}
+  .slider__nav{display:none;}
+  .slider__dot{width:8px; height:8px;}
+
+  .news-head{flex-direction:column; align-items:flex-start;}
+  .news-head .section-head{text-align:left;}
+  .section-head{text-align:left;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+  .slider__track{transition:none;}
+  .partners-track{animation:none;}
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Aller au contenu principal</a>
+
+<!-- HEADER INJECTÉ -->
+<div data-include="/components/header.html"></div>
+
 <main id="main">
-  <!-- ============================================================       HERO SLIDER — PLEINE LARGEUR (full-width horizontal)       ============================================================ -->  <section class="hero" aria-label="Nos domaines d'action">    <div class="slider" id="heroSlider"         role="region"         aria-roledescription="carrousel"         aria-label="Domaines d'action de l'APEBH">
-      <div class="slider__viewport">        <div class="slider__track" id="sliderTrack">
-          <article class="slide" role="group" aria-roledescription="diapositive"                   aria-label="1 sur 4 : Recyclage et art">            <img class="slide__img" src="/images/objets-arts.jpg"                 alt="Objets d'art fabriqués à partir de déchets plastiques du Lac Tanganyika"                 fetchpriority="high">            <div class="slide__overlay"></div>            <div class="slide__content">              <p class="slide__text">                En luttant contre la pollution grâce au recyclage des déchets plastiques du                Lac Tanganyika transformés en objets d'art, et autres.              </p>            </div>          </article>
-          <article class="slide" role="group" aria-roledescription="diapositive"                   aria-label="2 sur 4 : Zones humides">            <img class="slide__img" src="/images/imageswetlands.jpg"                 alt="Zone humide et écosystème aquatique protégé" loading="lazy">            <div class="slide__overlay"></div>            <div class="slide__content">              <p class="slide__text">                En menant des activités sur la protection des zones humides et des écosystèmes,                notamment à travers le programme transfrontalier                « Wetlands for Peace and People's Health Program ».              </p>            </div>          </article>
-          <article class="slide" role="group" aria-roledescription="diapositive"                   aria-label="3 sur 4 : Jeunesse et femmes">            <img class="slide__img" src="/images/presentation-imagebox.jpg"                 alt="Jeunes et femmes engagés dans une activité de sensibilisation climatique"                 loading="lazy">            <div class="slide__overlay"></div>            <div class="slide__content">              <p class="slide__text">                Avec des initiatives pour impliquer les jeunes et les femmes dans les politiques                climatiques, comme le projet « Ngir'Ijambo ku biriko biraba » réalisé en partenariat                avec l'Abarundikazi Period Movement (APM).              </p>            </div>          </article>
-          <article class="slide" role="group" aria-roledescription="diapositive"                   aria-label="4 sur 4 : Qualité de l'air et transition énergétique">            <img class="slide__img" src="/images/table-ronde.jpg"                 alt="Table ronde sur la qualité de l'air et la transition énergétique" loading="lazy">            <div class="slide__overlay"></div>            <div class="slide__content">              <p class="slide__text">                L'organisation participe à des tables rondes et des actions de sensibilisation                sur la qualité de l'air (pollution intérieure et extérieure) et la transition                énergétique, en lien avec des mouvements comme le Laudato Si' Movement Burundi.              </p>            </div>          </article>
-        </div>      </div>
-      <button class="slider__nav slider__nav--prev" type="button" aria-label="Diapositive précédente">        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">          <path d="M15 18l-6-6 6-6"/>        </svg>      </button>      <button class="slider__nav slider__nav--next" type="button" aria-label="Diapositive suivante">        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">          <path d="M9 6l6 6-6 6"/>        </svg>      </button>
-      <div class="slider__dots" id="sliderDots" role="tablist" aria-label="Choisir une diapositive"></div>      <div class="slider__progress" id="sliderProgress" aria-hidden="true"></div>
-      <p class="visually-hidden" id="sliderStatus" aria-live="polite"></p>    </div>  </section>
-  <!-- ============================================================       BANNIÈRE DE TRANSITION       ============================================================ -->  <section class="transition-banner" aria-label="Notre approche">    <div class="container transition-banner__inner">      <p class="transition-banner__text">        Nous agissons pour l'approche Une Seule Santé <em>« One Health »</em>      </p>    </div>  </section>
-  <!-- ============================================================       ACTUALITÉS       ============================================================ -->  <section class="section" aria-labelledby="news-title">    <div class="container">      <div class="news-head">        <header class="section-head">          <h2 class="section-head__title" id="news-title">Nos dernières actualités</h2>        </header>        <a class="btn btn--outline btn--arrow" href="/blog/">Toutes les actualités</a>      </div>
+
+  <!-- ============================================================
+       HERO SLIDER — IMAGE À GAUCHE / TEXTE DYNAMIQUE À DROITE
+       ============================================================ -->
+  <section class="hero" aria-label="Nos domaines d'action">
+    <div class="slider" id="heroSlider"
+         role="region"
+         aria-roledescription="carrousel"
+         aria-label="Domaines d'action de l'APEBH">
+
+      <!-- ---------- Colonne gauche : images pures (aucun dégradé) ---------- -->
+      <div class="slider__media">
+        <div class="slider__viewport">
+          <div class="slider__track" id="sliderTrack">
+
+            <article class="slide" role="group" aria-roledescription="diapositive"
+                     aria-label="1 sur 4 : Recyclage et art">
+              <img class="slide__img" src="/images/objets-arts.jpg"
+                   alt="Objets d'art fabriqués à partir de déchets plastiques du Lac Tanganyika"
+                   fetchpriority="high">
+            </article>
+
+            <article class="slide" role="group" aria-roledescription="diapositive"
+                     aria-label="2 sur 4 : Zones humides">
+              <img class="slide__img" src="/images/imageswetlands.jpg"
+                   alt="Zone humide et écosystème aquatique protégé" loading="lazy">
+            </article>
+
+            <article class="slide" role="group" aria-roledescription="diapositive"
+                     aria-label="3 sur 4 : Jeunesse et femmes">
+              <img class="slide__img" src="/images/presentation-imagebox.jpg"
+                   alt="Jeunes et femmes engagés dans une activité de sensibilisation climatique"
+                   loading="lazy">
+            </article>
+
+            <article class="slide" role="group" aria-roledescription="diapositive"
+                     aria-label="4 sur 4 : Qualité de l'air et transition énergétique">
+              <img class="slide__img" src="/images/table-ronde.jpg"
+                   alt="Table ronde sur la qualité de l'air et la transition énergétique"
+                   loading="lazy">
+            </article>
+
+          </div>
+        </div>
+
+        <button class="slider__nav slider__nav--prev" type="button" aria-label="Diapositive précédente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <button class="slider__nav slider__nav--next" type="button" aria-label="Diapositive suivante">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 6l6 6-6 6"/>
+          </svg>
+        </button>
+
+        <div class="slider__progress" id="sliderProgress" aria-hidden="true"></div>
+      </div>
+
+      <!-- ---------- Colonne droite : texte dynamique + accroche One Health ---------- -->
+      <div class="slider__panel">
+
+        <div class="slider__texts" id="sliderTexts">
+          <p class="slider__text is-active" aria-hidden="false">
+            En luttant contre la pollution grâce au recyclage des déchets plastiques du
+            Lac Tanganyika transformés en objets d'art, et autres.
+          </p>
+          <p class="slider__text" aria-hidden="true">
+            En menant des activités sur la protection des zones humides et des écosystèmes,
+            notamment à travers le programme transfrontalier
+            « Wetlands for Peace and People's Health Program ».
+          </p>
+          <p class="slider__text" aria-hidden="true">
+            Avec des initiatives pour impliquer les jeunes et les femmes dans les politiques
+            climatiques, comme le projet « Ngir'Ijambo ku biriko biraba » réalisé en partenariat
+            avec l'Abarundikazi Period Movement (APM).
+          </p>
+          <p class="slider__text" aria-hidden="true">
+            L'organisation participe à des tables rondes et des actions de sensibilisation
+            sur la qualité de l'air (pollution intérieure et extérieure) et la transition
+            énergétique, en lien avec des mouvements comme le Laudato Si' Movement Burundi.
+          </p>
+        </div>
+
+        <div class="slider__controls">
+          <div class="slider__dots" id="sliderDots" role="group" aria-label="Choisir une diapositive"></div>
+        </div>
+
+        <p class="slider__tagline">
+          Nous agissons pour l'approche Une Seule Santé <em>« One Health »</em>
+        </p>
+
+      </div>
+
+      <p class="visually-hidden" id="sliderStatus" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACTUALITÉS
+       ============================================================ -->
+  <section class="section" aria-labelledby="news-title">
+    <div class="container">
+      <div class="news-head">
+        <header class="section-head">
+          <h2 class="section-head__title" id="news-title">Nos dernières actualités</h2>
+        </header>
+        <a class="btn btn--outline btn--arrow" href="/blog/">Toutes les actualités</a>
+      </div>
+
       <div class="news-grid">
-        <article class="news-card">          <a class="news-card__link"             href="https://irisnews.org/umuhivu-une-foire-de-la-connaissance-pour-celebrer-la-jeunesse-ses-idees-et-ses-victoires/"             target="_blank" rel="noopener noreferrer">            <div class="news-card__media">              <img src="/news/images/iris-news.jpg" loading="lazy"                   alt="Jeunes participantes à la foire de la connaissance UMUHIVU">            </div>            <div class="news-card__body">              <p class="news-card__meta">                <time datetime="2025-07-13">13 juillet 2025</time> · <span>Iris News</span>              </p>              <h3 class="news-card__title">                UMUHIVU : une foire de la connaissance pour célébrer la jeunesse,                ses idées et ses victoires              </h3>              <p class="news-card__desc">                Renforcer la conscience des jeunes femmes sur leur rôle dans la protection                de l'environnement.              </p>              <span class="news-card__cta">Lire sur Iris News</span>            </div>          </a>        </article>
-        <article class="news-card">          <a class="news-card__link"             href="/blog/news/renforcer-la-conservation-transfrontalieres-biodiversite/">            <div class="news-card__media">              <img src="/news/renforcer-la-conservation-transfrontalieres-biodiversite/img.jpg"                   loading="lazy"                   alt="Conservation transfrontalière de la biodiversité dans la région des Grands Lacs">            </div>            <div class="news-card__body">              <p class="news-card__meta">                <time datetime="2023-12-05">5 décembre 2023</time>              </p>              <h3 class="news-card__title">                Le programme « Wetlands for Peace and People's Health Program »              </h3>              <p class="news-card__desc">                En collaboration avec MKAAJI MPYA asbl, nous visons à renforcer la conservation                transfrontalière de la biodiversité dans la région des Grands Lacs africains,                tout en s'attaquant au changement climatique et en améliorant la santé des                communautés locales et des peuples autochtones.              </p>              <span class="news-card__cta">Lire l'article</span>            </div>          </a>        </article>
-        <article class="news-card">          <a class="news-card__link"             href="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/">            <div class="news-card__media">              <img src="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/img.jpg"                   loading="lazy"                   alt="Présentation du programme Wetlands for Peace à la COP16 Biodiversité à Cali">            </div>            <div class="news-card__body">              <p class="news-card__meta">                <time datetime="2024-10-27">27 octobre 2024</time>              </p>              <h3 class="news-card__title">                À Cali, en Colombie : les zones humides au cœur de la COP16 Biodiversité              </h3>              <p class="news-card__desc">                En amont de la COP16 Biodiversité des Nations Unies, notre coordonnateur de                programme présentait « Wetlands for Peace and People's Health » lors d'un                side-event organisé par le Post-2020 Biodiversity Framework – EU Support et                l'African Wildlife Foundation (AWF), au Pavillon de l'UE. À l'approche des deux                ans de l'adoption du Cadre mondial pour la biodiversité, il est essentiel de                renforcer l'approche « Whole-of-Society » : les jeunes sont des acteurs clés                de la mise en œuvre.              </p>              <span class="news-card__cta">Lire l'article</span>            </div>          </a>        </article>
-      </div>    </div>  </section>
-  <!-- ============================================================       PARTENAIRES       ============================================================ -->  <section class="section section--soft partners-section" aria-labelledby="partners-title">    <div class="container">      <h2 class="partners-title" id="partners-title">Nos partenaires</h2>
-      <ul class="partners-grid">        <li class="partner">          <img src="/images/gef-sgp.png" alt="GEF Small Grants Programme" loading="lazy">        </li>        <li class="partner">          <img src="/images/undp.png" alt="Programme des Nations Unies pour le développement" loading="lazy">        </li>        <li class="partner">          <img src="/images/unep.png" alt="Programme des Nations Unies pour l'environnement" loading="lazy">        </li>        <li class="partner">          <img src="/images/apm.png" alt="Abarundikazi Period Movement" loading="lazy">        </li>        <li class="partner">          <img src="/images/wff.png" alt="World Food Forum" loading="lazy">        </li>        <li class="partner">          <img src="/images/mineagrie.png" alt="Ministère de l'Environnement" loading="lazy">        </li>        <li class="partner">          <img src="/images/gybn.png" alt="Global Youth Biodiversity Network" loading="lazy">        </li>      </ul>    </div>  </section>
-  <!-- ============================================================       ACTIVITÉS       ============================================================ -->  <section class="section section--cream" id="activites" aria-labelledby="activities-title">    <div class="container">      <header class="section-head">        <h2 class="section-head__title" id="activities-title">          Des programmes concrets, portés avec les communautés        </h2>        <!-- Texte supprimé : « Trois axes structurent notre action : zones humides, biodiversité, et qualité de l'air & transition énergétique. » -->      </header>
-      <article class="activity">        <div class="activity__media">          <img src="/images/ramsar-wetlands.jpg" loading="lazy"               alt="Zones humides et marais du Lac Tanganyika">        </div>        <div class="activity__body">          <h3 class="activity__title">            Protection des zones humides et de la Convention de Ramsar          </h3>          <p class="activity__text">            Nous œuvrons pour la protection des écosystèmes aquatiques — Lac Tanganyika,            marais et zones humides transfrontalières — à travers des initiatives de            conservation communautaire et le programme            « Wetlands for Peace and People's Health Program ».          </p>
-          <ul class="activity__list">            <li>Programme « Wetlands for Peace and People's Health Program »</li>            <li>Initiatives de conservation communautaire</li>            <li>Coopération transfrontalière dans la région des Grands Lacs</li>          </ul>
-          <a class="btn btn--primary btn--arrow" href="/activites/wetlands-ramsar/">            Découvrir le programme          </a>        </div>      </article>
-      <article class="activity">        <div class="activity__media">          <img src="/images/biodiversite-cdb.jpg" loading="lazy"               alt="Biodiversité locale et espèces protégées">        </div>        <div class="activity__body">          <h3 class="activity__title">            Convention sur la diversité biologique (CDB) &amp; SPANB          </h3>          <p class="activity__text">            Nous accompagnons le suivi de la Stratégie et Plan d'Action Nationaux pour la            Biodiversité (SPANB) et son alignement avec le Cadre mondial de Kunming-Montréal,            avec un focus sur l'intégration PNUD-BIOFIN, la conservation des espèces locales            et la sensibilisation citoyenne.          </p>
-          <ul class="activity__list">            <li>Suivi de la SPANB et alignement Kunming-Montréal</li>            <li>Intégration du programme PNUD-BIOFIN</li>            <li>Conservation des espèces locales et sensibilisation citoyenne</li>          </ul>
-          <a class="btn btn--primary btn--arrow" href="/activites/biodiversite-cdb/">            En savoir plus          </a>        </div>      </article>
-      <article class="activity">        <div class="activity__media">          <img src="/activites/air-et-climat/qualite-air-climat.jpg" loading="lazy"               alt="Sensibilisation sur la qualité de l'air et la cuisson propre">        </div>        <div class="activity__body">          <h3 class="activity__title">            Qualité de l'air, climat et transition énergétique          </h3>          <p class="activity__text">            Pollution de l'air intérieur et extérieur, protection de la couche d'ozone            (Protocole de Montréal) et promotion des énergies propres : nous mobilisons            les acteurs autour d'enjeux sanitaires et climatiques encore sous-estimés.          </p>
-          <ul class="activity__list">            <li>Tables rondes multi-acteurs et plaidoyer</li>            <li>Intégration de la qualité de l'air dans les CDN / PNA</li>            <li>Sensibilisation sur la cuisson propre et le Protocole de Montréal</li>          </ul>
-          <a class="btn btn--primary btn--arrow" href="/activites/air-et-climat/">            Voir nos actions          </a>        </div>      </article>
-      <div class="activities-footer">        <a class="btn btn--outline btn--arrow" href="/activities/">Plus de nos activités</a>      </div>    </div>  </section>
+
+        <article class="news-card">
+          <a class="news-card__link"
+             href="https://irisnews.org/umuhivu-une-foire-de-la-connaissance-pour-celebrer-la-jeunesse-ses-idees-et-ses-victoires/"
+             target="_blank" rel="noopener noreferrer">
+            <div class="news-card__media">
+              <img src="/news/images/iris-news.jpg" loading="lazy"
+                   alt="Jeunes participantes à la foire de la connaissance UMUHIVU">
+            </div>
+            <div class="news-card__body">
+              <p class="news-card__meta">
+                <time datetime="2025-07-13">13 juillet 2025</time> · <span>Iris News</span>
+              </p>
+              <h3 class="news-card__title">
+                UMUHIVU : une foire de la connaissance pour célébrer la jeunesse,
+                ses idées et ses victoires
+              </h3>
+              <p class="news-card__desc">
+                Renforcer la conscience des jeunes femmes sur leur rôle dans la protection
+                de l'environnement.
+              </p>
+              <span class="news-card__cta">Lire sur Iris News</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="news-card">
+          <a class="news-card__link"
+             href="/blog/news/renforcer-la-conservation-transfrontalieres-biodiversite/">
+            <div class="news-card__media">
+              <img src="/news/renforcer-la-conservation-transfrontalieres-biodiversite/img.jpg"
+                   loading="lazy"
+                   alt="Conservation transfrontalière de la biodiversité dans la région des Grands Lacs">
+            </div>
+            <div class="news-card__body">
+              <p class="news-card__meta">
+                <time datetime="2023-12-05">5 décembre 2023</time>
+              </p>
+              <h3 class="news-card__title">
+                Le programme « Wetlands for Peace and People's Health Program »
+              </h3>
+              <p class="news-card__desc">
+                En collaboration avec MKAAJI MPYA asbl, nous visons à renforcer la conservation
+                transfrontalière de la biodiversité dans la région des Grands Lacs africains,
+                tout en s'attaquant au changement climatique et en améliorant la santé des
+                communautés locales et des peuples autochtones.
+              </p>
+              <span class="news-card__cta">Lire l'article</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="news-card">
+          <a class="news-card__link"
+             href="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/">
+            <div class="news-card__media">
+              <img src="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/img.jpg"
+                   loading="lazy"
+                   alt="Présentation du programme Wetlands for Peace à la COP16 Biodiversité à Cali">
+            </div>
+            <div class="news-card__body">
+              <p class="news-card__meta">
+                <time datetime="2024-10-27">27 octobre 2024</time>
+              </p>
+              <h3 class="news-card__title">
+                À Cali, en Colombie : les zones humides au cœur de la COP16 Biodiversité
+              </h3>
+              <p class="news-card__desc">
+                En amont de la COP16 Biodiversité des Nations Unies, notre coordonnateur de
+                programme présentait « Wetlands for Peace and People's Health » lors d'un
+                side-event organisé par le Post-2020 Biodiversity Framework – EU Support et
+                l'African Wildlife Foundation (AWF), au Pavillon de l'UE. À l'approche des deux
+                ans de l'adoption du Cadre mondial pour la biodiversité, il est essentiel de
+                renforcer l'approche « Whole-of-Society » : les jeunes sont des acteurs clés
+                de la mise en œuvre.
+              </p>
+              <span class="news-card__cta">Lire l'article</span>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PARTENAIRES — BANDEAU DÉFILANT VERS LA GAUCHE
+       ============================================================ -->
+  <section class="section section--soft partners-section" aria-labelledby="partners-title">
+    <div class="container">
+      <h2 class="partners-title" id="partners-title">Nos partenaires</h2>
+    </div>
+
+    <div class="partners-marquee">
+      <div class="partners-track">
+
+        <!-- Piste 1 -->
+        <ul class="partners-grid">
+          <li class="partner"><img src="/images/gef-sgp.png" alt="GEF Small Grants Programme" loading="lazy"></li>
+          <li class="partner"><img src="/images/undp.png" alt="Programme des Nations Unies pour le développement" loading="lazy"></li>
+          <li class="partner"><img src="/images/unep.png" alt="Programme des Nations Unies pour l'environnement" loading="lazy"></li>
+          <li class="partner"><img src="/images/apm.png" alt="Abarundikazi Period Movement" loading="lazy"></li>
+          <li class="partner"><img src="/images/wff.png" alt="World Food Forum" loading="lazy"></li>
+          <li class="partner"><img src="/images/mineagrie.png" alt="Ministère de l'Environnement" loading="lazy"></li>
+          <li class="partner"><img src="/images/gybn.png" alt="Global Youth Biodiversity Network" loading="lazy"></li>
+        </ul>
+
+        <!-- Piste 2 (copie pour le défilement continu) -->
+        <ul class="partners-grid" aria-hidden="true">
+          <li class="partner"><img src="/images/gef-sgp.png" alt="" loading="lazy"></li>
+          <li class="partner"><img src="/images/undp.png" alt="" loading="lazy"></li>
+          <li class="partner"><img src="/images/unep.png" alt="" loading="lazy"></li>
+          <li class="partner"><img src="/images/apm.png" alt="" loading="lazy"></li>
+          <li class="partner"><img src="/images/wff.png" alt="" loading="lazy"></li>
+          <li class="partner"><img src="/images/mineagrie.png" alt="" loading="lazy"></li>
+          <li class="partner"><img src="/images/gybn.png" alt="" loading="lazy"></li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACTIVITÉS
+       ============================================================ -->
+  <section class="section section--cream" id="activites" aria-labelledby="activities-title">
+    <div class="container">
+
+      <header class="section-head">
+        <h2 class="section-head__title" id="activities-title">
+          Des programmes concrets, portés avec les communautés
+        </h2>
+      </header>
+
+      <!-- ---------- ACTIVITÉ PRIORITAIRE (1re position) ---------- -->
+      <article class="activity">
+        <div class="activity__media">
+          <img src="/images/ngire-ijambo-kubiriko-biraba.jpg" loading="lazy"
+               alt="Jeunes, femmes et leaders communautaires participant au projet Ngire Ijambo kubiriko biraba">
+        </div>
+        <div class="activity__body">
+          <h3 class="activity__title">
+            Ngire Ijambo kubiriko biraba
+          </h3>
+          <p class="activity__text">
+            Le projet vise à promouvoir la participation active des jeunes, des femmes et des
+            leaders communautaires burundais dans la conception et la mise en œuvre des
+            politiques relatives au changement climatique, à la biodiversité et au genre.
+            À cette fin, l'APEBH et l'APM ont élaboré et distribué un guide éducatif pratique
+            pour aider ces groupes marginalisés à plaider en faveur de la justice
+            environnementale et à influencer les politiques publiques, du niveau local au
+            niveau national.
+          </p>
+          <ul class="activity__list">
+            <li>Participation active des jeunes, des femmes et des leaders communautaires</li>
+            <li>Guide éducatif pratique de plaidoyer, élaboré et distribué avec l'APM</li>
+            <li>Justice environnementale et influence des politiques publiques, du local au national</li>
+          </ul>
+          <a class="btn btn--primary btn--arrow" href="/activites/ngire-ijambo-kubiriko-biraba/">
+            Découvrir le projet
+          </a>
+        </div>
+      </article>
+
+      <!-- ---------- Zones humides / Ramsar ---------- -->
+      <article class="activity">
+        <div class="activity__media">
+          <img src="/images/ramsar-wetlands.jpg" loading="lazy"
+               alt="Zones humides et marais du Lac Tanganyika">
+        </div>
+        <div class="activity__body">
+          <h3 class="activity__title">
+            Protection des zones humides et de la Convention de Ramsar
+          </h3>
+          <p class="activity__text">
+            Nous œuvrons pour la protection des écosystèmes aquatiques — Lac Tanganyika,
+            marais et zones humides transfrontalières — à travers des initiatives de
+            conservation communautaire et le programme
+            « Wetlands for Peace and People's Health Program ».
+          </p>
+          <ul class="activity__list">
+            <li>Programme « Wetlands for Peace and People's Health Program »</li>
+            <li>Initiatives de conservation communautaire</li>
+            <li>Coopération transfrontalière dans la région des Grands Lacs</li>
+          </ul>
+          <a class="btn btn--primary btn--arrow" href="/activites/wetlands-ramsar/">
+            Découvrir le programme
+          </a>
+        </div>
+      </article>
+
+      <!-- ---------- CDB / SPANB ---------- -->
+      <article class="activity">
+        <div class="activity__media">
+          <img src="/images/biodiversite-cdb.jpg" loading="lazy"
+               alt="Biodiversité locale et espèces protégées">
+        </div>
+        <div class="activity__body">
+          <h3 class="activity__title">
+            Convention sur la diversité biologique (CDB) &amp; SPANB
+          </h3>
+          <p class="activity__text">
+            Nous accompagnons le suivi de la Stratégie et Plan d'Action Nationaux pour la
+            Biodiversité (SPANB) et son alignement avec le Cadre mondial de Kunming-Montréal,
+            avec un focus sur l'intégration PNUD-BIOFIN, la conservation des espèces locales
+            et la sensibilisation citoyenne.
+          </p>
+          <ul class="activity__list">
+            <li>Suivi de la SPANB et alignement Kunming-Montréal</li>
+            <li>Intégration du programme PNUD-BIOFIN</li>
+            <li>Conservation des espèces locales et sensibilisation citoyenne</li>
+          </ul>
+          <a class="btn btn--primary btn--arrow" href="/activites/biodiversite-cdb/">
+            En savoir plus
+          </a>
+        </div>
+      </article>
+
+      <!-- ---------- Qualité de l'air / climat ---------- -->
+      <article class="activity">
+        <div class="activity__media">
+          <img src="/activites/air-et-climat/qualite-air-climat.jpg" loading="lazy"
+               alt="Sensibilisation sur la qualité de l'air et la cuisson propre">
+        </div>
+        <div class="activity__body">
+          <h3 class="activity__title">
+            Qualité de l'air, climat et transition énergétique
+          </h3>
+          <p class="activity__text">
+            Pollution de l'air intérieur et extérieur, protection de la couche d'ozone
+            (Protocole de Montréal) et promotion des énergies propres : nous mobilisons
+            les acteurs autour d'enjeux sanitaires et climatiques encore sous-estimés.
+          </p>
+          <ul class="activity__list">
+            <li>Tables rondes multi-acteurs et plaidoyer</li>
+            <li>Intégration de la qualité de l'air dans les CDN / PNA</li>
+            <li>Sensibilisation sur la cuisson propre et le Protocole de Montréal</li>
+          </ul>
+          <a class="btn btn--primary btn--arrow" href="/activites/air-et-climat/">
+            Voir nos actions
+          </a>
+        </div>
+      </article>
+
+      <div class="activities-footer">
+        <a class="btn btn--outline btn--arrow" href="/activities/">Plus de nos activités</a>
+      </div>
+
+    </div>
+  </section>
+
 </main>
-<!-- FOOTER --><div data-include="/components/footer.html"></div>
-<!-- ============================================================     BOUTON FLOTTANT + MODALE CONTACT     ============================================================ --><button class="contact-fab" type="button" id="contactFab" aria-haspopup="dialog">  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">    <path d="M4 5h16v11H7l-3 3z"/>  </svg>  Nous contacter</button>
-<div class="modal" id="contactModal" role="dialog" aria-modal="true"     aria-labelledby="contactModalTitle" aria-hidden="true">  <div class="modal__backdrop" data-close></div>
-  <div class="modal__panel" role="document">    <button class="modal__close" type="button" data-close aria-label="Fermer la fenêtre de contact">      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"           stroke-width="2.2" stroke-linecap="round" aria-hidden="true">        <path d="M6 6l12 12M18 6L6 18"/>      </svg>    </button>
-    <p class="modal__eyebrow">Contact</p>    <h2 class="modal__title" id="contactModalTitle">Écrivez-nous</h2>    <p class="modal__sub">      Une question, un partenariat, une envie de rejoindre le réseau ?      Remplissez le formulaire, nous vous répondrons dans les meilleurs délais.    </p>
-    <form id="contactForm" novalidate>      <div class="form-grid">
-        <div class="field">          <label for="cf-nom">Nom complet <span class="req">*</span></label>          <input type="text" id="cf-nom" name="nom" autocomplete="name" required>          <span class="field__error" data-error-for="cf-nom"></span>        </div>
-        <div class="field">          <label for="cf-email">Adresse e-mail <span class="req">*</span></label>          <input type="email" id="cf-email" name="email" autocomplete="email" required>          <span class="field__error" data-error-for="cf-email"></span>        </div>
-        <div class="field">          <label for="cf-organisation">Organisation / Institution</label>          <input type="text" id="cf-organisation" name="organisation" autocomplete="organization">          <span class="field__error" data-error-for="cf-organisation"></span>        </div>
-        <div class="field">          <label for="cf-objectif">Objectif de votre message <span class="req">*</span></label>          <select id="cf-objectif" name="objectif" required>            <option value="">— Sélectionnez —</option>            <option value="Demande d'information">Demande d'information</option>            <option value="Partenariat">Proposition de partenariat</option>            <option value="Adhésion / Bénévolat">Adhésion / Bénévolat</option>            <option value="Rejoindre le réseau WFF">Rejoindre le réseau WFF</option>            <option value="Presse & Médias">Presse &amp; Médias</option>            <option value="Autre">Autre</option>          </select>          <span class="field__error" data-error-for="cf-objectif"></span>        </div>
-        <div class="field field--full">          <label for="cf-message">Message <span class="req">*</span></label>          <textarea id="cf-message" name="message" rows="4" required                    placeholder="Décrivez votre demande en quelques lignes…"></textarea>          <span class="field__error" data-error-for="cf-message"></span>        </div>
-        <div class="field field--full">          <label for="cf-tel">Téléphone <span style="font-weight:400;color:var(--c-muted)">(facultatif)</span></label>          <input type="tel" id="cf-tel" name="telephone" autocomplete="tel">        </div>
-        <div class="hp" aria-hidden="true">          <label for="cf-website">Ne pas remplir</label>          <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">        </div>
-        <div class="field field--full field--check">          <input type="checkbox" id="cf-consent" name="consentement" required>          <label for="cf-consent">            J'accepte que les informations transmises soient utilisées par l'APEBH            pour répondre à ma demande. <span class="req">*</span>          </label>          <span class="field__error" data-error-for="cf-consent"></span>        </div>
-        <div class="form-actions">          <button class="btn btn--primary" type="submit" id="cf-submit">Envoyer le message</button>          <span class="form-status" id="cf-status" role="status" aria-live="polite"></span>        </div>
-      </div>    </form>
-    <div class="modal__contact">      <div class="modal__contact-item">        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">          <rect x="3" y="5" width="18" height="14" rx="2"/>          <path d="M3.5 7l8.5 6 8.5-6"/>        </svg>        <span><strong>E-mail</strong>          <a href="mailto:info@apebh.org">info@apebh.org</a>        </span>      </div>
-      <div class="modal__contact-item">        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">          <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/>          <circle cx="12" cy="10" r="2.6"/>        </svg>        <span><strong>Adresse</strong>          06 Avenue de la Mission, Immeuble Ndongozi, Bureau B9,<br>Mukaza — Bujumbura, Burundi        </span>      </div>    </div>  </div></div>
-<script>/* ==========================================================================   A. INCLUSIONS HEADER / FOOTER   ========================================================================== */(function initIncludes(){  document.querySelectorAll('[data-include]').forEach(async (slot) => {    const url = slot.dataset.include;    try{      const res = await fetch(url, { cache:'no-cache' });      if(!res.ok) throw new Error(res.status + ' ' + res.statusText);      slot.innerHTML = await res.text();    }catch(err){      console.warn('[APEBH] Inclusion impossible :', url, err);    }  });})();
-/* ==========================================================================   B. SLIDER   ========================================================================== */(function initSlider(){  const root = document.getElementById('heroSlider');  if(!root) return;
-  const track    = root.querySelector('#sliderTrack');  const slides   = Array.from(track.children);  const dotsWrap = root.querySelector('#sliderDots');  const progress = root.querySelector('#sliderProgress');  const status   = root.querySelector('#sliderStatus');  const btnPrev  = root.querySelector('.slider__nav--prev');  const btnNext  = root.querySelector('.slider__nav--next');
-  const AUTOPLAY_MS = 7000;  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+<!-- FOOTER -->
+<div data-include="/components/footer.html"></div>
+
+<!-- ============================================================
+     BOUTON FLOTTANT + MODALE CONTACT
+     ============================================================ -->
+<button class="contact-fab" type="button" id="contactFab" aria-haspopup="dialog">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 5h16v11H7l-3 3z"/>
+  </svg>
+  Nous contacter
+</button>
+
+<div class="modal" id="contactModal" role="dialog" aria-modal="true"
+     aria-labelledby="contactModalTitle" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+
+  <div class="modal__panel" role="document">
+    <button class="modal__close" type="button" data-close aria-label="Fermer la fenêtre de contact">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+           stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+
+    <p class="modal__eyebrow">Contact</p>
+    <h2 class="modal__title" id="contactModalTitle">Écrivez-nous</h2>
+    <p class="modal__sub">
+      Une question, un partenariat, une envie de rejoindre le réseau ?
+      Remplissez le formulaire, nous vous répondrons dans les meilleurs délais.
+    </p>
+
+    <form id="contactForm" novalidate>
+      <div class="form-grid">
+
+        <div class="field">
+          <label for="cf-nom">Nom complet <span class="req">*</span></label>
+          <input type="text" id="cf-nom" name="nom" autocomplete="name" required>
+          <span class="field__error" data-error-for="cf-nom"></span>
+        </div>
+
+        <div class="field">
+          <label for="cf-email">Adresse e-mail <span class="req">*</span></label>
+          <input type="email" id="cf-email" name="email" autocomplete="email" required>
+          <span class="field__error" data-error-for="cf-email"></span>
+        </div>
+
+        <div class="field">
+          <label for="cf-organisation">Organisation / Institution</label>
+          <input type="text" id="cf-organisation" name="organisation" autocomplete="organization">
+          <span class="field__error" data-error-for="cf-organisation"></span>
+        </div>
+
+        <div class="field">
+          <label for="cf-objectif">Objectif de votre message <span class="req">*</span></label>
+          <select id="cf-objectif" name="objectif" required>
+            <option value="">— Sélectionnez —</option>
+            <option value="Demande d'information">Demande d'information</option>
+            <option value="Partenariat">Proposition de partenariat</option>
+            <option value="Adhésion / Bénévolat">Adhésion / Bénévolat</option>
+            <option value="Rejoindre le réseau WFF">Rejoindre le réseau WFF</option>
+            <option value="Presse & Médias">Presse &amp; Médias</option>
+            <option value="Autre">Autre</option>
+          </select>
+          <span class="field__error" data-error-for="cf-objectif"></span>
+        </div>
+
+        <div class="field field--full">
+          <label for="cf-message">Message <span class="req">*</span></label>
+          <textarea id="cf-message" name="message" rows="4" required
+                    placeholder="Décrivez votre demande en quelques lignes…"></textarea>
+          <span class="field__error" data-error-for="cf-message"></span>
+        </div>
+
+        <div class="field field--full">
+          <label for="cf-tel">Téléphone <span style="font-weight:400;color:var(--c-muted)">(facultatif)</span></label>
+          <input type="tel" id="cf-tel" name="telephone" autocomplete="tel">
+        </div>
+
+        <div class="hp" aria-hidden="true">
+          <label for="cf-website">Ne pas remplir</label>
+          <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="field field--full field--check">
+          <input type="checkbox" id="cf-consent" name="consentement" required>
+          <label for="cf-consent">
+            J'accepte que les informations transmises soient utilisées par l'APEBH
+            pour répondre à ma demande. <span class="req">*</span>
+          </label>
+          <span class="field__error" data-error-for="cf-consent"></span>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn--primary" type="submit" id="cf-submit">Envoyer le message</button>
+          <span class="form-status" id="cf-status" role="status" aria-live="polite"></span>
+        </div>
+
+      </div>
+    </form>
+
+    <div class="modal__contact">
+      <div class="modal__contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <path d="M3.5 7l8.5 6 8.5-6"/>
+        </svg>
+        <span><strong>E-mail</strong>
+          <a href="mailto:info@apebh.org">info@apebh.org</a>
+        </span>
+      </div>
+
+      <div class="modal__contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/>
+          <circle cx="12" cy="10" r="2.6"/>
+        </svg>
+        <span><strong>Adresse</strong>
+          06 Avenue de la Mission, Immeuble Ndongozi, Bureau B9,<br>Mukaza — Bujumbura, Burundi
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   A. INCLUSIONS HEADER / FOOTER
+   ========================================================================== */
+(function initIncludes(){
+  document.querySelectorAll('[data-include]').forEach(async (slot) => {
+    const url = slot.dataset.include;
+    try{
+      const res = await fetch(url, { cache:'no-cache' });
+      if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+      slot.innerHTML = await res.text();
+    }catch(err){
+      console.warn('[APEBH] Inclusion impossible :', url, err);
+    }
+  });
+})();
+
+/* ==========================================================================
+   B. SLIDER — image à gauche, texte dynamique à droite
+   ========================================================================== */
+(function initSlider(){
+  const root = document.getElementById('heroSlider');
+  if(!root) return;
+
+  const track    = root.querySelector('#sliderTrack');
+  const slides   = Array.from(track.children);
+  const texts    = Array.from(root.querySelectorAll('.slider__text'));
+  const dotsWrap = root.querySelector('#sliderDots');
+  const progress = root.querySelector('#sliderProgress');
+  const status   = root.querySelector('#sliderStatus');
+  const btnPrev  = root.querySelector('.slider__nav--prev');
+  const btnNext  = root.querySelector('.slider__nav--next');
+
+  const AUTOPLAY_MS = 7000;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   let index = 0, timer = null, progressTimer = null, isPaused = false;
-  slides.forEach((_, i) => {    const dot = document.createElement('button');    dot.type = 'button';    dot.className = 'slider__dot';    dot.setAttribute('role', 'tab');    dot.setAttribute('aria-label', `Diapositive ${i + 1} sur ${slides.length}`);    dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');    dot.addEventListener('click', () => goTo(i, true));    dotsWrap.appendChild(dot);  });  const dots = Array.from(dotsWrap.children);
-  function goTo(i, userAction){    index = (i + slides.length) % slides.length;    track.style.transform = `translateX(-${index * 100}%)`;    dots.forEach((d, k) => d.setAttribute('aria-selected', k === index ? 'true' : 'false'));    slides.forEach((s, k) => s.setAttribute('aria-hidden', k === index ? 'false' : 'true'));    status.textContent = `Diapositive ${index + 1} sur ${slides.length}`;    if(userAction) restartAutoplay();  }  const next = (u) => goTo(index + 1, u);  const prev = (u) => goTo(index - 1, u);
-  function startAutoplay(){    if(reduceMotion || isPaused) return;    stopAutoplay();    let elapsed = 0;    const tick = 60;    progressTimer = setInterval(() => {      elapsed += tick;      progress.style.width = Math.min(100, (elapsed / AUTOPLAY_MS) * 100) + '%';    }, tick);    timer = setTimeout(() => { next(false); startAutoplay(); }, AUTOPLAY_MS);  }  function stopAutoplay(){    clearTimeout(timer); clearInterval(progressTimer);    timer = null; progressTimer = null;    progress.style.width = '0%';  }  function restartAutoplay(){ stopAutoplay(); progress.style.width='0%'; startAutoplay(); }
-  btnNext.addEventListener('click', () => next(true));  btnPrev.addEventListener('click', () => prev(true));
-  root.addEventListener('mouseenter', () => { isPaused=true; stopAutoplay(); });  root.addEventListener('mouseleave', () => { isPaused=false; restartAutoplay(); });  root.addEventListener('focusin',    () => { isPaused=true; stopAutoplay(); });  root.addEventListener('focusout',   () => { isPaused=false; restartAutoplay(); });
-  root.addEventListener('keydown', (e) => {    if(e.key==='ArrowRight'){ e.preventDefault(); next(true); }    if(e.key==='ArrowLeft'){  e.preventDefault(); prev(true); }  });
-  let startX=0, startY=0, tracking=false;  root.addEventListener('touchstart', (e) => {    startX = e.touches[0].clientX;    startY = e.touches[0].clientY;    tracking = true;    isPaused = true; stopAutoplay();  }, { passive:true });  root.addEventListener('touchend', (e) => {    if(!tracking) return;    tracking = false;    const dx = e.changedTouches[0].clientX - startX;    const dy = e.changedTouches[0].clientY - startY;    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){      dx < 0 ? next(true) : prev(true);    }    isPaused = false; restartAutoplay();  }, { passive:true });
-  document.addEventListener('visibilitychange', () => {    document.hidden ? stopAutoplay() : restartAutoplay();  });
-  document.addEventListener('apebh:modal-open',  () => { isPaused=true;  stopAutoplay(); });  document.addEventListener('apebh:modal-close', () => { isPaused=false; restartAutoplay(); });
-  goTo(0, false);  startAutoplay();})();
-/* ==========================================================================   C. MODALE CONTACT   ========================================================================== */(function initContactModal(){  const modal  = document.getElementById('contactModal');  const fab    = document.getElementById('contactFab');  const form   = document.getElementById('contactForm');  const status = document.getElementById('cf-status');  if(!modal || !form) return;
-  const focusableSelector =    'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +    'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  /* --- Pastilles --- */
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'slider__dot';
+    dot.setAttribute('aria-label', `Diapositive ${i + 1} sur ${slides.length}`);
+    dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+    dot.addEventListener('click', () => goTo(i, true));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  /* --- Navigation --- */
+  function goTo(i, userAction){
+    index = (i + slides.length) % slides.length;
+
+    track.style.transform = `translateX(-${index * 100}%)`;
+
+    dots.forEach((d, k) => d.setAttribute('aria-current', k === index ? 'true' : 'false'));
+
+    slides.forEach((s, k) => s.setAttribute('aria-hidden', k === index ? 'false' : 'true'));
+
+    /* Texte dynamique synchronisé */
+    texts.forEach((t, k) => {
+      const active = (k === index);
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
+
+    status.textContent = `Diapositive ${index + 1} sur ${slides.length}`;
+
+    if(userAction) restartAutoplay();
+  }
+
+  const next = (u) => goTo(index + 1, u);
+  const prev = (u) => goTo(index - 1, u);
+
+  /* --- Autoplay + barre de progression --- */
+  function startAutoplay(){
+    if(reduceMotion || isPaused) return;
+    stopAutoplay();
+    let elapsed = 0;
+    const tick = 60;
+    progressTimer = setInterval(() => {
+      elapsed += tick;
+      progress.style.width = Math.min(100, (elapsed / AUTOPLAY_MS) * 100) + '%';
+    }, tick);
+    timer = setTimeout(() => { next(false); startAutoplay(); }, AUTOPLAY_MS);
+  }
+
+  function stopAutoplay(){
+    clearTimeout(timer); clearInterval(progressTimer);
+    timer = null; progressTimer = null;
+    progress.style.width = '0%';
+  }
+
+  function restartAutoplay(){
+    stopAutoplay();
+    progress.style.width = '0%';
+    startAutoplay();
+  }
+
+  btnNext.addEventListener('click', () => next(true));
+  btnPrev.addEventListener('click', () => prev(true));
+
+  root.addEventListener('mouseenter', () => { isPaused = true;  stopAutoplay(); });
+  root.addEventListener('mouseleave', () => { isPaused = false; restartAutoplay(); });
+  root.addEventListener('focusin',    () => { isPaused = true;  stopAutoplay(); });
+  root.addEventListener('focusout',   () => { isPaused = false; restartAutoplay(); });
+
+  root.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowRight'){ e.preventDefault(); next(true); }
+    if(e.key === 'ArrowLeft'){  e.preventDefault(); prev(true); }
+  });
+
+  /* --- Swipe tactile --- */
+  let startX = 0, startY = 0, tracking = false;
+  root.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    tracking = true;
+    isPaused = true; stopAutoplay();
+  }, { passive:true });
+
+  root.addEventListener('touchend', (e) => {
+    if(!tracking) return;
+    tracking = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
+      dx < 0 ? next(true) : prev(true);
+    }
+    isPaused = false; restartAutoplay();
+  }, { passive:true });
+
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stopAutoplay() : restartAutoplay();
+  });
+
+  document.addEventListener('apebh:modal-open',  () => { isPaused = true;  stopAutoplay(); });
+  document.addEventListener('apebh:modal-close', () => { isPaused = false; restartAutoplay(); });
+
+  goTo(0, false);
+  startAutoplay();
+})();
+
+/* ==========================================================================
+   C. MODALE CONTACT
+   ========================================================================== */
+(function initContactModal(){
+  const modal  = document.getElementById('contactModal');
+  const fab    = document.getElementById('contactFab');
+  const form   = document.getElementById('contactForm');
+  const status = document.getElementById('cf-status');
+  if(!modal || !form) return;
+
+  const focusableSelector =
+    'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
+    'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
   let lastFocused = null;
-  function openModal(){    lastFocused = document.activeElement;    modal.classList.add('is-open');    modal.setAttribute('aria-hidden','false');    document.body.style.overflow = 'hidden';    document.dispatchEvent(new CustomEvent('apebh:modal-open'));    const first = modal.querySelector('#cf-nom');    if(first) setTimeout(() => first.focus(), 60);  }  function closeModal(){    modal.classList.remove('is-open');    modal.setAttribute('aria-hidden','true');    document.body.style.overflow = '';    document.dispatchEvent(new CustomEvent('apebh:modal-close'));    if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();  }
-  fab.addEventListener('click', openModal);  modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeModal));
-  document.addEventListener('keydown', (e) => {    if(!modal.classList.contains('is-open')) return;    if(e.key === 'Escape'){ e.preventDefault(); closeModal(); return; }    if(e.key === 'Tab'){      const items = Array.from(modal.querySelectorAll(focusableSelector))                         .filter((el) => el.offsetParent !== null);      if(!items.length) return;      const firstEl = items[0], lastEl = items[items.length - 1];      if(e.shiftKey && document.activeElement === firstEl){ e.preventDefault(); lastEl.focus(); }      else if(!e.shiftKey && document.activeElement === lastEl){ e.preventDefault(); firstEl.focus(); }    }  });
-  const rules = {    'cf-nom':      { required:true, message:'Veuillez indiquer votre nom complet.' },    'cf-email':    { required:true, email:true, message:'Veuillez saisir une adresse e-mail valide.' },    'cf-objectif': { required:true, message:'Veuillez sélectionner un objectif.' },    'cf-message':  { required:true, min:10, message:'Votre message doit contenir au moins 10 caractères.' },    'cf-consent':  { required:true, checkbox:true, message:'Votre accord est nécessaire pour envoyer le message.' }  };
-  function setError(id, message){    const field = document.getElementById(id);    const box   = document.querySelector(`[data-error-for="${id}"]`);    if(box) box.textContent = message || '';    if(field){      if(message) field.setAttribute('aria-invalid','true');      else field.removeAttribute('aria-invalid');    }  }
-  function validateField(id){    const input = document.getElementById(id);    const rule  = rules[id];    if(!input || !rule) return true;    let value = '';    if(rule.checkbox) value = input.checked ? 'on' : '';    else value = (input.value || '').trim();    if(rule.required && !value){ setError(id, rule.message); return false; }    if(rule.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)){ setError(id, rule.message); return false; }    if(rule.min && value.length < rule.min){ setError(id, rule.message); return false; }    setError(id,'');    return true;  }
-  Object.keys(rules).forEach((id) => {    const input = document.getElementById(id);    if(!input) return;    const evt = (input.type === 'checkbox' || input.tagName === 'SELECT') ? 'change' : 'blur';    input.addEventListener(evt, () => validateField(id));    input.addEventListener('input', () => {      if(input.getAttribute('aria-invalid') === 'true') validateField(id);    });  });
-  form.addEventListener('submit', async (e) => {    e.preventDefault();    status.textContent = '';    status.style.color = '';    if(form.website && form.website.value) return;
-    let valid = true, firstInvalid = null;    Object.keys(rules).forEach((id) => {      const ok = validateField(id);      if(!ok){ valid = false; if(!firstInvalid) firstInvalid = document.getElementById(id); }    });    if(!valid){      status.textContent = 'Veuillez corriger les champs indiqués.';      status.style.color = '#C0392B';      if(firstInvalid) firstInvalid.focus();      return;    }
-    const payload = {      nom:          document.getElementById('cf-nom').value.trim(),      email:        document.getElementById('cf-email').value.trim(),      organisation: document.getElementById('cf-organisation').value.trim(),      objectif:     document.getElementById('cf-objectif').value,      message:      document.getElementById('cf-message').value.trim(),      telephone:    document.getElementById('cf-tel').value.trim(),      consentement: document.getElementById('cf-consent').checked,      page:         window.location.href,      envoye_le:    new Date().toISOString()    };
-    const submitBtn = document.getElementById('cf-submit');    submitBtn.disabled = true;    submitBtn.textContent = 'Envoi en cours…';    status.textContent = '';
+
+  function openModal(){
+    lastFocused = document.activeElement;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    document.dispatchEvent(new CustomEvent('apebh:modal-open'));
+    const first = modal.querySelector('#cf-nom');
+    if(first) setTimeout(() => first.focus(), 60);
+  }
+
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    document.dispatchEvent(new CustomEvent('apebh:modal-close'));
+    if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+
+  fab.addEventListener('click', openModal);
+  modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeModal));
+
+  document.addEventListener('keydown', (e) => {
+    if(!modal.classList.contains('is-open')) return;
+
+    if(e.key === 'Escape'){ e.preventDefault(); closeModal(); return; }
+
+    if(e.key === 'Tab'){
+      const items = Array.from(modal.querySelectorAll(focusableSelector))
+                         .filter((el) => el.offsetParent !== null);
+      if(!items.length) return;
+      const firstEl = items[0], lastEl = items[items.length - 1];
+      if(e.shiftKey && document.activeElement === firstEl){ e.preventDefault(); lastEl.focus(); }
+      else if(!e.shiftKey && document.activeElement === lastEl){ e.preventDefault(); firstEl.focus(); }
+    }
+  });
+
+  const rules = {
+    'cf-nom':      { required:true, message:'Veuillez indiquer votre nom complet.' },
+    'cf-email':    { required:true, email:true, message:'Veuillez saisir une adresse e-mail valide.' },
+    'cf-objectif': { required:true, message:'Veuillez sélectionner un objectif.' },
+    'cf-message':  { required:true, min:10, message:'Votre message doit contenir au moins 10 caractères.' },
+    'cf-consent':  { required:true, checkbox:true, message:'Votre accord est nécessaire pour envoyer le message.' }
+  };
+
+  function setError(id, message){
+    const field = document.getElementById(id);
+    const box   = document.querySelector(`[data-error-for="${id}"]`);
+    if(box) box.textContent = message || '';
+    if(field){
+      if(message) field.setAttribute('aria-invalid','true');
+      else field.removeAttribute('aria-invalid');
+    }
+  }
+
+  function validateField(id){
+    const input = document.getElementById(id);
+    const rule  = rules[id];
+    if(!input || !rule) return true;
+
+    let value = '';
+    if(rule.checkbox) value = input.checked ? 'on' : '';
+    else value = (input.value || '').trim();
+
+    if(rule.required && !value){ setError(id, rule.message); return false; }
+    if(rule.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)){ setError(id, rule.message); return false; }
+    if(rule.min && value.length < rule.min){ setError(id, rule.message); return false; }
+
+    setError(id,'');
+    return true;
+  }
+
+  Object.keys(rules).forEach((id) => {
+    const input = document.getElementById(id);
+    if(!input) return;
+    const evt = (input.type === 'checkbox' || input.tagName === 'SELECT') ? 'change' : 'blur';
+    input.addEventListener(evt, () => validateField(id));
+    input.addEventListener('input', () => {
+      if(input.getAttribute('aria-invalid') === 'true') validateField(id);
+    });
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    status.style.color = '';
+
+    if(form.website && form.website.value) return;
+
+    let valid = true, firstInvalid = null;
+    Object.keys(rules).forEach((id) => {
+      const ok = validateField(id);
+      if(!ok){ valid = false; if(!firstInvalid) firstInvalid = document.getElementById(id); }
+    });
+
+    if(!valid){
+      status.textContent = 'Veuillez corriger les champs indiqués.';
+      status.style.color = '#C0392B';
+      if(firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    const payload = {
+      nom:          document.getElementById('cf-nom').value.trim(),
+      email:        document.getElementById('cf-email').value.trim(),
+      organisation: document.getElementById('cf-organisation').value.trim(),
+      objectif:     document.getElementById('cf-objectif').value,
+      message:      document.getElementById('cf-message').value.trim(),
+      telephone:    document.getElementById('cf-tel').value.trim(),
+      consentement: document.getElementById('cf-consent').checked,
+      page:         window.location.href,
+      envoye_le:    new Date().toISOString()
+    };
+
+    const submitBtn = document.getElementById('cf-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours…';
+    status.textContent = '';
+
     const ENDPOINT = '/api/contact';
-    try{      const res = await fetch(ENDPOINT, {        method: 'POST',        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },        body: JSON.stringify(payload)      });      if(!res.ok) throw new Error('HTTP ' + res.status);
-      form.reset();      status.style.color = 'var(--c-green)';      status.textContent = '✅ Merci ! Votre message a bien été envoyé.';      submitBtn.disabled = false;      submitBtn.textContent = 'Envoyer le message';      setTimeout(closeModal, 2600);    }catch(err){      const subject = `[Contact APEBH] ${payload.objectif} — ${payload.nom}`;      const body =        `Nom : ${payload.nom}\n` +        `E-mail : ${payload.email}\n` +        `Organisation : ${payload.organisation || '—'}\n` +        `Téléphone : ${payload.telephone || '—'}\n` +        `Objectif : ${payload.objectif}\n\n` +        `${payload.message}\n`;      window.location.href =        `mailto:info@apebh.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;      status.style.color = 'var(--c-muted)';      status.textContent = 'Ouverture de votre messagerie pour finaliser l\'envoi…';      submitBtn.disabled = false;      submitBtn.textContent = 'Envoyer le message';    }  });})();</script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"f94f643ea2e14da8beb1d737e88a2bab","r":1,"spa":2}' crossorigin="anonymous"></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"f94f643ea2e14da8beb1d737e88a2bab","r":1,"spa":2}' crossorigin="anonymous"></script></body></html>
+
+    try{
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+
+      form.reset();
+      status.style.color = 'var(--c-green)';
+      status.textContent = '✅ Merci ! Votre message a bien été envoyé.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer le message';
+      setTimeout(closeModal, 2600);
+    }catch(err){
+      const subject = `[Contact APEBH] ${payload.objectif} — ${payload.nom}`;
+      const body =
+        `Nom : ${payload.nom}\n` +
+        `E-mail : ${payload.email}\n` +
+        `Organisation : ${payload.organisation || '—'}\n` +
+        `Téléphone : ${payload.telephone || '—'}\n` +
+        `Objectif : ${payload.objectif}\n\n` +
+        `${payload.message}\n`;
+      window.location.href =
+        `mailto:info@apebh.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      status.style.color = 'var(--c-muted)';
+      status.textContent = 'Ouverture de votre messagerie pour finaliser l\'envoi…';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer le message';
+    }
+  });
+})();
+</script>
+</body>
+</html>
