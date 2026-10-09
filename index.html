@@ -17,6 +17,7 @@
   --c-green-dark:   #244B26;
   --c-green-soft:   #EAF0E8;
   --c-green-pale:   #FFFFFF;
+  --c-green-light:  #7BC97B;   /* vert beaucoup plus clair pour l'accroche */
   --c-orange:       #E07A3F;
   --c-orange-dark:  #C25F26;
   --c-ink:          #2F3C4C;
@@ -154,6 +155,31 @@ p:last-child{margin-bottom:0;}
 }
 
 /* ==========================================================================
+   SCROLL REVEAL (apparition en montant)
+   ========================================================================== */
+.reveal{
+  opacity:0;
+  transform:translateY(32px);
+  transition:opacity .75s cubic-bezier(.2,.8,.3,1), transform .75s cubic-bezier(.2,.8,.3,1);
+  will-change:opacity, transform;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+/* Décalage progressif pour les cartes d'actualités */
+.news-grid .news-card:nth-child(1){transition-delay:0s;}
+.news-grid .news-card:nth-child(2){transition-delay:.12s;}
+.news-grid .news-card:nth-child(3){transition-delay:.24s;}
+
+/* Décalage progressif pour les activités */
+#activites .activity:nth-child(1){transition-delay:0s;}
+#activites .activity:nth-child(2){transition-delay:.12s;}
+#activites .activity:nth-child(3){transition-delay:.24s;}
+#activites .activity:nth-child(4){transition-delay:.36s;}
+
+/* ==========================================================================
    HERO SLIDER — IMAGE À GAUCHE / TEXTE DYNAMIQUE À DROITE
    ========================================================================== */
 .hero{padding:0; width:100%;}
@@ -268,7 +294,7 @@ p:last-child{margin-bottom:0;}
   pointer-events:auto;
 }
 
-/* --- Accroche One Health, intégrée sous le bloc de texte --- */
+/* --- Accroche One Health, juste après le texte, au-dessus des points --- */
 .slider__tagline{
   margin:0;
   padding-left:.9rem;
@@ -277,7 +303,7 @@ p:last-child{margin-bottom:0;}
   font-size:clamp(.92rem, .5vw + .8rem, 1.1rem);
   font-weight:700;
   line-height:1.45;
-  color:var(--c-green);
+  color:var(--c-green-light);   /* vert beaucoup plus clair */
   text-wrap:balance;
 }
 .slider__tagline em{font-style:normal; color:var(--c-orange);}
@@ -302,8 +328,12 @@ p:last-child{margin-bottom:0;}
 }
 
 /* ==========================================================================
-   ACTUALITÉS
+   ACTUALITÉS — profondeur + cartes plus hautes + effet pop
    ========================================================================== */
+.news-section{
+  background:linear-gradient(180deg, #FFFFFF 0%, #F5FAF4 100%);
+}
+
 .news-head{
   display:flex; flex-wrap:wrap;
   align-items:flex-end; justify-content:space-between;
@@ -315,21 +345,23 @@ p:last-child{margin-bottom:0;}
 
 .news-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
   gap:clamp(1rem, 1.8vw, 1.5rem);
 }
+
 .news-card{
   background:#fff;
   border:1px solid var(--c-line);
   border-radius:var(--r-md);
   overflow:hidden;
-  box-shadow:var(--sh-sm);
-  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  box-shadow:0 4px 16px rgba(47,60,76,.06);
+  transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s ease, border-color .3s ease;
   display:flex;
+  min-height:100%;
 }
 .news-card:hover{
-  transform:translateY(-3px);
-  box-shadow:var(--sh-md);
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 18px 42px rgba(47,60,76,.15);
   border-color:#C7D9C5;
 }
 .news-card__link{
@@ -338,18 +370,19 @@ p:last-child{margin-bottom:0;}
   width:100%;
 }
 .news-card__media{
-  aspect-ratio:16/10;
+  aspect-ratio:4 / 3;          /* plus haut qu'avant (16/10) */
   background:linear-gradient(135deg,#DDEBE6,#C7DED6);
   overflow:hidden;
+  flex:0 0 auto;
 }
 .news-card__media img{
   width:100%; height:100%; object-fit:cover;
   transition:transform .5s ease;
 }
-.news-card:hover .news-card__media img{transform:scale(1.05);}
+.news-card:hover .news-card__media img{transform:scale(1.06);}
 .news-card__body{
-  padding:1.1rem 1.15rem 1.3rem;
-  display:flex; flex-direction:column; gap:.5rem;
+  padding:1.2rem 1.2rem 1.4rem;
+  display:flex; flex-direction:column; gap:.55rem;
   flex:1;
 }
 .news-card__meta{
@@ -360,7 +393,7 @@ p:last-child{margin-bottom:0;}
 }
 .news-card__meta span{color:var(--c-orange);}
 .news-card__title{
-  font-size:1rem;
+  font-size:1.02rem;
   margin:0; line-height:1.4;
   font-weight:700;
 }
@@ -372,7 +405,7 @@ p:last-child{margin-bottom:0;}
 }
 .news-card__cta{
   margin-top:auto;
-  padding-top:.5rem;
+  padding-top:.6rem;
   font-size:.8rem;
   font-weight:800;
   color:var(--c-green);
@@ -386,7 +419,9 @@ p:last-child{margin-bottom:0;}
 /* ==========================================================================
    PARTENAIRES — BANDEAU DÉFILANT VERS LA GAUCHE
    ========================================================================== */
-.partners-section{padding-block:clamp(1.75rem, 3vw, 2.5rem);}
+.partners-section{
+  padding-block:clamp(1.75rem, 3vw, 2.5rem) clamp(3rem, 6vw, 5rem);
+}
 
 .partners-title{
   text-align:center;
@@ -448,6 +483,10 @@ p:last-child{margin-bottom:0;}
 /* ==========================================================================
    ACTIVITÉS
    ========================================================================== */
+#activites{
+  padding-top:clamp(3rem, 6vw, 5rem);   /* espace supplémentaire avec les partenaires */
+}
+
 .activity{
   display:grid;
   grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
@@ -499,34 +538,6 @@ p:last-child{margin-bottom:0;}
   border:2px solid var(--c-green);
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
-  gap:.6rem;
-  margin:.9rem 0 1.25rem;
-}
-.stat{
-  background:var(--c-green-soft);
-  border-radius:var(--r-sm);
-  padding:.8rem .75rem;
-  text-align:center;
-}
-.stat__num{
-  display:block;
-  font-family:'Be Vietnam Pro', sans-serif;
-  font-size:1.15rem;
-  font-weight:700;
-  color:var(--c-green);
-  line-height:1.1;
-  margin-bottom:.15rem;
-}
-.stat__label{
-  font-size:.7rem;
-  color:var(--c-muted);
-  line-height:1.35;
-  display:block;
-}
-
 .activities-footer{
   margin-top:clamp(1.25rem, 2.5vw, 2rem);
   display:flex;
@@ -534,147 +545,80 @@ p:last-child{margin-bottom:0;}
 }
 
 /* ==========================================================================
-   MODALE CONTACT
+   NEWSLETTER (fin de page)
    ========================================================================== */
-.modal{position:fixed; inset:0; z-index:120; display:none;}
-.modal.is-open{display:grid; place-items:center;}
-.modal__backdrop{
-  position:absolute; inset:0;
-  background:rgba(8,22,18,.62);
-  backdrop-filter:blur(4px);
-  animation:fadeIn .25s ease;
+.newsletter-section{
+  background:linear-gradient(180deg, #FFFFFF 0%, #EAF0E8 100%);
+  padding-block:clamp(2.5rem, 5vw, 4rem);
 }
-.modal__panel{
-  position:relative; z-index:1;
-  width:min(100% - 1.5rem, 660px);
-  max-height:min(90vh, 800px);
-  overflow-y:auto;
+
+.newsletter-card{
+  max-width:620px;
+  margin:0 auto;
   background:#fff;
   border-radius:var(--r-lg);
-  box-shadow:var(--sh-md);
-  padding:clamp(1.25rem, 3vw, 2rem);
-  animation:popIn .3s cubic-bezier(.2,.8,.3,1);
-}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes popIn{from{opacity:0; transform:translateY(14px) scale(.98)}to{opacity:1; transform:none}}
-
-.modal__close{
-  position:absolute; top:.75rem; right:.75rem;
-  width:36px; height:36px;
-  display:grid; place-items:center;
+  padding:clamp(1.5rem, 3vw, 2.5rem);
+  box-shadow:0 12px 40px rgba(47,60,76,.10);
   border:1px solid var(--c-line);
-  border-radius:50%;
-  background:#fff;
+}
+.newsletter-card h2{
+  text-align:center;
+  margin:0 0 .5rem;
+  font-size:clamp(1.3rem, .9vw + .9rem, 1.75rem);
+}
+.newsletter-card p{
+  text-align:center;
   color:var(--c-muted);
-  cursor:pointer;
-  transition:background-color .2s ease, color .2s ease;
-}
-.modal__close:hover{background:var(--c-green); color:#fff; border-color:var(--c-green);}
-
-.modal__eyebrow{
-  font-size:.7rem; font-weight:800;
-  letter-spacing:.14em; text-transform:uppercase;
-  color:var(--c-orange);
-  margin:0 0 .35rem;
-}
-.modal__title{
-  font-size:clamp(1.2rem, 1vw + .95rem, 1.5rem);
-  margin-bottom:.35rem;
-}
-.modal__sub{
-  color:var(--c-muted);
-  font-size:.88rem;
-  margin-bottom:1.25rem;
+  font-size:.9rem;
+  margin:0 0 1.5rem;
   line-height:1.6;
 }
 
-.form-grid{display:grid; grid-template-columns:1fr 1fr; gap:.85rem;}
-.field{display:flex; flex-direction:column; gap:.3rem;}
-.field--full{grid-column:1 / -1;}
-.field label{
-  font-size:.8rem; font-weight:700;
-  color:var(--c-ink);
+.newsletter-form{
+  display:flex;
+  flex-direction:column;
+  gap:.85rem;
 }
-.field label .req{color:#C0392B;}
-.field input, .field select, .field textarea{
-  font:inherit; font-size:.88rem;
-  color:var(--c-ink);
-  padding:.6rem .75rem;
+.newsletter-form input,
+.newsletter-form textarea{
+  font:inherit;
+  font-size:.9rem;
+  padding:.75rem 1rem;
   border:1.5px solid var(--c-line);
   border-radius:var(--r-sm);
   background:#fff;
-  transition:border-color .18s ease, box-shadow .18s ease;
   width:100%;
+  color:var(--c-ink);
   font-family:'Nunito Sans', sans-serif;
+  transition:border-color .18s ease, box-shadow .18s ease;
 }
-.field textarea{resize:vertical; min-height:100px;}
-.field input:focus, .field select:focus, .field textarea:focus{
+.newsletter-form input:focus,
+.newsletter-form textarea:focus{
   outline:none;
   border-color:var(--c-green);
   box-shadow:0 0 0 3px rgba(48,100,49,.13);
 }
-.field input[aria-invalid="true"],
-.field textarea[aria-invalid="true"],
-.field select[aria-invalid="true"]{border-color:#C0392B;}
-.field__error{font-size:.72rem; color:#C0392B; min-height:1em;}
-
-.field--check{flex-direction:row; align-items:flex-start; gap:.55rem;}
-.field--check input{width:auto; margin-top:.25rem; flex:0 0 auto; accent-color:var(--c-green);}
-.field--check label{font-weight:400; font-size:.8rem; color:var(--c-muted); line-height:1.5;}
-
-.hp{position:absolute!important; left:-9999px!important; opacity:0;}
-
-.form-actions{
-  grid-column:1 / -1;
-  display:flex; flex-wrap:wrap; align-items:center; gap:.75rem;
-  margin-top:.5rem;
+.newsletter-form textarea{
+  resize:vertical;
+  min-height:100px;
 }
-.form-status{font-size:.82rem; font-weight:700; color:var(--c-green);}
-
-.modal__contact{
-  margin-top:1.5rem;
-  padding-top:1.25rem;
-  border-top:1px solid var(--c-line);
-  display:grid; gap:.75rem;
-  font-size:.85rem;
-}
-.modal__contact-item{display:flex; gap:.65rem; align-items:flex-start; color:var(--c-muted);}
-.modal__contact-item strong{
-  display:block;
-  color:var(--c-ink);
-  font-size:.75rem;
-  font-weight:800;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  margin-bottom:.1rem;
-}
-.modal__contact-item svg{
-  width:17px; height:17px; flex:0 0 auto;
-  color:var(--c-green); margin-top:.1rem;
-}
-.modal__contact-item a{color:var(--c-green); font-weight:600;}
-
-.contact-fab{
-  position:fixed;
-  right:clamp(.85rem, 1.6vw, 1.35rem);
-  bottom:clamp(.85rem, 1.6vw, 1.35rem);
-  z-index:110;
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.75rem 1.15rem;
+.newsletter-form button{
+  font:inherit;
+  font-weight:700;
+  font-size:.9rem;
+  padding:.85rem 1.5rem;
   border:none;
   border-radius:var(--r-pill);
   background:var(--c-green);
   color:#fff;
-  font-family:'Nunito Sans', sans-serif;
-  font-weight:700;
-  font-size:.82rem;
-  letter-spacing:.02em;
-  box-shadow:0 10px 24px rgba(48,100,49,.32);
   cursor:pointer;
-  transition:transform .2s ease, background-color .2s ease;
+  transition:background-color .2s ease, transform .2s ease;
+  font-family:'Nunito Sans', sans-serif;
 }
-.contact-fab:hover{transform:translateY(-2px); background:var(--c-green-dark);}
-.contact-fab svg{width:16px; height:16px;}
+.newsletter-form button:hover{
+  background:var(--c-green-dark);
+  transform:translateY(-1px);
+}
 
 /* ==========================================================================
    RESPONSIVE
@@ -693,8 +637,6 @@ p:last-child{margin-bottom:0;}
 }
 
 @media (max-width:720px){
-  .form-grid{grid-template-columns:1fr;}
-
   .slider{padding-block:1.25rem;}
   .slider__viewport{aspect-ratio:16/11; border-radius:var(--r-md);}
   .slider__nav{display:none;}
@@ -714,6 +656,7 @@ p:last-child{margin-bottom:0;}
   }
   .slider__track{transition:none;}
   .partners-track{animation:none;}
+  .reveal{opacity:1; transform:none;}
 }
 </style>
 </head>
@@ -786,7 +729,7 @@ p:last-child{margin-bottom:0;}
         <div class="slider__progress" id="sliderProgress" aria-hidden="true"></div>
       </div>
 
-      <!-- ---------- Colonne droite : texte dynamique + accroche One Health ---------- -->
+      <!-- ---------- Colonne droite : texte dynamique + accroche + pastilles ---------- -->
       <div class="slider__panel">
 
         <div class="slider__texts" id="sliderTexts">
@@ -811,13 +754,14 @@ p:last-child{margin-bottom:0;}
           </p>
         </div>
 
-        <div class="slider__controls">
-          <div class="slider__dots" id="sliderDots" role="group" aria-label="Choisir une diapositive"></div>
-        </div>
-
+        <!-- Accroche One Health : juste après le texte, au-dessus des pastilles -->
         <p class="slider__tagline">
           Nous agissons pour l'approche Une Seule Santé <em>« One Health »</em>
         </p>
+
+        <div class="slider__controls">
+          <div class="slider__dots" id="sliderDots" role="group" aria-label="Choisir une diapositive"></div>
+        </div>
 
       </div>
 
@@ -828,9 +772,9 @@ p:last-child{margin-bottom:0;}
   <!-- ============================================================
        ACTUALITÉS
        ============================================================ -->
-  <section class="section" aria-labelledby="news-title">
+  <section class="section news-section" aria-labelledby="news-title">
     <div class="container">
-      <div class="news-head">
+      <div class="news-head reveal">
         <header class="section-head">
           <h2 class="section-head__title" id="news-title">Nos dernières actualités</h2>
         </header>
@@ -839,7 +783,7 @@ p:last-child{margin-bottom:0;}
 
       <div class="news-grid">
 
-        <article class="news-card">
+        <article class="news-card reveal">
           <a class="news-card__link"
              href="https://irisnews.org/umuhivu-une-foire-de-la-connaissance-pour-celebrer-la-jeunesse-ses-idees-et-ses-victoires/"
              target="_blank" rel="noopener noreferrer">
@@ -864,7 +808,7 @@ p:last-child{margin-bottom:0;}
           </a>
         </article>
 
-        <article class="news-card">
+        <article class="news-card reveal">
           <a class="news-card__link"
              href="/blog/news/renforcer-la-conservation-transfrontalieres-biodiversite/">
             <div class="news-card__media">
@@ -890,7 +834,7 @@ p:last-child{margin-bottom:0;}
           </a>
         </article>
 
-        <article class="news-card">
+        <article class="news-card reveal">
           <a class="news-card__link"
              href="/blog/stories/our-program-wetlands-for-peace-in-cali-colombia/">
             <div class="news-card__media">
@@ -909,10 +853,7 @@ p:last-child{margin-bottom:0;}
                 En amont de la COP16 Biodiversité des Nations Unies, notre coordonnateur de
                 programme présentait « Wetlands for Peace and People's Health » lors d'un
                 side-event organisé par le Post-2020 Biodiversity Framework – EU Support et
-                l'African Wildlife Foundation (AWF), au Pavillon de l'UE. À l'approche des deux
-                ans de l'adoption du Cadre mondial pour la biodiversité, il est essentiel de
-                renforcer l'approche « Whole-of-Society » : les jeunes sont des acteurs clés
-                de la mise en œuvre.
+                l'African Wildlife Foundation (AWF), au Pavillon de l'UE.
               </p>
               <span class="news-card__cta">Lire l'article</span>
             </div>
@@ -928,7 +869,7 @@ p:last-child{margin-bottom:0;}
        ============================================================ -->
   <section class="section section--soft partners-section" aria-labelledby="partners-title">
     <div class="container">
-      <h2 class="partners-title" id="partners-title">Nos partenaires</h2>
+      <h2 class="partners-title reveal" id="partners-title">Nos partenaires</h2>
     </div>
 
     <div class="partners-marquee">
@@ -966,14 +907,14 @@ p:last-child{margin-bottom:0;}
   <section class="section section--cream" id="activites" aria-labelledby="activities-title">
     <div class="container">
 
-      <header class="section-head">
+      <header class="section-head reveal">
         <h2 class="section-head__title" id="activities-title">
           Des programmes concrets, portés avec les communautés
         </h2>
       </header>
 
       <!-- ---------- ACTIVITÉ PRIORITAIRE (1re position) ---------- -->
-      <article class="activity">
+      <article class="activity reveal">
         <div class="activity__media">
           <img src="/images/ngire-ijambo-kubiriko-biraba.jpg" loading="lazy"
                alt="Jeunes, femmes et leaders communautaires participant au projet Ngire Ijambo kubiriko biraba">
@@ -1003,7 +944,7 @@ p:last-child{margin-bottom:0;}
       </article>
 
       <!-- ---------- Zones humides / Ramsar ---------- -->
-      <article class="activity">
+      <article class="activity reveal">
         <div class="activity__media">
           <img src="/images/ramsar-wetlands.jpg" loading="lazy"
                alt="Zones humides et marais du Lac Tanganyika">
@@ -1030,7 +971,7 @@ p:last-child{margin-bottom:0;}
       </article>
 
       <!-- ---------- CDB / SPANB ---------- -->
-      <article class="activity">
+      <article class="activity reveal">
         <div class="activity__media">
           <img src="/images/biodiversite-cdb.jpg" loading="lazy"
                alt="Biodiversité locale et espèces protégées">
@@ -1057,7 +998,7 @@ p:last-child{margin-bottom:0;}
       </article>
 
       <!-- ---------- Qualité de l'air / climat ---------- -->
-      <article class="activity">
+      <article class="activity reveal">
         <div class="activity__media">
           <img src="/activites/air-et-climat/qualite-air-climat.jpg" loading="lazy"
                alt="Sensibilisation sur la qualité de l'air et la cuisson propre">
@@ -1082,10 +1023,30 @@ p:last-child{margin-bottom:0;}
         </div>
       </article>
 
-      <div class="activities-footer">
+      <div class="activities-footer reveal">
         <a class="btn btn--outline btn--arrow" href="/activities/">Plus de nos activités</a>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ============================================================
+       NEWSLETTER — FIN DE PAGE
+       ============================================================ -->
+  <section class="newsletter-section" aria-labelledby="newsletter-title">
+    <div class="container">
+      <div class="newsletter-card reveal">
+        <h2 id="newsletter-title">Rejoignez notre newsletter</h2>
+        <p>Recevez nos actualités et nos actions directement dans votre boîte mail.</p>
+
+        <form action="https://api.web3forms.com/submit" method="POST" class="newsletter-form">
+          <input type="hidden" name="access_key" value="6842497b-7767-4221-9284-08dd50be3980">
+          <input type="text" name="name" required placeholder="Votre nom">
+          <input type="email" name="email" required placeholder="Votre adresse e-mail">
+          <textarea name="message" required placeholder="Votre message..."></textarea>
+          <button type="submit">Submit Form</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -1093,131 +1054,6 @@ p:last-child{margin-bottom:0;}
 
 <!-- FOOTER -->
 <div data-include="/components/footer.html"></div>
-
-<!-- ============================================================
-     BOUTON FLOTTANT + MODALE CONTACT
-     ============================================================ -->
-<button class="contact-fab" type="button" id="contactFab" aria-haspopup="dialog">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
-       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M4 5h16v11H7l-3 3z"/>
-  </svg>
-  Nous contacter
-</button>
-
-<div class="modal" id="contactModal" role="dialog" aria-modal="true"
-     aria-labelledby="contactModalTitle" aria-hidden="true">
-  <div class="modal__backdrop" data-close></div>
-
-  <div class="modal__panel" role="document">
-    <button class="modal__close" type="button" data-close aria-label="Fermer la fenêtre de contact">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-           stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
-        <path d="M6 6l12 12M18 6L6 18"/>
-      </svg>
-    </button>
-
-    <p class="modal__eyebrow">Contact</p>
-    <h2 class="modal__title" id="contactModalTitle">Écrivez-nous</h2>
-    <p class="modal__sub">
-      Une question, un partenariat, une envie de rejoindre le réseau ?
-      Remplissez le formulaire, nous vous répondrons dans les meilleurs délais.
-    </p>
-
-    <form id="contactForm" novalidate>
-      <div class="form-grid">
-
-        <div class="field">
-          <label for="cf-nom">Nom complet <span class="req">*</span></label>
-          <input type="text" id="cf-nom" name="nom" autocomplete="name" required>
-          <span class="field__error" data-error-for="cf-nom"></span>
-        </div>
-
-        <div class="field">
-          <label for="cf-email">Adresse e-mail <span class="req">*</span></label>
-          <input type="email" id="cf-email" name="email" autocomplete="email" required>
-          <span class="field__error" data-error-for="cf-email"></span>
-        </div>
-
-        <div class="field">
-          <label for="cf-organisation">Organisation / Institution</label>
-          <input type="text" id="cf-organisation" name="organisation" autocomplete="organization">
-          <span class="field__error" data-error-for="cf-organisation"></span>
-        </div>
-
-        <div class="field">
-          <label for="cf-objectif">Objectif de votre message <span class="req">*</span></label>
-          <select id="cf-objectif" name="objectif" required>
-            <option value="">— Sélectionnez —</option>
-            <option value="Demande d'information">Demande d'information</option>
-            <option value="Partenariat">Proposition de partenariat</option>
-            <option value="Adhésion / Bénévolat">Adhésion / Bénévolat</option>
-            <option value="Rejoindre le réseau WFF">Rejoindre le réseau WFF</option>
-            <option value="Presse & Médias">Presse &amp; Médias</option>
-            <option value="Autre">Autre</option>
-          </select>
-          <span class="field__error" data-error-for="cf-objectif"></span>
-        </div>
-
-        <div class="field field--full">
-          <label for="cf-message">Message <span class="req">*</span></label>
-          <textarea id="cf-message" name="message" rows="4" required
-                    placeholder="Décrivez votre demande en quelques lignes…"></textarea>
-          <span class="field__error" data-error-for="cf-message"></span>
-        </div>
-
-        <div class="field field--full">
-          <label for="cf-tel">Téléphone <span style="font-weight:400;color:var(--c-muted)">(facultatif)</span></label>
-          <input type="tel" id="cf-tel" name="telephone" autocomplete="tel">
-        </div>
-
-        <div class="hp" aria-hidden="true">
-          <label for="cf-website">Ne pas remplir</label>
-          <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
-        </div>
-
-        <div class="field field--full field--check">
-          <input type="checkbox" id="cf-consent" name="consentement" required>
-          <label for="cf-consent">
-            J'accepte que les informations transmises soient utilisées par l'APEBH
-            pour répondre à ma demande. <span class="req">*</span>
-          </label>
-          <span class="field__error" data-error-for="cf-consent"></span>
-        </div>
-
-        <div class="form-actions">
-          <button class="btn btn--primary" type="submit" id="cf-submit">Envoyer le message</button>
-          <span class="form-status" id="cf-status" role="status" aria-live="polite"></span>
-        </div>
-
-      </div>
-    </form>
-
-    <div class="modal__contact">
-      <div class="modal__contact-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <path d="M3.5 7l8.5 6 8.5-6"/>
-        </svg>
-        <span><strong>E-mail</strong>
-          <a href="mailto:info@apebh.org">info@apebh.org</a>
-        </span>
-      </div>
-
-      <div class="modal__contact-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/>
-          <circle cx="12" cy="10" r="2.6"/>
-        </svg>
-        <span><strong>Adresse</strong>
-          06 Avenue de la Mission, Immeuble Ndongozi, Bureau B9,<br>Mukaza — Bujumbura, Burundi
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
 /* ==========================================================================
@@ -1356,180 +1192,35 @@ p:last-child{margin-bottom:0;}
     document.hidden ? stopAutoplay() : restartAutoplay();
   });
 
-  document.addEventListener('apebh:modal-open',  () => { isPaused = true;  stopAutoplay(); });
-  document.addEventListener('apebh:modal-close', () => { isPaused = false; restartAutoplay(); });
-
   goTo(0, false);
   startAutoplay();
 })();
 
 /* ==========================================================================
-   C. MODALE CONTACT
+   C. SCROLL REVEAL — apparition des éléments en montant
    ========================================================================== */
-(function initContactModal(){
-  const modal  = document.getElementById('contactModal');
-  const fab    = document.getElementById('contactFab');
-  const form   = document.getElementById('contactForm');
-  const status = document.getElementById('cf-status');
-  if(!modal || !form) return;
+(function initReveal(){
+  const reveals = document.querySelectorAll('.reveal');
+  if(!reveals.length) return;
 
-  const focusableSelector =
-    'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
-    'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-  let lastFocused = null;
-
-  function openModal(){
-    lastFocused = document.activeElement;
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-    document.dispatchEvent(new CustomEvent('apebh:modal-open'));
-    const first = modal.querySelector('#cf-nom');
-    if(first) setTimeout(() => first.focus(), 60);
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    reveals.forEach(el => el.classList.add('is-visible'));
+    return;
   }
 
-  function closeModal(){
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-    document.dispatchEvent(new CustomEvent('apebh:modal-close'));
-    if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-  }
-
-  fab.addEventListener('click', openModal);
-  modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeModal));
-
-  document.addEventListener('keydown', (e) => {
-    if(!modal.classList.contains('is-open')) return;
-
-    if(e.key === 'Escape'){ e.preventDefault(); closeModal(); return; }
-
-    if(e.key === 'Tab'){
-      const items = Array.from(modal.querySelectorAll(focusableSelector))
-                         .filter((el) => el.offsetParent !== null);
-      if(!items.length) return;
-      const firstEl = items[0], lastEl = items[items.length - 1];
-      if(e.shiftKey && document.activeElement === firstEl){ e.preventDefault(); lastEl.focus(); }
-      else if(!e.shiftKey && document.activeElement === lastEl){ e.preventDefault(); firstEl.focus(); }
-    }
-  });
-
-  const rules = {
-    'cf-nom':      { required:true, message:'Veuillez indiquer votre nom complet.' },
-    'cf-email':    { required:true, email:true, message:'Veuillez saisir une adresse e-mail valide.' },
-    'cf-objectif': { required:true, message:'Veuillez sélectionner un objectif.' },
-    'cf-message':  { required:true, min:10, message:'Votre message doit contenir au moins 10 caractères.' },
-    'cf-consent':  { required:true, checkbox:true, message:'Votre accord est nécessaire pour envoyer le message.' }
-  };
-
-  function setError(id, message){
-    const field = document.getElementById(id);
-    const box   = document.querySelector(`[data-error-for="${id}"]`);
-    if(box) box.textContent = message || '';
-    if(field){
-      if(message) field.setAttribute('aria-invalid','true');
-      else field.removeAttribute('aria-invalid');
-    }
-  }
-
-  function validateField(id){
-    const input = document.getElementById(id);
-    const rule  = rules[id];
-    if(!input || !rule) return true;
-
-    let value = '';
-    if(rule.checkbox) value = input.checked ? 'on' : '';
-    else value = (input.value || '').trim();
-
-    if(rule.required && !value){ setError(id, rule.message); return false; }
-    if(rule.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)){ setError(id, rule.message); return false; }
-    if(rule.min && value.length < rule.min){ setError(id, rule.message); return false; }
-
-    setError(id,'');
-    return true;
-  }
-
-  Object.keys(rules).forEach((id) => {
-    const input = document.getElementById(id);
-    if(!input) return;
-    const evt = (input.type === 'checkbox' || input.tagName === 'SELECT') ? 'change' : 'blur';
-    input.addEventListener(evt, () => validateField(id));
-    input.addEventListener('input', () => {
-      if(input.getAttribute('aria-invalid') === 'true') validateField(id);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
     });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -60px 0px'
   });
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    status.textContent = '';
-    status.style.color = '';
-
-    if(form.website && form.website.value) return;
-
-    let valid = true, firstInvalid = null;
-    Object.keys(rules).forEach((id) => {
-      const ok = validateField(id);
-      if(!ok){ valid = false; if(!firstInvalid) firstInvalid = document.getElementById(id); }
-    });
-
-    if(!valid){
-      status.textContent = 'Veuillez corriger les champs indiqués.';
-      status.style.color = '#C0392B';
-      if(firstInvalid) firstInvalid.focus();
-      return;
-    }
-
-    const payload = {
-      nom:          document.getElementById('cf-nom').value.trim(),
-      email:        document.getElementById('cf-email').value.trim(),
-      organisation: document.getElementById('cf-organisation').value.trim(),
-      objectif:     document.getElementById('cf-objectif').value,
-      message:      document.getElementById('cf-message').value.trim(),
-      telephone:    document.getElementById('cf-tel').value.trim(),
-      consentement: document.getElementById('cf-consent').checked,
-      page:         window.location.href,
-      envoye_le:    new Date().toISOString()
-    };
-
-    const submitBtn = document.getElementById('cf-submit');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours…';
-    status.textContent = '';
-
-    const ENDPOINT = '/api/contact';
-
-    try{
-      const res = await fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if(!res.ok) throw new Error('HTTP ' + res.status);
-
-      form.reset();
-      status.style.color = 'var(--c-green)';
-      status.textContent = '✅ Merci ! Votre message a bien été envoyé.';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Envoyer le message';
-      setTimeout(closeModal, 2600);
-    }catch(err){
-      const subject = `[Contact APEBH] ${payload.objectif} — ${payload.nom}`;
-      const body =
-        `Nom : ${payload.nom}\n` +
-        `E-mail : ${payload.email}\n` +
-        `Organisation : ${payload.organisation || '—'}\n` +
-        `Téléphone : ${payload.telephone || '—'}\n` +
-        `Objectif : ${payload.objectif}\n\n` +
-        `${payload.message}\n`;
-      window.location.href =
-        `mailto:info@apebh.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      status.style.color = 'var(--c-muted)';
-      status.textContent = 'Ouverture de votre messagerie pour finaliser l\'envoi…';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Envoyer le message';
-    }
-  });
+  reveals.forEach(el => observer.observe(el));
 })();
 </script>
 </body>
