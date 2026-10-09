@@ -14,6 +14,8 @@
     --c-line:         #E1E6E3;
     --c-orange:       #E07A3F;
     --r-pill:         999px;
+    --logo-h:         80px;   /* logo 2× plus grand (était 40px) */
+    --header-h:       100px;
   }
 
   .site-header {
@@ -26,7 +28,7 @@
     align-items: center;
     pointer-events: none;
     margin-top: 1cm;
-    height: 70px;
+    height: var(--header-h);
   }
 
   .header-inner {
@@ -50,9 +52,11 @@
     transform: translateY(-50%);
     pointer-events: auto;
     z-index: 2;
+    display: flex;
+    align-items: center;
   }
   .logo img {
-    height: 40px;
+    height: var(--logo-h);
     width: auto;
     display: block;
   }
@@ -129,7 +133,7 @@
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     padding: 0.5rem 0;
-    min-width: 180px;
+    min-width: 220px;
     display: none;
     flex-direction: column;
     z-index: 1001;
@@ -154,6 +158,23 @@
   .dropdown-menu li a:hover {
     background: var(--c-green-soft);
     color: var(--c-green);
+  }
+
+  /* Lien "Tous nos activités" — souligné vert, séparé du reste */
+  .dropdown-menu li.dropdown-all {
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--c-line);
+  }
+  .dropdown-menu li.dropdown-all a {
+    color: var(--c-green-text);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .dropdown-menu li.dropdown-all a:hover {
+    background: var(--c-green-soft);
+    color: var(--c-green-dark);
   }
 
   /* Bouton Blog */
@@ -184,6 +205,9 @@
       transform: translateY(-50%);
       top: 50%;
       margin: 0 auto;
+    }
+    :root {
+      --header-h: 80px;
     }
   }
 
@@ -218,12 +242,14 @@
         <li><a href="/notre-histoire/">Notre histoire</a></li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle">Nos actions <span class="caret">▼</span></a>
+          <a href="/activites/" class="dropdown-toggle">Nos actions <span class="caret">▼</span></a>
           <ul class="dropdown-menu">
-            <li><a href="/nos-actions/securite-alimentaire/">Sécurité alimentaire</a></li>
-            <li><a href="/nos-actions/environnement/">Environnement</a></li>
-            <li><a href="/nos-actions/plaidoyer/">Plaidoyer</a></li>
-            <li><a href="/nos-actions/qualite-air/">Qualité de l'air</a></li>
+            <li><a href="/activites/environnement/">Environnement</a></li>
+            <li><a href="/activites/environnement/">Qualité et Air</a></li>
+            <li><a href="/activites/plaidoyer/">Plaidoyer</a></li>
+            <li><a href="/activites/securite-alimentaire/">Sécurité Alimentaire</a></li>
+            <li><a href="/activites/qualite-air/">Qualité de l'air</a></li>
+            <li class="dropdown-all"><a href="/activites/">Tous nos activités</a></li>
           </ul>
         </li>
 
