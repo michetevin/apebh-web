@@ -13,11 +13,13 @@
    DESIGN TOKENS
    ========================================================================== */
 :root{
-  --c-green:        #306431;
-  --c-green-dark:   #244B26;
+  /* Vert principal : #32a630 */
+  --c-green:        #32a630;
+  --c-green-dark:   #268a24;   /* survol / états actifs */
   --c-green-soft:   #EAF0E8;
   --c-green-pale:   #FFFFFF;
-  --c-green-light:  #7BC97B;   /* vert beaucoup plus clair pour l'accroche */
+  --c-green-text:   #2E7D32;   /* vert foncé lisible pour les textes */
+
   --c-orange:       #E07A3F;
   --c-orange-dark:  #C25F26;
   --c-ink:          #2F3C4C;
@@ -51,8 +53,7 @@ html{
 
 body{
   margin:0;
-  /* Espace libre de ~1 cm en haut pour le header injecté */
-  padding-top:1cm;
+  padding-top:1cm; /* espace pour le header injecté */
   font-family:'Nunito Sans', system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   font-weight:400;
   font-size:.95rem;
@@ -63,7 +64,7 @@ body{
 }
 
 img{max-width:100%; display:block;}
-a{color:var(--c-green); text-underline-offset:2px;}
+a{color:var(--c-green-text); text-underline-offset:2px;}
 
 h1,h2,h3,h4{
   font-family:'Be Vietnam Pro', 'Nunito Sans', sans-serif;
@@ -126,7 +127,7 @@ p:last-child{margin-bottom:0;}
 .btn:hover{transform:translateY(-1px);}
 .btn--primary{background:var(--c-green); color:#fff;}
 .btn--primary:hover{background:var(--c-green-dark); color:#fff;}
-.btn--outline{background:transparent; color:var(--c-green); border-color:var(--c-green);}
+.btn--outline{background:transparent; color:var(--c-green-text); border-color:var(--c-green);}
 .btn--outline:hover{background:var(--c-green); color:#fff;}
 .btn--arrow::after{content:"→"; transition:transform .2s ease; font-size:1em;}
 .btn--arrow:hover::after{transform:translateX(3px);}
@@ -136,7 +137,6 @@ p:last-child{margin-bottom:0;}
    ========================================================================== */
 .section{padding-block:clamp(2rem, 3.5vw, 3.25rem);}
 .section--soft{background:var(--c-bg-soft);}
-.section--cream{background:var(--c-green-pale);}
 
 .section-head{
   max-width:60ch;
@@ -155,7 +155,7 @@ p:last-child{margin-bottom:0;}
 }
 
 /* ==========================================================================
-   SCROLL REVEAL (apparition en montant)
+   SCROLL REVEAL
    ========================================================================== */
 .reveal{
   opacity:0;
@@ -167,20 +167,16 @@ p:last-child{margin-bottom:0;}
   opacity:1;
   transform:none;
 }
-
-/* Décalage progressif pour les cartes d'actualités */
 .news-grid .news-card:nth-child(1){transition-delay:0s;}
 .news-grid .news-card:nth-child(2){transition-delay:.12s;}
 .news-grid .news-card:nth-child(3){transition-delay:.24s;}
-
-/* Décalage progressif pour les activités */
 #activites .activity:nth-child(1){transition-delay:0s;}
 #activites .activity:nth-child(2){transition-delay:.12s;}
 #activites .activity:nth-child(3){transition-delay:.24s;}
 #activites .activity:nth-child(4){transition-delay:.36s;}
 
 /* ==========================================================================
-   HERO SLIDER — IMAGE À GAUCHE / TEXTE DYNAMIQUE À DROITE
+   HERO SLIDER
    ========================================================================== */
 .hero{padding:0; width:100%;}
 
@@ -194,16 +190,12 @@ p:last-child{margin-bottom:0;}
   align-items:center;
 }
 
-/* --- Colonne image (nettoyée : aucun dégradé de superposition) --- */
-.slider__media{
-  position:relative;
-  min-width:0;
-}
+.slider__media{position:relative; min-width:0;}
 
 .slider__viewport{
   overflow:hidden;
   width:100%;
-  aspect-ratio:7 / 4;          /* ≈ 1400 × 800 */
+  aspect-ratio:7 / 4;
   border-radius:var(--r-lg);
   background:#F2F5F1;
   box-shadow:var(--sh-md);
@@ -231,7 +223,6 @@ p:last-child{margin-bottom:0;}
   display:block;
 }
 
-/* --- Flèches de navigation --- */
 .slider__nav{
   position:absolute; top:50%; transform:translateY(-50%);
   z-index:3;
@@ -245,13 +236,12 @@ p:last-child{margin-bottom:0;}
   backdrop-filter:blur(6px);
   transition:background-color .2s ease, transform .2s ease, border-color .2s ease;
 }
-.slider__nav:hover{background:var(--c-green); border-color:var(--c-green);}
+.slider__nav:hover{background:var(--c-green); border-color:var(--c-green); color:#fff;}
 .slider__nav:active{transform:translateY(-50%) scale(.94);}
 .slider__nav svg{width:16px; height:16px;}
 .slider__nav--prev{left:clamp(.7rem, 1.5vw, 1.1rem);}
 .slider__nav--next{right:clamp(.7rem, 1.5vw, 1.1rem);}
 
-/* --- Barre de progression --- */
 .slider__progress{
   position:absolute; left:0; bottom:0; z-index:3;
   height:4px; width:0%;
@@ -260,7 +250,6 @@ p:last-child{margin-bottom:0;}
   transition:width .18s linear;
 }
 
-/* --- Colonne texte dynamique --- */
 .slider__panel{
   display:flex;
   flex-direction:column;
@@ -268,9 +257,7 @@ p:last-child{margin-bottom:0;}
   min-width:0;
 }
 
-.slider__texts{
-  display:grid;
-}
+.slider__texts{display:grid;}
 
 .slider__text{
   grid-area:1 / 1;
@@ -294,7 +281,7 @@ p:last-child{margin-bottom:0;}
   pointer-events:auto;
 }
 
-/* --- Accroche One Health, juste après le texte, au-dessus des points --- */
+/* Accroche One Health — vert #32a630 */
 .slider__tagline{
   margin:0;
   padding-left:.9rem;
@@ -303,12 +290,11 @@ p:last-child{margin-bottom:0;}
   font-size:clamp(.92rem, .5vw + .8rem, 1.1rem);
   font-weight:700;
   line-height:1.45;
-  color:var(--c-green-light);   /* vert beaucoup plus clair */
+  color:var(--c-green);
   text-wrap:balance;
 }
 .slider__tagline em{font-style:normal; color:var(--c-orange);}
 
-/* --- Pastilles --- */
 .slider__controls{display:flex; align-items:center;}
 .slider__dots{
   display:flex; gap:.5rem;
@@ -328,7 +314,7 @@ p:last-child{margin-bottom:0;}
 }
 
 /* ==========================================================================
-   ACTUALITÉS — profondeur + cartes plus hautes + effet pop
+   ACTUALITÉS
    ========================================================================== */
 .news-section{
   background:linear-gradient(180deg, #FFFFFF 0%, #F5FAF4 100%);
@@ -370,7 +356,7 @@ p:last-child{margin-bottom:0;}
   width:100%;
 }
 .news-card__media{
-  aspect-ratio:4 / 3;          /* plus haut qu'avant (16/10) */
+  aspect-ratio:4 / 3;
   background:linear-gradient(135deg,#DDEBE6,#C7DED6);
   overflow:hidden;
   flex:0 0 auto;
@@ -408,7 +394,7 @@ p:last-child{margin-bottom:0;}
   padding-top:.6rem;
   font-size:.8rem;
   font-weight:800;
-  color:var(--c-green);
+  color:var(--c-green-text);
   display:inline-flex;
   align-items:center;
   gap:.4rem;
@@ -417,7 +403,7 @@ p:last-child{margin-bottom:0;}
 .news-card:hover .news-card__cta::after{transform:translateX(4px);}
 
 /* ==========================================================================
-   PARTENAIRES — BANDEAU DÉFILANT VERS LA GAUCHE
+   PARTENAIRES — BANDEAU DÉFILANT
    ========================================================================== */
 .partners-section{
   padding-block:clamp(1.75rem, 3vw, 2.5rem) clamp(3rem, 6vw, 5rem);
@@ -481,10 +467,27 @@ p:last-child{margin-bottom:0;}
 }
 
 /* ==========================================================================
-   ACTIVITÉS
+   ACTIVITÉS — profondeur de section + cartes surélevées
    ========================================================================== */
 #activites{
-  padding-top:clamp(3rem, 6vw, 5rem);   /* espace supplémentaire avec les partenaires */
+  padding-top:clamp(3rem, 6vw, 5rem);
+  padding-bottom:clamp(3rem, 6vw, 5rem);
+  background:linear-gradient(180deg, #FFFFFF 0%, #F2F7F2 100%);
+  position:relative;
+}
+
+#activites::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(50,166,48,.06), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(224,122,63,.04), transparent 40%);
+  pointer-events:none;
+}
+
+#activites .container{
+  position:relative;
+  z-index:1;
 }
 
 .activity{
@@ -492,10 +495,20 @@ p:last-child{margin-bottom:0;}
   grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
   gap:clamp(1.25rem, 3vw, 2.75rem);
   align-items:center;
-  padding-block:clamp(1.5rem, 3vw, 2.5rem);
-  border-bottom:1px solid var(--c-line);
+  background:#fff;
+  border:1px solid var(--c-line);
+  border-radius:var(--r-lg);
+  padding:clamp(1.25rem, 3vw, 2rem);
+  margin-bottom:clamp(1.5rem, 3vw, 2rem);
+  box-shadow:0 6px 24px rgba(47,60,76,.06);
+  transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s ease, border-color .3s ease;
 }
-.activity:last-of-type{border-bottom:none;}
+.activity:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(47,60,76,.12);
+  border-color:#C7D9C5;
+}
+.activity:last-of-type{margin-bottom:0;}
 
 .activity__media{
   border-radius:var(--r-md);
@@ -506,7 +519,6 @@ p:last-child{margin-bottom:0;}
 }
 .activity__media img{width:100%; height:100%; object-fit:cover;}
 
-/* Alternance : l'image reste à gauche sur la 1re activité */
 .activity:nth-child(odd) .activity__media{order:2;}
 
 .activity__title{
@@ -545,7 +557,7 @@ p:last-child{margin-bottom:0;}
 }
 
 /* ==========================================================================
-   NEWSLETTER (fin de page)
+   NEWSLETTER — FIN DE PAGE
    ========================================================================== */
 .newsletter-section{
   background:linear-gradient(180deg, #FFFFFF 0%, #EAF0E8 100%);
@@ -579,8 +591,7 @@ p:last-child{margin-bottom:0;}
   flex-direction:column;
   gap:.85rem;
 }
-.newsletter-form input,
-.newsletter-form textarea{
+.newsletter-form input[type="email"]{
   font:inherit;
   font-size:.9rem;
   padding:.75rem 1rem;
@@ -592,15 +603,10 @@ p:last-child{margin-bottom:0;}
   font-family:'Nunito Sans', sans-serif;
   transition:border-color .18s ease, box-shadow .18s ease;
 }
-.newsletter-form input:focus,
-.newsletter-form textarea:focus{
+.newsletter-form input[type="email"]:focus{
   outline:none;
   border-color:var(--c-green);
-  box-shadow:0 0 0 3px rgba(48,100,49,.13);
-}
-.newsletter-form textarea{
-  resize:vertical;
-  min-height:100px;
+  box-shadow:0 0 0 3px rgba(50,166,48,.25);
 }
 .newsletter-form button{
   font:inherit;
@@ -670,7 +676,7 @@ p:last-child{margin-bottom:0;}
 <main id="main">
 
   <!-- ============================================================
-       HERO SLIDER — IMAGE À GAUCHE / TEXTE DYNAMIQUE À DROITE
+       HERO SLIDER
        ============================================================ -->
   <section class="hero" aria-label="Nos domaines d'action">
     <div class="slider" id="heroSlider"
@@ -678,7 +684,6 @@ p:last-child{margin-bottom:0;}
          aria-roledescription="carrousel"
          aria-label="Domaines d'action de l'APEBH">
 
-      <!-- ---------- Colonne gauche : images pures (aucun dégradé) ---------- -->
       <div class="slider__media">
         <div class="slider__viewport">
           <div class="slider__track" id="sliderTrack">
@@ -729,7 +734,6 @@ p:last-child{margin-bottom:0;}
         <div class="slider__progress" id="sliderProgress" aria-hidden="true"></div>
       </div>
 
-      <!-- ---------- Colonne droite : texte dynamique + accroche + pastilles ---------- -->
       <div class="slider__panel">
 
         <div class="slider__texts" id="sliderTexts">
@@ -754,7 +758,7 @@ p:last-child{margin-bottom:0;}
           </p>
         </div>
 
-        <!-- Accroche One Health : juste après le texte, au-dessus des pastilles -->
+        <!-- Accroche One Health -->
         <p class="slider__tagline">
           Nous agissons pour l'approche Une Seule Santé <em>« One Health »</em>
         </p>
@@ -865,7 +869,7 @@ p:last-child{margin-bottom:0;}
   </section>
 
   <!-- ============================================================
-       PARTENAIRES — BANDEAU DÉFILANT VERS LA GAUCHE
+       PARTENAIRES
        ============================================================ -->
   <section class="section section--soft partners-section" aria-labelledby="partners-title">
     <div class="container">
@@ -875,7 +879,6 @@ p:last-child{margin-bottom:0;}
     <div class="partners-marquee">
       <div class="partners-track">
 
-        <!-- Piste 1 -->
         <ul class="partners-grid">
           <li class="partner"><img src="/images/gef-sgp.png" alt="GEF Small Grants Programme" loading="lazy"></li>
           <li class="partner"><img src="/images/undp.png" alt="Programme des Nations Unies pour le développement" loading="lazy"></li>
@@ -886,7 +889,6 @@ p:last-child{margin-bottom:0;}
           <li class="partner"><img src="/images/gybn.png" alt="Global Youth Biodiversity Network" loading="lazy"></li>
         </ul>
 
-        <!-- Piste 2 (copie pour le défilement continu) -->
         <ul class="partners-grid" aria-hidden="true">
           <li class="partner"><img src="/images/gef-sgp.png" alt="" loading="lazy"></li>
           <li class="partner"><img src="/images/undp.png" alt="" loading="lazy"></li>
@@ -904,7 +906,7 @@ p:last-child{margin-bottom:0;}
   <!-- ============================================================
        ACTIVITÉS
        ============================================================ -->
-  <section class="section section--cream" id="activites" aria-labelledby="activities-title">
+  <section class="section" id="activites" aria-labelledby="activities-title">
     <div class="container">
 
       <header class="section-head reveal">
@@ -913,7 +915,7 @@ p:last-child{margin-bottom:0;}
         </h2>
       </header>
 
-      <!-- ---------- ACTIVITÉ PRIORITAIRE (1re position) ---------- -->
+      <!-- ACTIVITÉ PRIORITAIRE -->
       <article class="activity reveal">
         <div class="activity__media">
           <img src="/images/ngire-ijambo-kubiriko-biraba.jpg" loading="lazy"
@@ -943,7 +945,7 @@ p:last-child{margin-bottom:0;}
         </div>
       </article>
 
-      <!-- ---------- Zones humides / Ramsar ---------- -->
+      <!-- Zones humides / Ramsar -->
       <article class="activity reveal">
         <div class="activity__media">
           <img src="/images/ramsar-wetlands.jpg" loading="lazy"
@@ -970,7 +972,7 @@ p:last-child{margin-bottom:0;}
         </div>
       </article>
 
-      <!-- ---------- CDB / SPANB ---------- -->
+      <!-- CDB / SPANB -->
       <article class="activity reveal">
         <div class="activity__media">
           <img src="/images/biodiversite-cdb.jpg" loading="lazy"
@@ -997,7 +999,7 @@ p:last-child{margin-bottom:0;}
         </div>
       </article>
 
-      <!-- ---------- Qualité de l'air / climat ---------- -->
+      <!-- Qualité de l'air / climat -->
       <article class="activity reveal">
         <div class="activity__media">
           <img src="/activites/air-et-climat/qualite-air-climat.jpg" loading="lazy"
@@ -1039,12 +1041,11 @@ p:last-child{margin-bottom:0;}
         <h2 id="newsletter-title">Rejoignez notre newsletter</h2>
         <p>Recevez nos actualités et nos actions directement dans votre boîte mail.</p>
 
+        <!-- Formulaire simplifié : e-mail + bouton "S'abonner" -->
         <form action="https://api.web3forms.com/submit" method="POST" class="newsletter-form">
           <input type="hidden" name="access_key" value="6842497b-7767-4221-9284-08dd50be3980">
-          <input type="text" name="name" required placeholder="Votre nom">
           <input type="email" name="email" required placeholder="Votre adresse e-mail">
-          <textarea name="message" required placeholder="Votre message..."></textarea>
-          <button type="submit">Submit Form</button>
+          <button type="submit">S'abonner</button>
         </form>
       </div>
     </div>
@@ -1073,7 +1074,7 @@ p:last-child{margin-bottom:0;}
 })();
 
 /* ==========================================================================
-   B. SLIDER — image à gauche, texte dynamique à droite
+   B. SLIDER
    ========================================================================== */
 (function initSlider(){
   const root = document.getElementById('heroSlider');
@@ -1093,7 +1094,6 @@ p:last-child{margin-bottom:0;}
 
   let index = 0, timer = null, progressTimer = null, isPaused = false;
 
-  /* --- Pastilles --- */
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.type = 'button';
@@ -1105,17 +1105,14 @@ p:last-child{margin-bottom:0;}
   });
   const dots = Array.from(dotsWrap.children);
 
-  /* --- Navigation --- */
   function goTo(i, userAction){
     index = (i + slides.length) % slides.length;
 
     track.style.transform = `translateX(-${index * 100}%)`;
 
     dots.forEach((d, k) => d.setAttribute('aria-current', k === index ? 'true' : 'false'));
-
     slides.forEach((s, k) => s.setAttribute('aria-hidden', k === index ? 'false' : 'true'));
 
-    /* Texte dynamique synchronisé */
     texts.forEach((t, k) => {
       const active = (k === index);
       t.classList.toggle('is-active', active);
@@ -1130,7 +1127,6 @@ p:last-child{margin-bottom:0;}
   const next = (u) => goTo(index + 1, u);
   const prev = (u) => goTo(index - 1, u);
 
-  /* --- Autoplay + barre de progression --- */
   function startAutoplay(){
     if(reduceMotion || isPaused) return;
     stopAutoplay();
@@ -1168,7 +1164,6 @@ p:last-child{margin-bottom:0;}
     if(e.key === 'ArrowLeft'){  e.preventDefault(); prev(true); }
   });
 
-  /* --- Swipe tactile --- */
   let startX = 0, startY = 0, tracking = false;
   root.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
@@ -1197,7 +1192,7 @@ p:last-child{margin-bottom:0;}
 })();
 
 /* ==========================================================================
-   C. SCROLL REVEAL — apparition des éléments en montant
+   C. SCROLL REVEAL
    ========================================================================== */
 (function initReveal(){
   const reveals = document.querySelectorAll('.reveal');
