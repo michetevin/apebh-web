@@ -1,42 +1,38 @@
 <!-- header.html -->
 <style>
-  /* ==========================================================================
-     HEADER CIRCULAIRE STICKY — STYLES AUTONOMES
-     ========================================================================== */
-
-  /* Variables de secours si non définies globalement */
   :root {
-    --c-green:        #32a630;
-    --c-green-dark:   #268a24;
-    --c-green-soft:   #EAF0E8;
-    --c-green-text:   #2E7D32;
-    --c-ink:          #2F3C4C;
-    --c-line:         #E1E6E3;
-    --c-orange:       #E07A3F;
-    --r-pill:         999px;
-    --logo-h:         80px;   /* logo 2× plus grand (était 40px) */
-    --header-h:       100px;
-    --header-gap:     1cm;    /* décalage du header collant */
+    --c-green:      #32a630;
+    --c-green-dark: #268a24;
+    --c-green-soft: #EAF0E8;
+    --c-green-text: #2E7D32;
+    --c-ink:        #2F3C4C;
+    --c-line:       #E1E6E3;
+    --c-orange:     #E07A3F;
+    --r-pill:       999px;
+    --logo-h:       52px;   /* était 80px */
+    --header-h:     60px;   /* était 100px */
+    --header-gap:   8px;    /* était 1cm */
   }
 
-  /* --------------------------------------------------------------------------
-     ⚠️  IMPORTANT — position: sticky ne fonctionne PAS si un ancêtre
-     (html, body, div wrapper…) possède overflow: hidden / auto / scroll.
-     Si le header ne colle pas, remplacez sur l'ancêtre fautif :
-         overflow-x: hidden;   →   overflow-x: clip;
-     -------------------------------------------------------------------------- */
-
+  /* Fixe = sort du flux, ne pousse plus rien vers le bas */
   .site-header {
-    position: sticky;
-    top: var(--header-gap);
+    position: fixed;
+    top: 0; left: 0; right: 0;
     z-index: 1000;
-    width: 100%;
+    height: calc(var(--header-h) + var(--header-gap));
+    padding-top: var(--header-gap);
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     pointer-events: none;
-    margin-top: var(--header-gap);
-    height: var(--header-h);
+  }
+
+  /* Réserve la hauteur du header.
+     ⚠️ Supprimez ce bloc si votre 1ʳᵉ section a déjà un padding-top. */
+  .header-spacer {
+    height: calc(var(--header-h) + var(--header-gap));
+    pointer-events: none;
   }
 
   .header-inner {
@@ -52,100 +48,69 @@
     padding: 0 1rem;
   }
 
-  /* Logo séparé, à gauche */
   .logo {
     position: absolute;
-    left: 0;
-    top: 50%;
+    left: 0; top: 50%;
     transform: translateY(-50%);
     pointer-events: auto;
     z-index: 2;
     display: flex;
     align-items: center;
   }
-  .logo img {
-    height: var(--logo-h);
-    width: auto;
-    display: block;
-  }
+  .logo img { height: var(--logo-h); width: auto; display: block; }
 
-  /* Pilule de navigation centrée */
   .nav-pill {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 50%; top: 50%;
     transform: translate(-50%, -50%);
     pointer-events: auto;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255,255,255,0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: var(--r-pill);
-    padding: 0.5rem 1.5rem;
+    padding: 0.35rem 1.2rem;   /* un peu plus compact */
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    gap: 1.2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255,255,255,0.5);
     white-space: nowrap;
     max-width: 100%;
-    /* ⚠️ NE PAS mettre overflow-x: auto ici :
-       cela force overflow-y à "auto" et ROGNE le menu déroulant. */
-    overflow: visible;
+    overflow: visible;         /* surtout PAS hidden/auto */
   }
 
   .nav-list {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    display: flex; align-items: center;
+    gap: 1.2rem; list-style: none;
+    margin: 0; padding: 0;
   }
-
   .nav-list > li > a {
     text-decoration: none;
     color: var(--c-ink);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     transition: color 0.2s;
     white-space: nowrap;
   }
-  .nav-list > li > a:hover {
-    color: var(--c-green);
-  }
+  .nav-list > li > a:hover { color: var(--c-green); }
 
-  /* ---------------------------------------------------------------- Dropdown */
-  .dropdown {
-    position: relative;
-  }
-
-  /* Pont invisible entre le lien et le menu : évite que le menu
-     se ferme quand la souris traverse l'espace vide. */
-  .dropdown::after {
+  /* ---- Dropdown ---- */
+  .dropdown { position: relative; }
+  .dropdown::after {              /* pont invisible → évite la fermeture au survol */
     content: "";
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    top: 100%; left: 0; right: 0;
     height: 0.9rem;
     pointer-events: auto;
   }
-
   .dropdown-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
+    display: inline-flex; align-items: center; gap: 0.3rem;
     cursor: pointer;
   }
-  .caret {
-    font-size: 0.7rem;
-    transition: transform 0.2s;
-  }
+  .caret { font-size: 0.7rem; transition: transform 0.2s; }
   .dropdown:hover .caret,
-  .dropdown.is-open .caret,
-  .dropdown:focus-within .caret {
-    transform: rotate(180deg);
-  }
+  .dropdown:focus-within .caret,
+  .dropdown.is-open .caret { transform: rotate(180deg); }
 
   .dropdown-menu {
     position: absolute;
@@ -154,7 +119,7 @@
     transform: translate(-50%, -6px);
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     padding: 0.5rem 0;
     min-width: 220px;
     display: flex;
@@ -163,13 +128,10 @@
     list-style: none;
     margin: 0;
     border: 1px solid var(--c-line);
-
-    /* Ouverture/fermeture animée (plus fiable que display: none) */
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    transition: opacity .18s ease, transform .18s ease, visibility .18s;
   }
-
   .dropdown:hover .dropdown-menu,
   .dropdown:focus-within .dropdown-menu,
   .dropdown.is-open .dropdown-menu {
@@ -185,7 +147,7 @@
     color: var(--c-ink);
     font-size: 0.85rem;
     font-weight: 500;
-    transition: background 0.15s, color 0.15s;
+    transition: background .15s, color .15s;
     white-space: nowrap;
   }
   .dropdown-menu li a:hover,
@@ -193,11 +155,8 @@
     background: var(--c-green-soft);
     color: var(--c-green);
   }
-
-  /* Lien "Tous nos activités" — souligné vert, séparé du reste */
   .dropdown-menu li.dropdown-all {
-    margin-top: 0.35rem;
-    padding-top: 0.35rem;
+    margin-top: 0.35rem; padding-top: 0.35rem;
     border-top: 1px solid var(--c-line);
   }
   .dropdown-menu li.dropdown-all a {
@@ -211,11 +170,10 @@
     color: var(--c-green-dark);
   }
 
-  /* Bouton Blog */
   .btn-blog {
     background: var(--c-green);
     color: #fff !important;
-    padding: 0.4rem 1rem;
+    padding: 0.35rem 0.9rem;
     border-radius: 999px;
     font-weight: 700;
     text-decoration: none;
@@ -223,37 +181,17 @@
     transition: background 0.2s;
     white-space: nowrap;
   }
-  .btn-blog:hover {
-    background: var(--c-green-dark);
-    color: #fff !important;
-  }
+  .btn-blog:hover { background: var(--c-green-dark); color: #fff !important; }
 
-  /* --------------------------------------------------------------- Responsive */
   @media (max-width: 900px) {
-    :root {
-      --header-h: 80px;
-    }
-    .logo {
-      display: none;
-    }
-    /* Plus besoin de bricolage top/translate : .header-inner centre déjà */
-    .nav-pill {
-      position: static;
-      transform: none;
-      margin: 0 auto;
-      max-width: 100%;
-    }
+    :root { --header-h: 56px; --logo-h: 44px; }
+    .logo { display: none; }
+    .nav-pill { position: static; transform: none; margin: 0 auto; max-width: 100%; }
   }
 
   @media (max-width: 720px) {
-    .site-header {
-      height: auto;
-      min-height: 64px;
-    }
-    .header-inner {
-      height: auto;
-      padding: 0 0.5rem;
-    }
+    :root { --header-h: 96px; --header-gap: 6px; }  /* nav wraps → plus haut */
+    .header-inner { padding: 0 0.5rem; }
     .nav-pill {
       padding: 0.4rem 0.9rem;
       gap: 0.6rem;
@@ -261,48 +199,32 @@
       white-space: normal;
     }
     .nav-list {
-      gap: 0.4rem 0.9rem;
+      gap: 0.35rem 0.8rem;
       flex-wrap: wrap;
       justify-content: center;
     }
-    .nav-list > li > a {
-      font-size: 0.8rem;
-    }
-    .btn-blog {
-      padding: 0.3rem 0.8rem;
-      font-size: 0.8rem;
-    }
-
-    /* Menu aligné à gauche pour ne pas sortir de l'écran */
-    .dropdown-menu {
-      left: 0;
-      transform: translateY(-6px);
-    }
+    .nav-list > li > a { font-size: 0.8rem; }
+    .btn-blog { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+    .dropdown-menu { left: 0; transform: translateY(-6px); }
     .dropdown:hover .dropdown-menu,
     .dropdown:focus-within .dropdown-menu,
-    .dropdown.is-open .dropdown-menu {
-      transform: translateY(0);
-    }
+    .dropdown.is-open .dropdown-menu { transform: translateY(0); }
   }
 </style>
 
 <header class="site-header">
   <div class="header-inner">
-    <!-- Logo à gauche, séparé de la pilule -->
     <a href="/" class="logo" aria-label="Accueil APEBH">
       <img src="/images/logo.png" alt="Logo APEBH">
     </a>
 
-    <!-- Pilule de navigation centrée -->
     <nav class="nav-pill" aria-label="Navigation principale">
       <ul class="nav-list">
         <li><a href="/notre-histoire/">Notre histoire</a></li>
 
         <li class="dropdown">
-          <a href="/activites/"
-             class="dropdown-toggle"
-             aria-haspopup="true"
-             aria-expanded="false">
+          <a href="/activites/" class="dropdown-toggle"
+             aria-haspopup="true" aria-expanded="false">
             Nos actions <span class="caret">▼</span>
           </a>
           <ul class="dropdown-menu">
@@ -323,6 +245,10 @@
   </div>
 </header>
 
+<!-- Compense la hauteur du header fixe.
+     Supprimez cette ligne si votre 1ʳᵉ section a déjà son propre padding-top. -->
+<div class="header-spacer" aria-hidden="true"></div>
+
 <script>
 (function () {
   var dropdowns = Array.prototype.slice.call(
@@ -341,16 +267,13 @@
   dropdowns.forEach(function (dd) {
     var toggle = dd.querySelector('.dropdown-toggle');
     if (!toggle) return;
-
     toggle.setAttribute('aria-expanded', 'false');
 
     toggle.addEventListener('click', function (e) {
-      // Souris (survol disponible) et menu pas encore ouvert :
-      // on laisse le lien naviguer normalement, le CSS gère le survol.
+      // Survol dispo → on laisse le lien naviguer ; le CSS gère l'ouverture.
       var hoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       if (hoverable && !dd.classList.contains('is-open')) return;
 
-      // Tactile / clavier : le clic ouvre (ou ferme) le menu.
       e.preventDefault();
       closeAll(dd);
       var open = dd.classList.toggle('is-open');
@@ -358,12 +281,9 @@
     });
   });
 
-  // Clic en dehors → fermeture
   document.addEventListener('click', function (e) {
     if (!e.target.closest('.site-header .dropdown')) closeAll(null);
   });
-
-  // Échap → fermeture
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeAll(null);
   });
