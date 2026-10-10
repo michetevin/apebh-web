@@ -1,8 +1,10 @@
 <!-- header.html -->
 <style>
   /* ==========================================================================
-     HEADER CIRCULAIRE STICKY & RESPONSIVE
+     HEADER CIRCULAIRE STICKY — STYLES AUTONOMES
      ========================================================================== */
+
+  /* Variables de secours si non définies globalement */
   :root {
     --c-green:        #32a630;
     --c-green-dark:   #268a24;
@@ -10,27 +12,31 @@
     --c-green-text:   #2E7D32;
     --c-ink:          #2F3C4C;
     --c-line:         #E1E6E3;
+    --c-orange:       #E07A3F;
     --r-pill:         999px;
-    --logo-h:         60px;
-    --header-h:       80px;
+    --logo-h:         80px;   /* logo 2× plus grand (était 40px) */
+    --header-h:       100px;
+    --header-gap:     1cm;    /* décalage du header collant */
   }
 
-  body {
-    /* Adding some top padding to test scrolling */
-    margin: 0;
-    font-family: system-ui, -apple-system, sans-serif;
-  }
+  /* --------------------------------------------------------------------------
+     ⚠️  IMPORTANT — position: sticky ne fonctionne PAS si un ancêtre
+     (html, body, div wrapper…) possède overflow: hidden / auto / scroll.
+     Si le header ne colle pas, remplacez sur l'ancêtre fautif :
+         overflow-x: hidden;   →   overflow-x: clip;
+     -------------------------------------------------------------------------- */
 
   .site-header {
     position: sticky;
-    top: 20px; /* Distance from top when scrolling */
+    top: var(--header-gap);
     z-index: 1000;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
+    margin-top: var(--header-gap);
     height: var(--header-h);
-    pointer-events: none; /* Allows clicking through the empty space */
   }
 
   .header-inner {
@@ -40,21 +46,22 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Space out logo and nav on mobile */
+    justify-content: center;
+    pointer-events: none;
     height: 100%;
     padding: 0 1rem;
-    pointer-events: auto; /* Re-enable clicks for header elements */
   }
 
-  /* Logo */
+  /* Logo séparé, à gauche */
   .logo {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    z-index: 2;
     display: flex;
     align-items: center;
-    z-index: 1002;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
-    border-radius: 50%; /* Optional: nice background for logo */
-    padding: 5px;
   }
   .logo img {
     height: var(--logo-h);
@@ -62,21 +69,28 @@
     display: block;
   }
 
-  /* Pilule de navigation (Desktop) */
+  /* Pilule de navigation centrée */
   .nav-pill {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    pointer-events: auto;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-radius: var(--r-pill);
     padding: 0.5rem 1.5rem;
     display: flex;
     align-items: center;
+    gap: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    z-index: 1001;
+    white-space: nowrap;
+    max-width: 100%;
+    /* ⚠️ NE PAS mettre overflow-x: auto ici :
+       cela force overflow-y à "auto" et ROGNE le menu déroulant. */
+    overflow: visible;
   }
 
   .nav-list {
@@ -92,7 +106,7 @@
     text-decoration: none;
     color: var(--c-ink);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: color 0.2s;
     white-space: nowrap;
   }
@@ -100,10 +114,23 @@
     color: var(--c-green);
   }
 
-  /* Dropdown (Desktop) */
+  /* ---------------------------------------------------------------- Dropdown */
   .dropdown {
     position: relative;
   }
+
+  /* Pont invisible entre le lien et le menu : évite que le menu
+     se ferme quand la souris traverse l'espace vide. */
+  .dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 0.9rem;
+    pointer-events: auto;
+  }
+
   .dropdown-toggle {
     display: inline-flex;
     align-items: center;
@@ -114,25 +141,17 @@
     font-size: 0.7rem;
     transition: transform 0.2s;
   }
-  
-  /* Desktop Hover Effect */
-  @media (min-width: 901px) {
-    .dropdown:hover .caret {
-      transform: rotate(180deg);
-    }
-    .dropdown:hover .dropdown-menu {
-      display: flex;
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
+  .dropdown:hover .caret,
+  .dropdown.is-open .caret,
+  .dropdown:focus-within .caret {
+    transform: rotate(180deg);
   }
 
   .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.6rem);
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    transform: translate(-50%, -6px);
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -142,11 +161,21 @@
     flex-direction: column;
     z-index: 1001;
     list-style: none;
-    margin: 0.5rem 0 0;
+    margin: 0;
     border: 1px solid var(--c-line);
+
+    /* Ouverture/fermeture animée (plus fiable que display: none) */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  }
+
+  .dropdown:hover .dropdown-menu,
+  .dropdown:focus-within .dropdown-menu,
+  .dropdown.is-open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
   }
 
   .dropdown-menu li a {
@@ -154,16 +183,18 @@
     padding: 0.5rem 1rem;
     text-decoration: none;
     color: var(--c-ink);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
   }
-  .dropdown-menu li a:hover {
+  .dropdown-menu li a:hover,
+  .dropdown-menu li a:focus {
     background: var(--c-green-soft);
     color: var(--c-green);
   }
 
-  /* Lien "Toutes nos activités" */
+  /* Lien "Tous nos activités" — souligné vert, séparé du reste */
   .dropdown-menu li.dropdown-all {
     margin-top: 0.35rem;
     padding-top: 0.35rem;
@@ -175,143 +206,112 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
+  .dropdown-menu li.dropdown-all a:hover {
+    background: var(--c-green-soft);
+    color: var(--c-green-dark);
+  }
 
   /* Bouton Blog */
   .btn-blog {
     background: var(--c-green);
     color: #fff !important;
-    padding: 0.5rem 1.2rem;
+    padding: 0.4rem 1rem;
     border-radius: 999px;
     font-weight: 700;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: background 0.2s;
+    white-space: nowrap;
   }
   .btn-blog:hover {
     background: var(--c-green-dark);
+    color: #fff !important;
   }
 
-  /* Mobile Menu Toggle Button */
-  .mobile-toggle {
-    display: none;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid var(--c-line);
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    z-index: 1002;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-  .mobile-toggle span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--c-ink);
-    margin: 4px auto;
-    transition: 0.3s;
-  }
-
-  /* ==========================================================================
-     RESPONSIVE (MOBILE)
-     ========================================================================== */
+  /* --------------------------------------------------------------- Responsive */
   @media (max-width: 900px) {
-    .mobile-toggle {
-      display: block;
+    :root {
+      --header-h: 80px;
     }
-    
+    .logo {
+      display: none;
+    }
+    /* Plus besoin de bricolage top/translate : .header-inner centre déjà */
     .nav-pill {
-      position: fixed;
-      top: 0;
-      right: -100%; /* Hide off-screen by default */
-      left: auto;
-      transform: none;
-      height: 100vh;
-      width: 280px;
-      border-radius: 0;
-      background: #ffffff;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 100px 2rem 2rem;
-      transition: right 0.3s ease;
-      box-shadow: -4px 0 20px rgba(0,0,0,0.1);
-      overflow-y: auto;
-    }
-
-    /* When menu is open */
-    .nav-pill.is-open {
-      right: 0;
-    }
-
-    .nav-list {
-      flex-direction: column;
-      align-items: flex-start;
-      width: 100%;
-      gap: 1.2rem;
-    }
-
-    .nav-list > li {
-      width: 100%;
-    }
-
-    .dropdown-menu {
       position: static;
       transform: none;
-      opacity: 1;
-      visibility: visible;
-      display: none; /* Controlled by JS on mobile */
-      box-shadow: none;
-      border: none;
-      padding-left: 1rem;
-      margin-top: 10px;
-      width: 100%;
+      margin: 0 auto;
+      max-width: 100%;
     }
+  }
 
-    .dropdown.is-active .dropdown-menu {
-      display: flex;
+  @media (max-width: 720px) {
+    .site-header {
+      height: auto;
+      min-height: 64px;
     }
-
-    .dropdown.is-active .caret {
-      transform: rotate(180deg);
+    .header-inner {
+      height: auto;
+      padding: 0 0.5rem;
     }
-    
+    .nav-pill {
+      padding: 0.4rem 0.9rem;
+      gap: 0.6rem;
+      border-radius: 24px;
+      white-space: normal;
+    }
+    .nav-list {
+      gap: 0.4rem 0.9rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav-list > li > a {
+      font-size: 0.8rem;
+    }
     .btn-blog {
-      display: inline-block;
-      text-align: center;
-      margin-top: 1rem;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    /* Menu aligné à gauche pour ne pas sortir de l'écran */
+    .dropdown-menu {
+      left: 0;
+      transform: translateY(-6px);
+    }
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu,
+    .dropdown.is-open .dropdown-menu {
+      transform: translateY(0);
     }
   }
 </style>
 
 <header class="site-header">
   <div class="header-inner">
-    <!-- Logo -->
+    <!-- Logo à gauche, séparé de la pilule -->
     <a href="/" class="logo" aria-label="Accueil APEBH">
-      <!-- Replaced with a placeholder image so you can test it -->
-      <img src="https://via.placeholder.com/60x60?text=Logo" alt="Logo APEBH">
+      <img src="/images/logo.png" alt="Logo APEBH">
     </a>
 
-    <!-- Hamburger Button (Mobile Only) -->
-    <button class="mobile-toggle" aria-label="Ouvrir le menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <!-- Navigation -->
+    <!-- Pilule de navigation centrée -->
     <nav class="nav-pill" aria-label="Navigation principale">
       <ul class="nav-list">
         <li><a href="/notre-histoire/">Notre histoire</a></li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" id="mobile-dropdown-toggle">Nos actions <span class="caret">▼</span></a>
+          <a href="/activites/"
+             class="dropdown-toggle"
+             aria-haspopup="true"
+             aria-expanded="false">
+            Nos actions <span class="caret">▼</span>
+          </a>
           <ul class="dropdown-menu">
             <li><a href="/activites/environnement/">Environnement</a></li>
             <li><a href="/activites/environnement/">Qualité et Air</a></li>
             <li><a href="/activites/plaidoyer/">Plaidoyer</a></li>
             <li><a href="/activites/securite-alimentaire/">Sécurité Alimentaire</a></li>
             <li><a href="/activites/qualite-air/">Qualité de l'air</a></li>
-            <li class="dropdown-all"><a href="/activites/">Toutes nos activités</a></li>
+            <li class="dropdown-all"><a href="/activites/">Tous nos activités</a></li>
           </ul>
         </li>
 
@@ -323,31 +323,49 @@
   </div>
 </header>
 
-<!-- Minimal JS to handle the mobile menu and mobile dropdown -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileToggle = document.querySelector('.mobile-toggle');
-    const navPill = document.querySelector('.nav-pill');
-    const dropdownToggle = document.querySelector('#mobile-dropdown-toggle');
-    const dropdownParent = document.querySelector('.dropdown');
+(function () {
+  var dropdowns = Array.prototype.slice.call(
+    document.querySelectorAll('.site-header .dropdown')
+  );
 
-    // Toggle Mobile Sidebar Menu
-    mobileToggle.addEventListener('click', () => {
-      navPill.classList.toggle('is-open');
+  function closeAll(except) {
+    dropdowns.forEach(function (dd) {
+      if (dd === except) return;
+      dd.classList.remove('is-open');
+      var t = dd.querySelector('.dropdown-toggle');
+      if (t) t.setAttribute('aria-expanded', 'false');
     });
+  }
 
-    // Toggle Dropdown on Mobile
-    dropdownToggle.addEventListener('click', (e) => {
-      if (window.innerWidth <= 900) {
-        e.preventDefault(); // Prevents navigating to "#"
-        dropdownParent.classList.toggle('is-active');
-      }
+  dropdowns.forEach(function (dd) {
+    var toggle = dd.querySelector('.dropdown-toggle');
+    if (!toggle) return;
+
+    toggle.setAttribute('aria-expanded', 'false');
+
+    toggle.addEventListener('click', function (e) {
+      // Souris (survol disponible) et menu pas encore ouvert :
+      // on laisse le lien naviguer normalement, le CSS gère le survol.
+      var hoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (hoverable && !dd.classList.contains('is-open')) return;
+
+      // Tactile / clavier : le clic ouvre (ou ferme) le menu.
+      e.preventDefault();
+      closeAll(dd);
+      var open = dd.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   });
-</script>
 
-<!-- Just to test scrolling functionality -->
-<div style="height: 2000px; padding: 50px 20px; background: #f4f7f6; margin-top: -100px;">
-   <h1 style="margin-top: 150px; text-align:center;">Faites défiler vers le bas (Scroll down)</h1>
-   <p style="text-align:center;">Le header restera fixé en haut de l'écran.</p>
-</div>
+  // Clic en dehors → fermeture
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.site-header .dropdown')) closeAll(null);
+  });
+
+  // Échap → fermeture
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAll(null);
+  });
+})();
+</script>
