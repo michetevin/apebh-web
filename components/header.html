@@ -1,0 +1,353 @@
+<!-- header.html -->
+<style>
+  /* ==========================================================================
+     HEADER CIRCULAIRE STICKY & RESPONSIVE
+     ========================================================================== */
+  :root {
+    --c-green:        #32a630;
+    --c-green-dark:   #268a24;
+    --c-green-soft:   #EAF0E8;
+    --c-green-text:   #2E7D32;
+    --c-ink:          #2F3C4C;
+    --c-line:         #E1E6E3;
+    --r-pill:         999px;
+    --logo-h:         60px;
+    --header-h:       80px;
+  }
+
+  body {
+    /* Adding some top padding to test scrolling */
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 20px; /* Distance from top when scrolling */
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--header-h);
+    pointer-events: none; /* Allows clicking through the empty space */
+  }
+
+  .header-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out logo and nav on mobile */
+    height: 100%;
+    padding: 0 1rem;
+    pointer-events: auto; /* Re-enable clicks for header elements */
+  }
+
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    z-index: 1002;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 50%; /* Optional: nice background for logo */
+    padding: 5px;
+  }
+  .logo img {
+    height: var(--logo-h);
+    width: auto;
+    display: block;
+  }
+
+  /* Pilule de navigation (Desktop) */
+  .nav-pill {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: var(--r-pill);
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    z-index: 1001;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list > li > a {
+    text-decoration: none;
+    color: var(--c-ink);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-list > li > a:hover {
+    color: var(--c-green);
+  }
+
+  /* Dropdown (Desktop) */
+  .dropdown {
+    position: relative;
+  }
+  .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+  }
+  .caret {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+  
+  /* Desktop Hover Effect */
+  @media (min-width: 901px) {
+    .dropdown:hover .caret {
+      transform: rotate(180deg);
+    }
+    .dropdown:hover .dropdown-menu {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 0.5rem 0;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1001;
+    list-style: none;
+    margin: 0.5rem 0 0;
+    border: 1px solid var(--c-line);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: var(--c-ink);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--c-green-soft);
+    color: var(--c-green);
+  }
+
+  /* Lien "Toutes nos activités" */
+  .dropdown-menu li.dropdown-all {
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--c-line);
+  }
+  .dropdown-menu li.dropdown-all a {
+    color: var(--c-green-text);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Bouton Blog */
+  .btn-blog {
+    background: var(--c-green);
+    color: #fff !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .btn-blog:hover {
+    background: var(--c-green-dark);
+  }
+
+  /* Mobile Menu Toggle Button */
+  .mobile-toggle {
+    display: none;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--c-line);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    z-index: 1002;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .mobile-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--c-ink);
+    margin: 4px auto;
+    transition: 0.3s;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE (MOBILE)
+     ========================================================================== */
+  @media (max-width: 900px) {
+    .mobile-toggle {
+      display: block;
+    }
+    
+    .nav-pill {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Hide off-screen by default */
+      left: auto;
+      transform: none;
+      height: 100vh;
+      width: 280px;
+      border-radius: 0;
+      background: #ffffff;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 100px 2rem 2rem;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+
+    /* When menu is open */
+    .nav-pill.is-open {
+      right: 0;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      gap: 1.2rem;
+    }
+
+    .nav-list > li {
+      width: 100%;
+    }
+
+    .dropdown-menu {
+      position: static;
+      transform: none;
+      opacity: 1;
+      visibility: visible;
+      display: none; /* Controlled by JS on mobile */
+      box-shadow: none;
+      border: none;
+      padding-left: 1rem;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .dropdown.is-active .dropdown-menu {
+      display: flex;
+    }
+
+    .dropdown.is-active .caret {
+      transform: rotate(180deg);
+    }
+    
+    .btn-blog {
+      display: inline-block;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  }
+</style>
+
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="/" class="logo" aria-label="Accueil APEBH">
+      <!-- Replaced with a placeholder image so you can test it -->
+      <img src="https://via.placeholder.com/60x60?text=Logo" alt="Logo APEBH">
+    </a>
+
+    <!-- Hamburger Button (Mobile Only) -->
+    <button class="mobile-toggle" aria-label="Ouvrir le menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="nav-pill" aria-label="Navigation principale">
+      <ul class="nav-list">
+        <li><a href="/notre-histoire/">Notre histoire</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" id="mobile-dropdown-toggle">Nos actions <span class="caret">▼</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/activites/environnement/">Environnement</a></li>
+            <li><a href="/activites/environnement/">Qualité et Air</a></li>
+            <li><a href="/activites/plaidoyer/">Plaidoyer</a></li>
+            <li><a href="/activites/securite-alimentaire/">Sécurité Alimentaire</a></li>
+            <li><a href="/activites/qualite-air/">Qualité de l'air</a></li>
+            <li class="dropdown-all"><a href="/activites/">Toutes nos activités</a></li>
+          </ul>
+        </li>
+
+        <li><a href="/communaute/">Communauté</a></li>
+        <li><a href="/ressources/">Ressources</a></li>
+        <li><a href="/blog/" class="btn-blog">Blog</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Minimal JS to handle the mobile menu and mobile dropdown -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navPill = document.querySelector('.nav-pill');
+    const dropdownToggle = document.querySelector('#mobile-dropdown-toggle');
+    const dropdownParent = document.querySelector('.dropdown');
+
+    // Toggle Mobile Sidebar Menu
+    mobileToggle.addEventListener('click', () => {
+      navPill.classList.toggle('is-open');
+    });
+
+    // Toggle Dropdown on Mobile
+    dropdownToggle.addEventListener('click', (e) => {
+      if (window.innerWidth <= 900) {
+        e.preventDefault(); // Prevents navigating to "#"
+        dropdownParent.classList.toggle('is-active');
+      }
+    });
+  });
+</script>
+
+<!-- Just to test scrolling functionality -->
+<div style="height: 2000px; padding: 50px 20px; background: #f4f7f6; margin-top: -100px;">
+   <h1 style="margin-top: 150px; text-align:center;">Faites défiler vers le bas (Scroll down)</h1>
+   <p style="text-align:center;">Le header restera fixé en haut de l'écran.</p>
+</div>
